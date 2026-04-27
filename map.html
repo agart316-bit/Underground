@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Underground</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ds-v2.css">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+</head>
+<body class="app-page" data-page="map">
+    <header class="site-header">
+        <a class="brand-link" href="underground-landing.html">Underground</a>
+        <nav class="site-nav">
+            <a href="feed.html" class="nav-link">Feed</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="collabs.html" class="nav-link">Collabs</a>
+            <a href="map.html" class="nav-link active">Resources</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+        <div class="site-actions">
+            <button class="btn-post" type="button">Post</button>
+            <a href="messages.html"><img class="avatar" src="assets/profile-icon.png" alt="Messages" /></a>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <h1 class="page-title">Resources</h1>
+
+        <div class="filter-row filter-row--feed" data-tab-group>
+            <button class="filter-chip active" type="button">All</button>
+            <button class="filter-chip" type="button">Spaces</button>
+            <button class="filter-chip" type="button">Equipment</button>
+            <button class="filter-chip" type="button">Materials</button>
+            <button class="filter-chip" type="button">Mentorship</button>
+        </div>
+
+        <section class="split-layout" aria-label="Resources and map layout">
+            <div class="wide-card-list">
+                <article class="wide-card" data-lat="40.7043" data-lng="-73.9012">
+                    <div class="wide-card-inner">
+                        <div class="wide-card-face wide-card-front">
+                            <img src="assets/the-annex-ridgewood.jpg" alt="Studio Space" />
+                        </div>
+                        <div class="wide-card-face wide-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="wide-card-category">Studio Space</p>
+                            <p class="wide-card-title">The Annex - Ridgewood</p>
+                            <p class="wide-card-meta">Ridgewood · Queens · 10am-8pm · Mon-Sat</p>
+                            <p class="wide-card-desc">A bright multi-use studio with flexible floor space for rehearsals, critiques, shoots, and small community gatherings.</p>
+                            <p class="wide-card-extra">$80/h</p>
+                            <button class="wide-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="wide-card" data-lat="40.7051" data-lng="-73.9280">
+                    <div class="wide-card-inner">
+                        <div class="wide-card-face wide-card-front">
+                            <img src="assets/studio-a-bushwick.jpg" alt="Recording Studio" />
+                        </div>
+                        <div class="wide-card-face wide-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="wide-card-category">Recording Studio</p>
+                            <p class="wide-card-title">Studio A - Bushwick</p>
+                            <p class="wide-card-meta">Bushwick · Brooklyn · 9am-9pm · Mon-Sat</p>
+                            <p class="wide-card-desc">A neighborhood recording room with treated acoustics, production support, and enough flexibility for writing sessions or tracking.</p>
+                            <p class="wide-card-extra">$75/h</p>
+                            <button class="wide-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="wide-card" data-lat="40.7440" data-lng="-73.9489">
+                    <div class="wide-card-inner">
+                        <div class="wide-card-face wide-card-front">
+                            <img src="assets/camera-lighting-gear-lending.jpg" alt="Equipment" />
+                        </div>
+                        <div class="wide-card-face wide-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="wide-card-category">Equipment</p>
+                            <p class="wide-card-title">Camera &amp; Lighting Gear Lending</p>
+                            <p class="wide-card-meta">Long Island City · Queens · 10am-6pm · Weekdays</p>
+                            <p class="wide-card-desc">A shared library of cameras, lenses, and portable lighting kits intended to lower production costs for local makers.</p>
+                            <p class="wide-card-extra">Free (members)</p>
+                            <button class="wide-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="wide-card" data-lat="40.6455" data-lng="-74.0120">
+                    <div class="wide-card-inner">
+                        <div class="wide-card-face wide-card-front">
+                            <img src="assets/textile-print-lab.jpg" alt="Materials" />
+                        </div>
+                        <div class="wide-card-face wide-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="wide-card-category">Materials</p>
+                            <p class="wide-card-title">Textile and Print Lab</p>
+                            <p class="wide-card-meta">Sunset Park · Brooklyn · 12pm-8pm · Tue-Sun</p>
+                            <p class="wide-card-desc">A hands-on lab for experimenting with fabric treatments, screen printing, and small-batch material prototyping.</p>
+                            <p class="wide-card-extra">$20/session</p>
+                            <button class="wide-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="wide-card" data-lat="40.7208" data-lng="-73.9893">
+                    <div class="wide-card-inner">
+                        <div class="wide-card-face wide-card-front">
+                            <img src="assets/one-on-one-film-photography-ana-costa.jpg" alt="1:1 Film Photography with Ana Costa mentorship" />
+                        </div>
+                        <div class="wide-card-face wide-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="wide-card-category">Mentorship</p>
+                            <p class="wide-card-title">1:1 Film Photography with Ana Costa</p>
+                            <p class="wide-card-meta">Lower East Side · Manhattan · By appointment</p>
+                            <p class="wide-card-desc">Personal guidance on shooting, developing, and sequencing film work with tailored feedback for artists at any level.</p>
+                            <p class="wide-card-extra">Free</p>
+                            <button class="wide-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="side-panel side-panel--map" aria-label="Neighborhood map">
+                <div class="live-map" id="resourceLiveMap" aria-label="Interactive map of New York City resources"></div>
+            </aside>
+        </section>
+    </main>
+
+    <!-- Resource card overlay -->
+    <div class="feed-overlay" id="mapOverlay" role="dialog" aria-modal="true" aria-label="Resource detail">
+        <div class="feed-modal" id="mapModal">
+            <div class="feed-modal-media"></div>
+            <button class="feed-modal-heart" type="button" aria-label="Save" aria-pressed="false">&#9825;</button>
+            <p class="feed-modal-category" id="mapModalCategory"></p>
+            <p class="feed-modal-title" id="mapModalTitle"></p>
+            <p class="feed-modal-meta" id="mapModalMeta"></p>
+            <p class="feed-modal-desc" id="mapModalDesc"></p>
+            <p class="feed-modal-stats" id="mapModalStats"></p>
+            <button class="feed-modal-rsvp" type="button">Respond</button>
+            <div class="feed-modal-connect" hidden>
+                <button class="connect-back" type="button">← Back</button>
+                <div class="connect-poster-card">
+                    <div class="connect-avatar"><span class="connect-avatar-letter"></span></div>
+                    <p class="connect-poster-handle"></p>
+                </div>
+                <p class="connect-heading">Connect with the poster</p>
+                <div class="connect-actions">
+                    <button class="connect-action" type="button">Send a message</button>
+                    <button class="connect-action" type="button">View profile</button>
+                    <button class="connect-action connect-action--follow" type="button">Follow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="shared-ui.js"></script>
+    <script src="ds-init.js" defer></script>
+</body>
+</html>

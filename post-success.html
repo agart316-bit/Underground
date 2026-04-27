@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posted! - Underground</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ds-v2.css">
+</head>
+<body class="app-page" data-page="post-success">
+    <header class="site-header">
+        <a class="brand-link" href="underground-landing.html">Underground</a>
+        <nav class="site-nav">
+            <a href="feed.html" class="nav-link">Feed</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="collabs.html" class="nav-link">Collabs</a>
+            <a href="map.html" class="nav-link">Map</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+        <div class="site-actions">
+            <a class="btn-post" href="post.html">Post</a>
+            <a href="messages.html"><img class="avatar" src="assets/profile-icon.png" alt="Messages" /></a>
+        </div>
+    </header>
+
+    <main class="success-page">
+        <div class="success-left">
+            <h1 class="success-headline" id="successHeadline">Your collab call is live!</h1>
+            <p class="success-sub" id="successSub">Underground is notifying 47 matching creators automatically.</p>
+        </div>
+
+        <div class="success-card">
+            <div class="success-post-preview">
+                <span class="success-post-type" id="successType">Collab Call</span>
+                <p class="success-post-title" id="successTitle">Your Post</p>
+                <p class="success-post-meta" id="successMeta">@tanaya.agarwal</p>
+                <p class="success-post-desc" id="successDesc"></p>
+            </div>
+            <div class="success-stats">
+                <div class="success-stat">
+                    <span class="success-stat-num">47</span>
+                    <span class="success-stat-label">Notified</span>
+                </div>
+                <div class="success-stat">
+                    <span class="success-stat-num">3d</span>
+                    <span class="success-stat-label">Active</span>
+                </div>
+                <div class="success-stat">
+                    <span class="success-stat-num">Live</span>
+                    <span class="success-stat-label">Status</span>
+                </div>
+            </div>
+            <div class="success-actions">
+                <a class="success-btn" id="viewPostBtn" href="feed.html">View my Post</a>
+                <a class="success-btn" href="feed.html">Back to Feed</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="post-success.js"></script>
+    <script src="ds-init.js" defer></script>
+</body>
+</html>

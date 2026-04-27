@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collab Hub - Underground</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ds-v2.css">
+</head>
+<body class="app-page" data-page="collabs">
+    <header class="site-header">
+        <a class="brand-link" href="underground-landing.html">Underground</a>
+        <nav class="site-nav">
+            <a href="feed.html" class="nav-link">Feed</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="collabs.html" class="nav-link active">Collabs</a>
+            <a href="map.html" class="nav-link">Resources</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+        <div class="site-actions">
+            <button class="btn-post" type="button">Post</button>
+            <a href="messages.html"><img class="avatar" src="assets/profile-icon.png" alt="Messages" /></a>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <h1 class="page-title">@tanaya.agarwal <span class="page-title-outline">x</span></h1>
+
+        <div class="filter-row filter-row--feed" data-tab-group>
+            <button class="filter-chip active" type="button">All</button>
+            <button class="filter-chip" type="button">Music</button>
+            <button class="filter-chip" type="button">Visual Arts</button>
+            <button class="filter-chip" type="button">Theatre</button>
+            <button class="filter-chip" type="button">Cinema</button>
+            <button class="filter-chip" type="button">Dance</button>
+        </div>
+
+        <section class="three-grid" aria-label="Collab cards">
+            <!-- Row 1, Col 1: Visual Arts typographic poster -->
+            <article class="square-card">
+                <div class="square-card-inner">
+                    <div class="square-card-face square-card-front">
+                        <img src="assets/typographer-print-editorial.jpg" alt="Typographer for print editorial" />
+                    </div>
+                    <div class="square-card-face square-card-back">
+                        <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                        <p class="square-card-category">Visual Arts</p>
+                        <p class="square-card-title">Typographer for print editorial</p>
+                        <p class="square-card-meta">@dmnd.txt · Brooklyn · Rev share</p>
+                        <p class="square-card-desc">Seeking a type-forward designer to help shape an indie editorial issue with bold spreads and tactile print details.</p>
+                        <p class="square-card-stats">8 responses · 3h ago</p>
+                        <button class="square-card-btn" type="button">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Row 1, Col 2: Music "Station Read Collab" -->
+            <article class="square-card">
+                <div class="square-card-inner">
+                    <div class="square-card-face square-card-front">
+                        <img src="assets/featured-artist-k-pop-collab.jpg" alt="Featured artist for K-pop collab" />
+                    </div>
+                    <div class="square-card-face square-card-back">
+                        <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                        <p class="square-card-category">Music</p>
+                        <p class="square-card-title">Featured artist for K-pop collab</p>
+                        <p class="square-card-meta">@streamteam · NYC · Paid</p>
+                        <p class="square-card-desc">Looking for a charismatic feature with polished vocals, sharp visuals, and comfort working inside a fast-moving studio team.</p>
+                        <p class="square-card-stats">14 responses · 1h ago</p>
+                        <button class="square-card-btn" type="button">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Row 1, Col 3: Music Fest poster -->
+            <article class="square-card">
+                <div class="square-card-inner">
+                    <div class="square-card-face square-card-front">
+                        <img src="assets/live-musicians-jazz-festival.jpg" alt="Live musicians for jazz festival" />
+                    </div>
+                    <div class="square-card-face square-card-back">
+                        <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                        <p class="square-card-category">Music</p>
+                        <p class="square-card-title">Live musicians for jazz festival</p>
+                        <p class="square-card-meta">@chidi.eze · Harlem · Paid</p>
+                        <p class="square-card-desc">Open call for improvisers and section players to join a community jazz bill with live rehearsals and featured solos.</p>
+                        <p class="square-card-stats">6 responses · 2h ago</p>
+                        <button class="square-card-btn" type="button">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Row 2, Col 1: Music / leather jacket woman with phone -->
+            <article class="square-card">
+                <div class="square-card-inner">
+                    <div class="square-card-face square-card-front">
+                        <img src="assets/vocalist-rnb-mixtape.jpg" alt="Vocalist for R&B mixtape" />
+                    </div>
+                    <div class="square-card-face square-card-back">
+                        <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                        <p class="square-card-category">Music</p>
+                        <p class="square-card-title">Vocalist for R&amp;B mixtape</p>
+                        <p class="square-card-meta">@reddress.wav · Bushwick · Paid</p>
+                        <p class="square-card-desc">Searching for a warm lead voice to finish hooks and layered harmonies across a moody, late-night R&amp;B project.</p>
+                        <p class="square-card-stats">3 responses · 4h ago</p>
+                        <button class="square-card-btn" type="button">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Row 2, Col 2: Cinema / people in theater seats -->
+            <article class="square-card">
+                <div class="square-card-inner">
+                    <div class="square-card-face square-card-front">
+                        <img src="assets/actors-indie-short-film.jpg" alt="Actors for indie short film" />
+                    </div>
+                    <div class="square-card-face square-card-back">
+                        <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                        <p class="square-card-category">Cinema</p>
+                        <p class="square-card-title">Actors for indie short film</p>
+                        <p class="square-card-meta">@lowlight.film · Astoria · Unpaid</p>
+                        <p class="square-card-desc">Casting expressive performers for an intimate micro-budget short built around long takes, silence, and ensemble chemistry.</p>
+                        <p class="square-card-stats">9 responses · 5h ago</p>
+                        <button class="square-card-btn" type="button">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Row 2, Col 3: Music / DJ at Pioneer decks -->
+            <article class="square-card">
+                <div class="square-card-inner">
+                    <div class="square-card-face square-card-front">
+                        <img src="assets/dj-underground-warehouse-party.jpg" alt="DJ for underground warehouse party" />
+                    </div>
+                    <div class="square-card-face square-card-back">
+                        <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                        <p class="square-card-category">Music</p>
+                        <p class="square-card-title">DJ for underground warehouse party</p>
+                        <p class="square-card-meta">@pioneerselect · BK Warehouse · Paid</p>
+                        <p class="square-card-desc">Need a DJ who can build tension from opening hour to close with genre-fluid selections and a confident live presence.</p>
+                        <p class="square-card-stats">11 responses · 2h ago</p>
+                        <button class="square-card-btn" type="button">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Row 3, Col 1: Dance / JUMP poster -->
+            <article class="square-card">
+                <div class="square-card-inner">
+                    <div class="square-card-face square-card-front">
+                        <img src="assets/dancer-music-video-shoot.jpg" alt="Dancer for music video shoot" />
+                    </div>
+                    <div class="square-card-face square-card-back">
+                        <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                        <p class="square-card-category">Dance</p>
+                        <p class="square-card-title">Dancer for music video shoot</p>
+                        <p class="square-card-meta">@jumpxclara · Crown Heights · Paid</p>
+                        <p class="square-card-desc">Seeking a movement artist for a high-energy video concept with fast choreography, rooftop scenes, and bold styling.</p>
+                        <p class="square-card-stats">5 responses · 6h ago</p>
+                        <button class="square-card-btn" type="button">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Row 3, Col 2: Dance / breakdancers collage -->
+            <article class="square-card">
+                <div class="square-card-inner">
+                    <div class="square-card-face square-card-front">
+                        <img src="assets/b-boys-street-performance.png" alt="B-boys for street performance" />
+                    </div>
+                    <div class="square-card-face square-card-back">
+                        <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                        <p class="square-card-category">Dance</p>
+                        <p class="square-card-title">B-boys for street performance</p>
+                        <p class="square-card-meta">@breaklab · Bronx · Rev share</p>
+                        <p class="square-card-desc">Looking for breakers ready to co-create a public performance piece that blends cypher energy with structured staging.</p>
+                        <p class="square-card-stats">7 responses · 8h ago</p>
+                        <button class="square-card-btn" type="button">Details</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Row 3, Col 3: Visual Arts / Space Open gallery -->
+            <article class="square-card">
+                <div class="square-card-inner">
+                    <div class="square-card-face square-card-front">
+                        <img src="assets/artists-gallery-group-show.jpg" alt="Artists for gallery group show" />
+                    </div>
+                    <div class="square-card-face square-card-back">
+                        <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                        <p class="square-card-category">Visual Arts</p>
+                        <p class="square-card-title">Artists for gallery group show</p>
+                        <p class="square-card-meta">@spacedark · Lower East Side · Unpaid</p>
+                        <p class="square-card-desc">Inviting artists with installation, sculpture, or media work for a tightly curated group show in a downtown project space.</p>
+                        <p class="square-card-stats">4 responses · 10h ago</p>
+                        <button class="square-card-btn" type="button">Details</button>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Collab card overlay -->
+    <div class="feed-overlay" id="collabOverlay" role="dialog" aria-modal="true" aria-label="Collab detail">
+        <div class="feed-modal" id="collabModal">
+            <div class="feed-modal-media"></div>
+            <button class="feed-modal-heart" type="button" aria-label="Save" aria-pressed="false">&#9825;</button>
+            <p class="feed-modal-category" id="collabModalCategory"></p>
+            <p class="feed-modal-title" id="collabModalTitle"></p>
+            <p class="feed-modal-meta" id="collabModalMeta"></p>
+            <p class="feed-modal-desc" id="collabModalDesc"></p>
+            <p class="feed-modal-stats" id="collabModalStats"></p>
+            <button class="feed-modal-rsvp" type="button">Respond</button>
+            <div class="feed-modal-connect" hidden>
+                <button class="connect-back" type="button">← Back</button>
+                <div class="connect-poster-card">
+                    <div class="connect-avatar"><span class="connect-avatar-letter"></span></div>
+                    <p class="connect-poster-handle"></p>
+                </div>
+                <p class="connect-heading">Connect with the poster</p>
+                <div class="connect-actions">
+                    <button class="connect-action" type="button">Send a message</button>
+                    <button class="connect-action" type="button">View profile</button>
+                    <button class="connect-action connect-action--follow" type="button">Follow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared-ui.js"></script>
+    <script src="ds-init.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post - Underground</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ds-v2.css">
+</head>
+<body class="app-page" data-page="post">
+    <header class="site-header">
+        <a class="brand-link" href="underground-landing.html">Underground</a>
+        <nav class="site-nav">
+            <a href="feed.html" class="nav-link">Feed</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="collabs.html" class="nav-link">Collabs</a>
+            <a href="map.html" class="nav-link">Resources</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+        <div class="site-actions">
+            <button class="btn-post" type="button">Post</button>
+            <a href="messages.html"><img class="avatar" src="assets/profile-icon.png" alt="Messages" /></a>
+        </div>
+    </header>
+
+    <main class="page-main post-page">
+        <h1 class="page-title">Post</h1>
+
+        <div class="filter-row post-type-row" data-post-type-group>
+            <button class="filter-chip active" data-type="portfolio" type="button">Portfolio</button>
+            <button class="filter-chip" data-type="events" type="button">Events</button>
+            <button class="filter-chip" data-type="collabs" type="button">Collabs</button>
+            <button class="filter-chip" data-type="resources" type="button">Resources</button>
+        </div>
+
+        <div class="post-layout">
+
+            <!-- Left: Form Panel -->
+            <div class="post-form-panel">
+
+                <!-- Collabs form -->
+                <form class="post-form" id="form-collabs" hidden novalidate>
+                    <h2 class="post-form-title">New Collab Call</h2>
+                    <div class="post-fields">
+                        <div class="post-field">
+                            <label for="collab-project">What are you making?</label>
+                            <input id="collab-project" name="project" type="text" placeholder="e.g. indie EP, documentary, art show..." autocomplete="off">
+                        </div>
+                        <div class="post-field">
+                            <label for="collab-roles">Who do you need?</label>
+                            <input id="collab-roles" name="roles" type="text" placeholder="Vocalist, DP, illustrator..." autocomplete="off">
+                        </div>
+                        <div class="post-field-row">
+                            <div class="post-field">
+                                <label for="collab-timeline">Timeline</label>
+                                <input id="collab-timeline" name="timeline" type="text" placeholder="Dates" autocomplete="off">
+                            </div>
+                            <div class="post-field">
+                                <label for="collab-location">Location</label>
+                                <input id="collab-location" name="location" type="text" placeholder="Borough" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="post-field">
+                            <label for="collab-desc">Describe the project</label>
+                            <textarea id="collab-desc" name="description" placeholder="Looking for a vocalist for 4–6 tracks of bedroom pop..." rows="3"></textarea>
+                        </div>
+                        <div class="post-field">
+                            <label>Upload image</label>
+                            <div class="post-upload">
+                                <input type="file" id="collab-image" class="post-upload-input" accept="image/*">
+                                <label for="collab-image" class="post-upload-label">
+                                    <span class="post-upload-icon">↑</span>
+                                    <span>Choose a file</span>
+                                </label>
+                                <span class="post-upload-filename"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-category-selector">
+                        <div class="post-category-row">
+                            <button type="button" class="post-cat-btn" data-cat="music">Music</button>
+                            <button type="button" class="post-cat-btn" data-cat="visual-arts">Visual Arts</button>
+                            <button type="button" class="post-cat-btn" data-cat="theater">Theater</button>
+                        </div>
+                        <div class="post-category-row post-category-row--center">
+                            <button type="button" class="post-cat-btn" data-cat="cinema">Cinema</button>
+                            <button type="button" class="post-cat-btn" data-cat="dance">Dance</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="post-submit-btn">Post Collab Call</button>
+                </form>
+
+                <!-- Events form -->
+                <form class="post-form" id="form-events" hidden novalidate>
+                    <h2 class="post-form-title">New Event</h2>
+                    <div class="post-fields">
+                        <div class="post-field">
+                            <label for="event-title">Event title</label>
+                            <input id="event-title" name="title" type="text" placeholder="e.g. Open Studio Night, Listening Session..." autocomplete="off">
+                        </div>
+                        <div class="post-field-row">
+                            <div class="post-field">
+                                <label for="event-date">Date &amp; Time</label>
+                                <input id="event-date" name="date" type="text" placeholder="Sat · 7 PM" autocomplete="off">
+                            </div>
+                            <div class="post-field">
+                                <label for="event-location">Location</label>
+                                <input id="event-location" name="location" type="text" placeholder="Neighborhood" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="post-field">
+                            <label for="event-cost">Cost</label>
+                            <input id="event-cost" name="cost" type="text" placeholder="Free, $10, Pay what you can..." autocomplete="off">
+                        </div>
+                        <div class="post-field">
+                            <label for="event-desc">Describe the event</label>
+                            <textarea id="event-desc" name="description" placeholder="What's happening, who it's for..." rows="3"></textarea>
+                        </div>
+                        <div class="post-field">
+                            <label>Upload image</label>
+                            <div class="post-upload">
+                                <input type="file" id="event-image" class="post-upload-input" accept="image/*">
+                                <label for="event-image" class="post-upload-label">
+                                    <span class="post-upload-icon">↑</span>
+                                    <span>Choose a file</span>
+                                </label>
+                                <span class="post-upload-filename"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-category-selector">
+                        <div class="post-category-row">
+                            <button type="button" class="post-cat-btn" data-cat="music">Music</button>
+                            <button type="button" class="post-cat-btn" data-cat="visual-arts">Visual Arts</button>
+                            <button type="button" class="post-cat-btn" data-cat="theater">Theater</button>
+                        </div>
+                        <div class="post-category-row post-category-row--center">
+                            <button type="button" class="post-cat-btn" data-cat="cinema">Cinema</button>
+                            <button type="button" class="post-cat-btn" data-cat="dance">Dance</button>
+                            <button type="button" class="post-cat-btn" data-cat="performance">Performance</button>
+                        </div>
+                        <div class="post-category-row post-category-row--center">
+                            <button type="button" class="post-cat-btn" data-cat="workshop">Workshop</button>
+                            <button type="button" class="post-cat-btn" data-cat="screening">Screening</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="post-submit-btn">Post Event</button>
+                </form>
+
+                <!-- Portfolio form -->
+                <form class="post-form" id="form-portfolio" novalidate>
+                    <h2 class="post-form-title">New Portfolio Post</h2>
+                    <div class="post-fields">
+                        <div class="post-field">
+                            <label for="portfolio-title">Project title</label>
+                            <input id="portfolio-title" name="title" type="text" placeholder="e.g. Generative poster set, Mural study..." autocomplete="off">
+                        </div>
+                        <div class="post-field">
+                            <label for="portfolio-medium">Discipline / Medium</label>
+                            <input id="portfolio-medium" name="medium" type="text" placeholder="e.g. Illustration, Motion design..." autocomplete="off">
+                        </div>
+                        <div class="post-field">
+                            <label for="portfolio-desc">Describe the work</label>
+                            <textarea id="portfolio-desc" name="description" placeholder="What it is, how it was made, what it explores..." rows="3"></textarea>
+                        </div>
+                        <div class="post-field">
+                            <label>Upload image</label>
+                            <div class="post-upload">
+                                <input type="file" id="portfolio-image" class="post-upload-input" accept="image/*">
+                                <label for="portfolio-image" class="post-upload-label">
+                                    <span class="post-upload-icon">↑</span>
+                                    <span>Choose a file</span>
+                                </label>
+                                <span class="post-upload-filename"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-category-selector">
+                        <div class="post-category-row">
+                            <button type="button" class="post-cat-btn" data-cat="photography">Photography</button>
+                            <button type="button" class="post-cat-btn" data-cat="illustration">Illustration</button>
+                            <button type="button" class="post-cat-btn" data-cat="typography">Typography</button>
+                        </div>
+                        <div class="post-category-row post-category-row--center">
+                            <button type="button" class="post-cat-btn" data-cat="motion">Motion</button>
+                            <button type="button" class="post-cat-btn" data-cat="sculpture">Sculpture</button>
+                            <button type="button" class="post-cat-btn" data-cat="installation">Installation</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="post-submit-btn">Post Portfolio</button>
+                </form>
+
+                <!-- Resources form -->
+                <form class="post-form" id="form-resources" hidden novalidate>
+                    <h2 class="post-form-title">New Resource</h2>
+                    <div class="post-fields">
+                        <div class="post-field">
+                            <label for="resource-name">Resource name</label>
+                            <input id="resource-name" name="name" type="text" placeholder="e.g. Studio A – Bushwick, Gear Lending..." autocomplete="off">
+                        </div>
+                        <div class="post-field-row">
+                            <div class="post-field">
+                                <label for="resource-location">Location</label>
+                                <input id="resource-location" name="location" type="text" placeholder="Neighborhood · Borough" autocomplete="off">
+                            </div>
+                            <div class="post-field">
+                                <label for="resource-cost">Cost</label>
+                                <input id="resource-cost" name="cost" type="text" placeholder="Free, $20/h..." autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="post-field">
+                            <label for="resource-hours">Hours</label>
+                            <input id="resource-hours" name="hours" type="text" placeholder="10am–8pm · Mon–Sat" autocomplete="off">
+                        </div>
+                        <div class="post-field">
+                            <label for="resource-desc">Describe the resource</label>
+                            <textarea id="resource-desc" name="description" placeholder="What's available, who it's for, how to access it..." rows="3"></textarea>
+                        </div>
+                        <div class="post-field">
+                            <label>Upload image</label>
+                            <div class="post-upload">
+                                <input type="file" id="resource-image" class="post-upload-input" accept="image/*">
+                                <label for="resource-image" class="post-upload-label">
+                                    <span class="post-upload-icon">↑</span>
+                                    <span>Choose a file</span>
+                                </label>
+                                <span class="post-upload-filename"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-category-selector">
+                        <div class="post-category-row">
+                            <button type="button" class="post-cat-btn" data-cat="spaces">Spaces</button>
+                            <button type="button" class="post-cat-btn" data-cat="equipment">Equipment</button>
+                            <button type="button" class="post-cat-btn" data-cat="materials">Materials</button>
+                        </div>
+                        <div class="post-category-row post-category-row--center">
+                            <button type="button" class="post-cat-btn" data-cat="mentorship">Mentorship</button>
+                            <button type="button" class="post-cat-btn" data-cat="workshops">Workshops</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="post-submit-btn">Post Resource</button>
+                </form>
+
+            </div>
+
+            <!-- Right: Live Preview -->
+            <div class="post-preview-panel">
+                <h2 class="post-preview-title">Live Preview</h2>
+                <div class="post-preview-card">
+                    <img class="post-preview-image" id="previewImage" src="" alt="" hidden>
+                    <div class="post-preview-content">
+                        <div class="post-preview-info">
+                            <p class="post-preview-type" id="previewType">Collab Call</p>
+                            <p class="post-preview-name is-placeholder" id="previewTitle">Project</p>
+                            <p class="post-preview-meta-line" id="previewMeta">@tanaya.agarwal · East Village · Timeline</p>
+                            <p class="post-preview-desc is-placeholder" id="previewDesc">Description</p>
+                        </div>
+                        <p class="post-preview-responses">Responses</p>
+                    </div>
+                    <div class="post-preview-actions">
+                        <button type="button" class="post-preview-heart" aria-label="Save" aria-pressed="false">♡</button>
+                        <button type="button" class="post-preview-rsvp" id="previewRsvp">RSVP</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="shared-ui.js"></script>
+    <script src="post.js"></script>
+    <script src="ds-init.js" defer></script>
+</body>
+</html>

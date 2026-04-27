@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Underground</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ds-v2.css">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+</head>
+<body class="app-page" data-page="events">
+    <header class="site-header">
+        <a class="brand-link" href="underground-landing.html">Underground</a>
+        <nav class="site-nav">
+            <a href="feed.html" class="nav-link">Feed</a>
+            <a href="events.html" class="nav-link active">Events</a>
+            <a href="collabs.html" class="nav-link">Collabs</a>
+            <a href="map.html" class="nav-link">Resources</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+        <div class="site-actions">
+            <button class="btn-post" type="button">Post</button>
+            <a href="messages.html"><img class="avatar" src="assets/profile-icon.png" alt="Messages" /></a>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <h1 class="page-title">Event Board</h1>
+
+        <div class="filter-row filter-row--feed" data-tab-group>
+            <button class="filter-chip active" type="button">All</button>
+            <button class="filter-chip" type="button">Tonight</button>
+            <button class="filter-chip" type="button">This Week</button>
+            <button class="filter-chip" type="button">Free</button>
+        </div>
+
+        <section class="split-layout" aria-label="Events and map layout">
+            <div class="wide-card-list">
+
+                <article class="wide-card" data-img="assets/bravo-design-good-design.jpg" data-lat="40.7158" data-lng="-73.9970">
+                    <div class="wide-card-inner">
+                        <div class="wide-card-face wide-card-front">
+                            <img src="assets/bravo-design-good-design.jpg" alt="Bravo! Design exhibition poster" />
+                        </div>
+                        <div class="wide-card-face wide-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="wide-card-category">Exhibition</p>
+                            <p class="wide-card-title">Bravo! Design — 好好设计！</p>
+                            <p class="wide-card-meta">Chinatown · Manhattan · Oct 18 – Nov 27</p>
+                            <p class="wide-card-desc">A multilingual design showcase bringing together poster systems, editorial experiments, and graphic work from emerging studios.</p>
+                            <p class="wide-card-extra">Free Entry</p>
+                            <button class="wide-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="wide-card" data-img="assets/summer-sonic-24.jpg" data-lat="40.7498" data-lng="-73.8447">
+                    <div class="wide-card-inner">
+                        <div class="wide-card-face wide-card-front">
+                            <img src="assets/summer-sonic-24.jpg" alt="Summer Sonic '24 music festival poster" />
+                        </div>
+                        <div class="wide-card-face wide-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="wide-card-category">Music Festival</p>
+                            <p class="wide-card-title">Summer Sonic '24</p>
+                            <p class="wide-card-meta">Flushing Meadows · Queens · May 20–22 · All Day</p>
+                            <p class="wide-card-desc">A three-day destination festival featuring global headliners, layered genre programming, and an all-day crowd atmosphere.</p>
+                            <p class="wide-card-extra">$125</p>
+                            <button class="wide-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="wide-card" data-img="assets/bella-figura.jpg" data-lat="40.7640" data-lng="-73.9808">
+                    <div class="wide-card-inner">
+                        <div class="wide-card-face wide-card-front">
+                            <img src="assets/bella-figura.jpg" alt="Bella Figura dance performance poster" />
+                        </div>
+                        <div class="wide-card-face wide-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="wide-card-category">Dance</p>
+                            <p class="wide-card-title">Bella Figura</p>
+                            <p class="wide-card-meta">Midtown · Manhattan · Apr 24–28 · 7:30 PM</p>
+                            <p class="wide-card-desc">A celebrated evening-length dance work pairing sculptural choreography with a rich, emotionally charged musical score.</p>
+                            <p class="wide-card-extra">$35</p>
+                            <button class="wide-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="wide-card" data-img="assets/hervision.jpg" data-lat="40.8089" data-lng="-73.9228">
+                    <div class="wide-card-inner">
+                        <div class="wide-card-face wide-card-front">
+                            <img src="assets/hervision.jpg" alt="HerVision — An Exhibition Celebrating Women in the Arts poster" />
+                        </div>
+                        <div class="wide-card-face wide-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="wide-card-category">Exhibition</p>
+                            <p class="wide-card-title">HerVision</p>
+                            <p class="wide-card-meta">Mott Haven · Bronx · Apr 27–28</p>
+                            <p class="wide-card-desc">A short-run exhibition foregrounding women in the arts through painting, mixed media, and community-centered programming.</p>
+                            <p class="wide-card-extra">Free</p>
+                            <button class="wide-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="wide-card" data-img="assets/aub-fest-vii.jpg" data-lat="40.6270" data-lng="-74.0757">
+                    <div class="wide-card-inner">
+                        <div class="wide-card-face wide-card-front">
+                            <img src="assets/aub-fest-vii.jpg" alt="AUB Fest VII poster" />
+                        </div>
+                        <div class="wide-card-face wide-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="wide-card-category">Music Festival</p>
+                            <p class="wide-card-title">AUB Fest VII</p>
+                            <p class="wide-card-meta">Stapleton · Staten Island · Mar 22 · All Day</p>
+                            <p class="wide-card-desc">A campus festival poster for a full-day run of student performances, food pop-ups, and open-air community programming.</p>
+                            <p class="wide-card-extra">Free</p>
+                            <button class="wide-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <aside class="side-panel side-panel--event" aria-label="Map preview">
+                <div class="live-map" id="eventsLiveMap" aria-label="Interactive map of New York City events"></div>
+            </aside>
+        </section>
+    </main>
+
+    <!-- Event detail overlay -->
+    <div class="feed-overlay" id="eventOverlay" role="dialog" aria-modal="true" aria-label="Event detail">
+        <div class="feed-modal" id="eventModal">
+            <div class="feed-modal-media"></div>
+            <button class="feed-modal-heart" type="button" aria-label="Save" aria-pressed="false">&#9825;</button>
+            <p class="feed-modal-category" id="eventModalCategory"></p>
+            <p class="feed-modal-title" id="eventModalTitle"></p>
+            <p class="feed-modal-meta event-modal-meta" id="eventModalMeta"></p>
+            <p class="feed-modal-desc" id="eventModalDesc"></p>
+            <p class="feed-modal-stats" id="eventModalStats"></p>
+            <button class="feed-modal-rsvp" type="button">RSVP</button>
+            <div class="feed-modal-connect" hidden>
+                <button class="connect-back" type="button">← Back</button>
+                <div class="connect-poster-card">
+                    <div class="connect-avatar"><span class="connect-avatar-letter"></span></div>
+                    <p class="connect-poster-handle"></p>
+                </div>
+                <p class="connect-heading">Connect with the poster</p>
+                <div class="connect-actions">
+                    <button class="connect-action" type="button">Send a message</button>
+                    <button class="connect-action" type="button">View profile</button>
+                    <button class="connect-action connect-action--follow" type="button">Follow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="shared-ui.js"></script>
+    <script src="ds-init.js" defer></script>
+</body>
+</html>

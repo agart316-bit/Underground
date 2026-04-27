@@ -1,0 +1,599 @@
+/* ═══════════════════════════════════════════════════════
+   Underground Design System v2 — Override Layer
+   Load after styles.css. Keeps glass aesthetic intact
+   while adding hierarchy: button tiers, nav pill,
+   filter chip states, and content-type C badges.
+   ═══════════════════════════════════════════════════════ */
+
+/* ─── NEW TOKENS ──────────────────────────────────────── */
+:root {
+  /* Tier 1: primary action — Post, Submit, Send (one per screen) */
+  --action-primary:      rgba(170, 38, 108, 0.94);
+  --action-primary-glow: 0 8px 28px rgba(170,38,108,0.34);
+
+  /* Tier 2: social action — Follow, RSVP, Like, Connect */
+  --action-social:      rgba(255, 195, 225, 0.88);
+  --action-social-text: #3a1229;
+
+  /* ── GLASS LEVEL TOKENS (mirrors Design System v2) ── */
+  --glass-0-bg:     rgba(255,255,255,0.06);
+  --glass-0-border: rgba(255,255,255,0.14);
+  --glass-0-blur:   blur(8px) saturate(140%);
+
+  --glass-1-bg:     rgba(255,255,255,0.18);
+  --glass-1-border: rgba(255,255,255,0.28);
+  --glass-1-blur:   blur(20px) saturate(180%);
+  --glass-1-shadow: 0 8px 32px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.62);
+
+  --glass-2-bg:     rgba(255,255,255,0.72);
+  --glass-2-border: rgba(255,255,255,0.55);
+  --glass-2-blur:   blur(32px) saturate(200%);
+  --glass-2-shadow: 0 20px 56px rgba(48,24,72,0.14), inset 0 1px 1px rgba(255,255,255,0.80);
+
+  /* Content type tints */
+  --type-event:     rgba(255, 210, 140, 0.78);
+  --type-collab:    rgba(195, 185, 250, 0.72);
+  --type-portfolio: rgba(175, 230, 200, 0.72);
+  --type-resource:  rgba(185, 225, 255, 0.72);
+
+  --type-event-dot:     #c47d10;
+  --type-collab-dot:    #5c44cc;
+  --type-portfolio-dot: #2a8c5c;
+  --type-resource-dot:  #2466b8;
+
+  --type-event-text:     #7a4800;
+  --type-collab-text:    #2d1f8c;
+  --type-portfolio-text: #145c38;
+  --type-resource-text:  #0e3d7a;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TIER 1 — PRIMARY BUTTONS
+   Deep fuchsia, white text, glow shadow, inner sheen.
+   Use for: Post, Submit, Publish, Send — one per view.
+   ═══════════════════════════════════════════════════════ */
+.btn-post,
+.post-submit-btn,
+.connect-rsvp-submit {
+  background: var(--action-primary) !important;
+  color: #fff !important;
+  box-shadow: var(--action-primary-glow) !important;
+  font-weight: 600;
+  border: none;
+}
+
+.btn-post::before,
+.post-submit-btn::before,
+.connect-rsvp-submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.btn-post:hover,
+.btn-post:focus-visible,
+.post-submit-btn:hover,
+.post-submit-btn:focus-visible,
+.connect-rsvp-submit:hover,
+.connect-rsvp-submit:focus-visible {
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
+  transform: translateY(-2px);
+}
+
+/* Messages send + modal chat send — both use primary */
+.msg-send-btn,
+.connect-chat-send {
+  background: var(--action-primary) !important;
+  color: #fff !important;
+  box-shadow: var(--action-primary-glow) !important;
+}
+
+.msg-send-btn:hover,
+.connect-chat-send:hover {
+  box-shadow: 0 6px 22px rgba(170,38,108,0.46) !important;
+}
+
+/* Sent bubble */
+.msg-bubble--sent {
+  background: var(--action-primary) !important;
+  box-shadow: 0 2px 14px rgba(170,38,108,0.28) !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TIER 2 — SOCIAL BUTTONS
+   Soft pink glass. Follow, RSVP, Like, Connect.
+   Lower visual weight than primary — participatory not directive.
+   ═══════════════════════════════════════════════════════ */
+.btn-auth,
+.feed-modal-rsvp,
+.square-card-btn,
+.wide-card-btn,
+.connect-profile-follow,
+.post-preview-rsvp,
+.connect-action--follow.is-followed,
+.msg-view-profile-btn {
+  background: var(--action-social) !important;
+  color: var(--action-social-text) !important;
+  box-shadow:
+    0 4px 16px rgba(200,80,140,0.14),
+    inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  border: 1px solid rgba(255,200,230,0.4);
+}
+
+.btn-auth:hover,
+.btn-auth:focus-visible,
+.feed-modal-rsvp:hover,
+.feed-modal-rsvp:focus-visible,
+.square-card-btn:hover,
+.square-card-btn:focus-visible,
+.wide-card-btn:hover,
+.wide-card-btn:focus-visible,
+.connect-profile-follow:hover,
+.connect-profile-follow:focus-visible,
+.msg-view-profile-btn:hover {
+  background: rgba(255,205,230,0.96) !important;
+  box-shadow:
+    0 10px 30px rgba(200,80,140,0.24),
+    inset 0 1px 1px rgba(255,255,255,0.72) !important;
+  transform: translateY(-2px);
+  color: var(--action-social-text) !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TIER 3 — GLASS BUTTONS
+   Neutral white glass. Details, Edit Profile, View, Share.
+   Present but not competing.
+   ═══════════════════════════════════════════════════════ */
+.btn-edit-profile {
+  background: rgba(255,255,255,0.22) !important;
+  color: var(--text) !important;
+  box-shadow:
+    0 3px 12px rgba(0,0,0,0.07),
+    inset 0 1px 1px rgba(255,255,255,0.62) !important;
+}
+
+.btn-edit-profile:hover,
+.btn-edit-profile:focus-visible,
+.square-card-btn:hover,
+.square-card-btn:focus-visible,
+.wide-card-btn:hover,
+.wide-card-btn:focus-visible {
+  background: rgba(255,255,255,0.34) !important;
+  box-shadow:
+    0 7px 22px rgba(0,0,0,0.10),
+    inset 0 1px 1px rgba(255,255,255,0.72) !important;
+  transform: translateY(-2px);
+}
+
+/* Post category selector — selected = social */
+.post-cat-btn.selected {
+  background: var(--action-social) !important;
+  color: var(--action-social-text) !important;
+}
+
+/* Success page CTAs — glass tier 3 */
+.success-btn {
+  background: rgba(255,255,255,0.22) !important;
+  color: var(--text) !important;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+}
+
+.success-btn:hover {
+  background: rgba(255,255,255,0.34) !important;
+  box-shadow: 0 7px 22px rgba(0,0,0,0.10) !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   NAV — PILL CONTAINER
+   The site-nav now reads as a single unit floating in the header.
+   Active item gets an elevated inner pill. Default items fade back.
+   ═══════════════════════════════════════════════════════ */
+.site-nav {
+  background: rgba(255,255,255,0.20);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.30);
+  border-radius: 999px;
+  padding: 4px;
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.06),
+    inset 0 1px 1px rgba(255,255,255,0.52);
+  gap: 2px;
+}
+
+.nav-link {
+  padding: 8px 18px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-weight: 400;
+  opacity: 1;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  background: rgba(255,255,255,0.30) !important;
+  color: var(--text);
+  transform: none;
+  box-shadow: none;
+}
+
+.nav-link.active {
+  background: rgba(255,255,255,0.58) !important;
+  color: var(--text) !important;
+  font-weight: 600;
+  box-shadow:
+    0 2px 10px rgba(0,0,0,0.08),
+    inset 0 1px 1px rgba(255,255,255,0.72);
+}
+
+/* ═══════════════════════════════════════════════════════
+   FILTER CHIPS
+   Three clear states: inactive (faded), hover (light glass),
+   active (solid glass + bold). Chips are for content filtering —
+   not action — so they stay out of the button hierarchy.
+   ═══════════════════════════════════════════════════════ */
+.filter-chip {
+  background: rgba(255,255,255,0.10) !important;
+  color: var(--muted) !important;
+  font-weight: 400;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  box-shadow: none !important;
+}
+
+.filter-chip:hover,
+.filter-chip:focus-visible {
+  background: rgba(255,255,255,0.24) !important;
+  color: var(--text) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+}
+
+.filter-chip.active {
+  background: rgba(255,255,255,0.54) !important;
+  color: var(--text) !important;
+  font-weight: 600;
+  border-color: rgba(255,255,255,0.44) !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08) !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TYPE C BADGES
+   Category labels on cards and in modals styled as pill
+   badges with a coloured dot. Color keyed to content type
+   via data-type="event|collab|portfolio|resource" on the
+   parent article or modal. Set by ds-init.js at runtime.
+   ═══════════════════════════════════════════════════════ */
+
+/* Base badge */
+.square-card-category,
+.wide-card-category,
+.feed-modal-category {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px 3px 7px !important;
+  border-radius: 999px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  width: fit-content;
+  /* Default — neutral glass */
+  background: rgba(255,255,255,0.38);
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.30);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+/* Dot via ::before */
+.square-card-category::before,
+.wide-card-category::before,
+.feed-modal-category::before {
+  content: "" !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  flex-shrink: 0;
+  background: var(--muted);
+  opacity: 0.45;
+  display: inline-block;
+}
+
+/* ── Event (amber) ── */
+[data-type="event"] .square-card-category,
+[data-type="event"] .wide-card-category,
+[data-type="event"] .feed-modal-category,
+.feed-modal[data-type="event"] .feed-modal-category {
+  background: var(--type-event) !important;
+  color: var(--type-event-text) !important;
+  border-color: rgba(200,140,40,0.28) !important;
+}
+[data-type="event"] .square-card-category::before,
+[data-type="event"] .wide-card-category::before,
+[data-type="event"] .feed-modal-category::before,
+.feed-modal[data-type="event"] .feed-modal-category::before {
+  background: var(--type-event-dot) !important;
+  opacity: 1;
+}
+
+/* ── Collab (violet) ── */
+[data-type="collab"] .square-card-category,
+[data-type="collab"] .wide-card-category,
+[data-type="collab"] .feed-modal-category,
+.feed-modal[data-type="collab"] .feed-modal-category {
+  background: var(--type-collab) !important;
+  color: var(--type-collab-text) !important;
+  border-color: rgba(100,80,210,0.25) !important;
+}
+[data-type="collab"] .square-card-category::before,
+[data-type="collab"] .wide-card-category::before,
+[data-type="collab"] .feed-modal-category::before,
+.feed-modal[data-type="collab"] .feed-modal-category::before {
+  background: var(--type-collab-dot) !important;
+  opacity: 1;
+}
+
+/* ── Portfolio (sage) ── */
+[data-type="portfolio"] .square-card-category,
+[data-type="portfolio"] .wide-card-category,
+[data-type="portfolio"] .feed-modal-category,
+.feed-modal[data-type="portfolio"] .feed-modal-category {
+  background: var(--type-portfolio) !important;
+  color: var(--type-portfolio-text) !important;
+  border-color: rgba(40,160,100,0.25) !important;
+}
+[data-type="portfolio"] .square-card-category::before,
+[data-type="portfolio"] .wide-card-category::before,
+[data-type="portfolio"] .feed-modal-category::before,
+.feed-modal[data-type="portfolio"] .feed-modal-category::before {
+  background: var(--type-portfolio-dot) !important;
+  opacity: 1;
+}
+
+/* ── Resource (sky) ── */
+[data-type="resource"] .square-card-category,
+[data-type="resource"] .wide-card-category,
+[data-type="resource"] .feed-modal-category,
+.feed-modal[data-type="resource"] .feed-modal-category {
+  background: var(--type-resource) !important;
+  color: var(--type-resource-text) !important;
+  border-color: rgba(50,140,220,0.25) !important;
+}
+[data-type="resource"] .square-card-category::before,
+[data-type="resource"] .wide-card-category::before,
+[data-type="resource"] .feed-modal-category::before,
+.feed-modal[data-type="resource"] .feed-modal-category::before {
+  background: var(--type-resource-dot) !important;
+  opacity: 1;
+}
+
+/* ─── GLASS LEVEL TIGHTENING ──────────────────────────── */
+/* Modals (L2) should feel clearly elevated vs cards (L1) */
+.feed-modal {
+  background: rgba(255,255,255,0.82) !important;
+}
+
+/* Connect profile preview (L2) */
+.connect-profile-preview {
+  background: rgba(255,255,255,0.88) !important;
+}
+
+/* ─── PROFILE STAT CARDS ──────────────────────────────── */
+/* Tier distinction: stat cards read as ambient data, not interactive */
+.profile-stat-card {
+  background: rgba(255,255,255,0.14) !important;
+  box-shadow: none !important;
+}
+
+/* ─── PAGINATION ──────────────────────────────────────── */
+.pagination-btn.active {
+  background: var(--action-social) !important;
+  color: var(--action-social-text) !important;
+}
+
+.pagination-btn--next {
+  background: rgba(255,255,255,0.22) !important;
+  color: var(--text) !important;
+}
+
+/* ─── CONNECT ACTIONS (glass tier 3) ─────────────────── */
+.connect-action {
+  background: rgba(255,255,255,0.18) !important;
+}
+
+.connect-action:hover {
+  background: rgba(255,255,255,0.28) !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MESSAGES PAGE + FEED MODAL — SHARED GLASS SURFACE SYSTEM
+   Both surfaces are brought onto the same ds-v2 token set.
+   Typography is left untouched throughout.
+   ═══════════════════════════════════════════════════════ */
+
+/* ── FEED MODAL — align to ds-v2 glass tokens ────────── */
+
+/* L2 Elevated: the modal card itself */
+.feed-modal {
+  background: var(--glass-2-bg, rgba(255,255,255,0.72)) !important;
+  backdrop-filter: var(--glass-2-blur, blur(32px) saturate(200%)) !important;
+  -webkit-backdrop-filter: var(--glass-2-blur, blur(32px) saturate(200%)) !important;
+  border: 1px solid var(--glass-2-border, rgba(255,255,255,0.55)) !important;
+  box-shadow: var(--glass-2-shadow, 0 20px 56px rgba(48,24,72,0.14), inset 0 1px 1px rgba(255,255,255,0.80)) !important;
+}
+
+/* Sheen overlay on modal (matches glass-2::before) */
+.feed-modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.14) 45%, rgba(255,255,255,0.04) 100%);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+/* Heart button — L1 Surface glass chip */
+.feed-modal-heart {
+  background: rgba(255,255,255,0.18) !important;
+  border: 1px solid rgba(255,255,255,0.28) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+
+/* Media pane inside modal — L1 surface tint */
+.feed-modal-media {
+  background: rgba(255,255,255,0.18) !important;
+  border: 1px solid rgba(255,255,255,0.28) !important;
+}
+
+/* ── MESSAGES PAGE — align all panels to ds-v2 glass ─── */
+
+/* Overall layout shell — uses strong glass shadow like the modal */
+.msg-layout {
+  box-shadow: 0 20px 56px rgba(48,24,72,0.14), inset 0 1px 1px rgba(255,255,255,0.80) !important;
+  border: 1px solid rgba(255,255,255,0.55) !important;
+}
+
+/* Sidebar — L1 Surface glass */
+.msg-sidebar {
+  background: rgba(255,255,255,0.18) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-right: 1px solid rgba(255,255,255,0.28) !important;
+}
+
+/* Sidebar header strip */
+.msg-sidebar-header {
+  background: rgba(255,255,255,0.10);
+  border-bottom: 1px solid rgba(255,255,255,0.28) !important;
+}
+
+/* Contact hover — subtle L0 ambient */
+.msg-contact-item:hover {
+  background: rgba(255,255,255,0.14) !important;
+}
+
+/* Active contact — pink tint using action-primary at low opacity */
+.msg-contact-item--active {
+  background: rgba(186,48,120,0.09) !important;
+}
+.msg-contact-item--active:hover {
+  background: rgba(186,48,120,0.13) !important;
+}
+
+/* Main chat area — L0 Ambient glass */
+.msg-chat {
+  background: rgba(255,255,255,0.06) !important;
+  backdrop-filter: blur(8px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+}
+
+/* Chat header — L1 Surface glass (matches modal's interior panels) */
+.msg-chat-header {
+  background: rgba(255,255,255,0.18) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.28) !important;
+}
+
+/* Received bubble — L1 Surface glass */
+.msg-bubble--received {
+  background: rgba(255,255,255,0.18) !important;
+  border: 1px solid rgba(255,255,255,0.28) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+
+/* Sent bubble — Tier 1 primary (already set above, reinforce here) */
+.msg-bubble--sent {
+  background: var(--action-primary) !important;
+  box-shadow: 0 2px 14px rgba(170,38,108,0.28) !important;
+}
+
+/* Message input field — L1 Surface glass */
+.msg-input {
+  background: rgba(255,255,255,0.18) !important;
+  border: 1px solid rgba(255,255,255,0.28) !important;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.62) !important;
+}
+.msg-input:focus {
+  border-color: rgba(186,48,120,0.35) !important;
+  box-shadow: 0 0 0 2px rgba(186,48,120,0.18), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+}
+
+/* Input row border */
+.msg-input-row {
+  border-top: 1px solid rgba(255,255,255,0.28) !important;
+}
+
+/* Send button — already Tier 1 primary via ds-v2 above */
+
+/* Profile drawer — L2 Elevated (same level as feed-modal) */
+.msg-profile-drawer {
+  background: rgba(255,255,255,0.72) !important;
+  backdrop-filter: blur(32px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+  border: 1px solid rgba(255,255,255,0.55) !important;
+  box-shadow: 0 20px 56px rgba(48,24,72,0.14), inset 0 1px 1px rgba(255,255,255,0.80) !important;
+}
+
+/* Drawer header strip — L1 Surface */
+.msg-profile-drawer-header {
+  background: rgba(255,255,255,0.18) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.28) !important;
+}
+
+/* Drawer back button — Tier 3 glass */
+.msg-profile-drawer-back {
+  background: rgba(255,255,255,0.18) !important;
+  border: 1px solid rgba(255,255,255,0.28) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+.msg-profile-drawer-back:hover {
+  background: rgba(255,255,255,0.28) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.72) !important;
+}
+
+/* Profile stat cards — L1 Surface glass (ambient data, not interactive) */
+.msg-profile-stat-card {
+  background: rgba(255,255,255,0.18) !important;
+  border: 1px solid rgba(255,255,255,0.28) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+
+/* Profile work grid cards — L0 Ambient */
+.msg-profile-card {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+}
+
+/* Follow button — Tier 2 Social (same as feed modal RSVP) */
+.msg-profile-follow-btn {
+  background: var(--action-social) !important;
+  color: var(--action-social-text) !important;
+  border: 1px solid rgba(255,200,230,0.4) !important;
+  box-shadow: 0 4px 16px rgba(200,80,140,0.14), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+}
+.msg-profile-follow-btn:hover {
+  background: rgba(255,205,230,0.96) !important;
+  color: var(--action-social-text) !important;
+  box-shadow: 0 10px 30px rgba(200,80,140,0.24), inset 0 1px 1px rgba(255,255,255,0.72) !important;
+  transform: translateY(-2px);
+}

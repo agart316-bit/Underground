@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Underground</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ds-v2.css">
+</head>
+<body class="app-page" data-page="user-profile">
+    <header class="site-header">
+        <a class="brand-link" href="underground-landing.html">Underground</a>
+        <nav class="site-nav">
+            <a href="feed.html" class="nav-link">Feed</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="collabs.html" class="nav-link">Collabs</a>
+            <a href="map.html" class="nav-link">Resources</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+        <div class="site-actions">
+            <button class="btn-post" type="button">Post</button>
+            <a href="messages.html"><img class="avatar" src="assets/profile-icon.png" alt="Profile" /></a>
+        </div>
+    </header>
+
+    <a class="user-profile-back" id="userProfileBack" href="messages.html"
+       onclick="if(history.length > 1){ event.preventDefault(); history.back(); }">← Back to messages</a>
+
+    <main class="page-main">
+        <div class="profile-hero">
+            <h1 class="profile-username" id="upUsername">@user</h1>
+            <p class="profile-subtitle" id="upSubtitle">Name · Location · Role</p>
+            <div class="profile-stats">
+                <div class="profile-stat-card">
+                    <span class="profile-stat-num" id="upPosts">0</span>
+                    <span class="profile-stat-label">Posts</span>
+                </div>
+                <div class="profile-stat-card">
+                    <span class="profile-stat-num" id="upFollowers">0</span>
+                    <span class="profile-stat-label">Followers</span>
+                </div>
+                <div class="profile-stat-card">
+                    <span class="profile-stat-num" id="upCollabs">0</span>
+                    <span class="profile-stat-label">Collabs</span>
+                </div>
+            </div>
+            <button class="btn-edit-profile" type="button">Follow</button>
+        </div>
+
+        <div class="filter-row filter-row--profile" data-tab-group>
+            <button class="filter-chip active" type="button">Work</button>
+            <button class="filter-chip" type="button">Events</button>
+            <button class="filter-chip" type="button">Collabs</button>
+        </div>
+
+        <section class="three-grid" aria-label="Profile cards" id="upGrid">
+        </section>
+    </main>
+
+    <div class="feed-overlay" id="feedOverlay" role="dialog" aria-modal="true" aria-label="Card detail">
+        <div class="feed-modal" id="feedModal">
+            <div class="feed-modal-media"></div>
+            <button class="feed-modal-heart" type="button" aria-label="Save" aria-pressed="false">&#9825;</button>
+            <p class="feed-modal-category" id="modalCategory"></p>
+            <p class="feed-modal-title" id="modalTitle"></p>
+            <p class="feed-modal-meta" id="modalMeta"></p>
+            <p class="feed-modal-desc" id="modalDesc">Description</p>
+            <p class="feed-modal-stats" id="modalStats"></p>
+            <button class="feed-modal-rsvp" type="button">Respond</button>
+            <div class="feed-modal-connect" hidden>
+                <button class="connect-back" type="button">← Back</button>
+                <div class="connect-poster-card">
+                    <div class="connect-avatar"><span class="connect-avatar-letter"></span></div>
+                    <p class="connect-poster-handle"></p>
+                </div>
+                <p class="connect-heading">Connect with the poster</p>
+                <div class="connect-actions">
+                    <button class="connect-action" type="button">Send a message</button>
+                    <button class="connect-action" type="button">View profile</button>
+                    <button class="connect-action connect-action--follow" type="button">Follow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared-ui.js"></script>
+    <script>
+        (() => {
+            const users = {
+                rosaline: {
+                    username: '@rosaline.m',
+                    subtitle: 'Rosaline Mercer · Brooklyn · Musician & Sound Designer',
+                    posts: 8,
+                    followers: '3.2k',
+                    collabs: 5,
+                    cards: [
+                        { img: 'assets/rooftop-listening-session.jpg', cat: 'Work', title: 'Rooftop Listening Session', meta: '@rosaline.m · Manhattan', desc: 'An outdoor ambient listening installation combining field recordings and modular synthesis under open sky.', stats: '318 views · 3d ago' },
+                        { img: 'assets/immersive-audio-preview.jpg', cat: 'Work', title: 'Immersive audio preview', meta: '@rosaline.m · Brooklyn', desc: 'A preview recording from the Spring listening series — layers of synth textures and processed city sounds.', stats: '204 views · 1w ago' },
+                        { img: 'assets/basement-poetry-open-mic.jpg', cat: 'Event', title: 'Basement Poetry Open Mic', meta: '@rosaline.m · Bushwick · May 28', desc: 'Live sound design sets between spoken word performances in an intimate underground space.', stats: 'Free · RSVP open' },
+                        { img: null, label: 'Collab', cat: 'Collab Call', title: 'Seeking visual artist for listening series', meta: '@rosaline.m · NYC', desc: 'Looking for a visual artist to create reactive projections that respond to live sound in real time.', stats: '6 responses · 2d ago' },
+                        { img: 'assets/analog-photo-walk.jpg', cat: 'Work', title: 'Field recording archive', meta: '@rosaline.m · Various NYC', desc: 'A growing collection of site-specific recordings from subway platforms, markets, and parks around the city.', stats: '441 views · 2w ago' },
+                        { img: null, label: 'Residency', cat: 'Event', title: 'Sound art residency open call', meta: '@rosaline.m · Online · Jun 1', desc: 'Applications open for a two-week summer sound art residency in upstate New York. Housing provided.', stats: 'Deadline May 20' },
+                    ]
+                },
+                kai: {
+                    username: '@kai.wu',
+                    subtitle: 'Kai Wu · Bushwick · Illustrator & Visual Artist',
+                    posts: 24,
+                    followers: '6.8k',
+                    collabs: 12,
+                    cards: [
+                        { img: 'assets/illustrator-for-brand-identity-of-a-cafe.jpg', cat: 'Work', title: 'Cafe brand identity studies', meta: '@kai.wu · Bushwick', desc: 'Process work from a recent brand identity project — hand-drawn mark-making combined with layered risograph textures.', stats: '892 views · 2d ago' },
+                        { img: 'assets/printmaker-community-poster-drop.jpg', cat: 'Work', title: 'Community poster series', meta: '@kai.wu · Brooklyn', desc: 'A run of limited-edition posters screenprinted for a local community organizing campaign.', stats: '1.1k views · 1w ago' },
+                        { img: 'assets/downtown-zine-fair.jpg', cat: 'Event', title: 'Downtown Zine Fair', meta: '@kai.wu · Lower East Side · May 18', desc: 'Tabling at the zine fair with new prints and a small edition artist book.', stats: '$5 entry' },
+                        { img: null, label: 'Collab', cat: 'Collab Call', title: 'Illustrator for independent film titles', meta: '@kai.wu · NYC', desc: 'Seeking a second illustrator for title card work on an indie documentary — hand-drawn style preferred.', stats: '3 responses · 4d ago' },
+                        { img: 'assets/generative-poster-set.png', cat: 'Work', title: 'Risograph poster set', meta: '@kai.wu · Brooklyn', desc: 'Two-color risograph prints exploring layered pattern and found imagery. Edition of 30.', stats: '674 views · 3d ago' },
+                        { img: 'assets/canal-street-crit-room.jpg', cat: 'Event', title: 'Canal Street Crit Room', meta: '@kai.wu · Manhattan · May 25', desc: 'Monthly portfolio crit session — bring work in progress and get feedback from a small group of practitioners.', stats: 'Free · 8 spots left' },
+                    ]
+                },
+                amina: {
+                    username: '@amina.stone',
+                    subtitle: 'Amina Stone · Harlem · Choreographer & Movement Director',
+                    posts: 15,
+                    followers: '4.5k',
+                    collabs: 7,
+                    cards: [
+                        { img: 'assets/choreographer-rooftop-duet.jpg', cat: 'Work', title: 'Rooftop duet study', meta: '@amina.stone · Harlem', desc: 'Documentation from a rooftop improvisation session exploring weight, counterbalance, and wind resistance.', stats: '763 views · 5d ago' },
+                        { img: 'assets/costume-lab-showcase.jpg', cat: 'Event', title: 'Movement theatre showcase', meta: '@amina.stone · Harlem · Jun 4', desc: 'An evening of devised movement pieces from the spring residency cohort. Free and open to all.', stats: 'Free · Limited seats' },
+                        { img: 'assets/midnight-movement-jam.jpg', cat: 'Event', title: 'Midnight movement jam', meta: '@amina.stone · Brooklyn · May 30', desc: 'Late-night open floor session — come move, watch, or both. All bodies welcome.', stats: '$10 suggested' },
+                        { img: null, label: 'Collab', cat: 'Collab Call', title: 'Choreographer for short film', meta: '@amina.stone · NYC', desc: 'Looking for a choreographer to develop a 4-minute movement sequence for a narrative short film. Paid opportunity.', stats: '11 responses · 1d ago' },
+                        { img: 'assets/costume-lead-movement-theatre.jpg', cat: 'Work', title: 'Movement theatre costumes', meta: '@amina.stone · Manhattan', desc: 'Costume and movement research for a site-specific devised performance at a converted warehouse.', stats: '509 views · 1w ago' },
+                        { img: 'assets/stage-manager-devised-piece.jpg', cat: 'Work', title: 'Devised ensemble piece', meta: '@amina.stone · Harlem', desc: 'Documentation from a 6-week devised work process with an ensemble of seven performers.', stats: '381 views · 2w ago' },
+                    ]
+                },
+                jiro: {
+                    username: '@jiro.n',
+                    subtitle: 'Jiro Nakamura · Ridgewood · Printmaker & Zine Maker',
+                    posts: 31,
+                    followers: '2.1k',
+                    collabs: 3,
+                    cards: [
+                        { img: 'assets/lantern-parade-rehearsal.jpg', cat: 'Work', title: 'Lantern parade installation', meta: '@jiro.n · Queens', desc: 'Production documentation from the annual lantern parade — large-scale paper structures and community fabrication.', stats: '547 views · 2w ago' },
+                        { img: 'assets/printmaker-community-poster-drop.jpg', cat: 'Work', title: 'Community poster drop', meta: '@jiro.n · Ridgewood', desc: 'Wheat-paste installation across the neighborhood — 200 hand-printed posters in two days.', stats: '322 views · 1w ago' },
+                        { img: 'assets/downtown-zine-fair.jpg', cat: 'Event', title: 'Zine fair table', meta: '@jiro.n · Lower East Side · May 18', desc: 'Sharing the table with a few other Ridgewood makers — zines, prints, and handmade books.', stats: '$5 entry' },
+                        { img: null, label: 'Print', cat: 'Work', title: 'New risograph run', meta: '@jiro.n · Ridgewood', desc: 'Just finished a 2-color risograph run — abstract patterns inspired by subway tile and industrial signage.', stats: '188 views · 3d ago' },
+                        { img: 'assets/analog-photo-walk.jpg', cat: 'Work', title: 'Analog photo walk', meta: '@jiro.n · Queens', desc: 'Shooting expired film on a walk through the industrial edges of Ridgewood and Maspeth.', stats: '263 views · 4d ago' },
+                        { img: null, label: 'Collab', cat: 'Collab Call', title: 'Printmaker for artist run catalogue', meta: '@jiro.n · NYC', desc: 'Looking for a second printmaker to help produce a 40-page catalogue for a group show opening in July.', stats: '2 responses · 6d ago' },
+                    ]
+                }
+            };
+
+            const params = new URLSearchParams(window.location.search);
+            const userId = params.get('user') || 'rosaline';
+            const user = users[userId] || users.rosaline;
+
+            document.getElementById('upUsername').textContent = user.username;
+            document.getElementById('upSubtitle').textContent = user.subtitle;
+            document.getElementById('upPosts').textContent = user.posts;
+            document.getElementById('upFollowers').textContent = user.followers;
+            document.getElementById('upCollabs').textContent = user.collabs;
+            document.title = `${user.username} - Underground`;
+
+            const grid = document.getElementById('upGrid');
+            user.cards.forEach(card => {
+                const article = document.createElement('article');
+                article.className = 'square-card';
+                article.innerHTML = `
+                    <div class="square-card-inner">
+                        <div class="square-card-face square-card-front">
+                            ${card.img
+                                ? `<img src="${card.img}" alt="${card.title}">`
+                                : (card.label || card.cat)
+                            }
+                        </div>
+                        <div class="square-card-face square-card-back">
+                            <button class="card-heart" type="button" aria-label="Save card" aria-pressed="false">&#9825;</button>
+                            <p class="square-card-category">${card.cat}</p>
+                            <p class="square-card-title">${card.title}</p>
+                            <p class="square-card-meta">${card.meta}</p>
+                            <p class="square-card-desc">${card.desc}</p>
+                            <p class="square-card-stats">${card.stats}</p>
+                            <button class="square-card-btn" type="button">Details</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(article);
+            });
+        })();
+    </script>
+    <script src="ds-init.js" defer></script>
+</body>
+</html>

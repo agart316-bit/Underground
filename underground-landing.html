@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Underground - Your borough. Your scene</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ds-v2.css">
+</head>
+<body class="landing-page" data-page="landing">
+    <header class="site-header">
+        <a class="brand-link" href="underground-landing.html">Underground</a>
+        <nav class="site-nav">
+            <a href="feed.html" class="nav-link">Feed</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="collabs.html" class="nav-link">Collabs</a>
+            <a href="map.html" class="nav-link">Resources</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+        <div class="site-actions">
+            <button class="btn-post" type="button">Post</button>
+            <a href="messages.html"><img class="avatar" src="assets/profile-icon.png" alt="Messages" /></a>
+        </div>
+        <button class="menu-toggle" id="landingMenuToggle" type="button" aria-label="Open menu" aria-controls="landingDrawer" aria-expanded="false">
+            <span class="menu-toggle-line"></span>
+            <span class="menu-toggle-line"></span>
+            <span class="menu-toggle-line"></span>
+        </button>
+    </header>
+
+    <div class="landing-menu-backdrop" id="landingMenuBackdrop" aria-hidden="true"></div>
+    <aside class="landing-drawer" id="landingDrawer" aria-hidden="true">
+        <div class="landing-drawer-header">
+            <p class="landing-drawer-title">Underground</p>
+            <button class="landing-drawer-close" id="landingDrawerClose" type="button" aria-label="Close menu">&times;</button>
+        </div>
+        <nav class="landing-drawer-nav" aria-label="Mobile navigation">
+            <a href="feed.html" class="landing-drawer-link">Feed</a>
+            <a href="events.html" class="landing-drawer-link">Events</a>
+            <a href="collabs.html" class="landing-drawer-link">Collabs</a>
+            <a href="map.html" class="landing-drawer-link">Resources</a>
+            <a href="profile.html" class="landing-drawer-link">Profile</a>
+        </nav>
+        <div class="landing-drawer-actions">
+            <button class="btn-post" type="button">Post</button>
+            <button class="btn-auth" type="button">DM</button>
+        </div>
+    </aside>
+
+    <main class="landing-main">
+        <section class="landing-hero">
+            <div class="deco-rect" aria-hidden="true" style="left:116px; top:121px; width:251px; height:251px;"></div>
+            <div class="deco-rect" aria-hidden="true" style="left:calc(20% + 100px); top:311px; width:187px; height:187px;"></div>
+            <div class="deco-rect" aria-hidden="true" style="left:183px; top:615px; width:205px; height:205px;"></div>
+            <div class="deco-rect" aria-hidden="true" style="left:calc(40% + 247px); top:654px; width:128px; height:128px;"></div>
+            <div class="deco-rect" aria-hidden="true" style="left:calc(60% + 115px); top:542px; width:128px; height:128px;"></div>
+            <div class="deco-rect" aria-hidden="true" style="left:calc(60% + 113px); top:700px; width:179px; height:179px;"></div>
+            <div class="deco-rect" aria-hidden="true" style="left:calc(80% - 22px); top:121px; width:262px; height:262px;"></div>
+            <div class="landing-hero-content">
+                <h1 class="landing-display">Underground</h1>
+                <p class="landing-subtitle">Your borough. Your scene</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="shared-ui.js"></script>
+    <script src="ds-init.js" defer></script>
+</body>
+</html>
