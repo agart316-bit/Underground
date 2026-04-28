@@ -53,18 +53,16 @@
    Use for: Post, Submit, Publish, Send — one per view.
    ═══════════════════════════════════════════════════════ */
 .btn-post,
-.post-submit-btn,
-.connect-rsvp-submit {
+.post-submit-btn {
   background: var(--action-primary) !important;
   color: #fff !important;
   box-shadow: var(--action-primary-glow) !important;
-  font-weight: 600;
+  font-weight: 500 !important;
   border: none;
 }
 
 .btn-post::before,
-.post-submit-btn::before,
-.connect-rsvp-submit::before {
+.post-submit-btn::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -77,9 +75,7 @@
 .btn-post:hover,
 .btn-post:focus-visible,
 .post-submit-btn:hover,
-.post-submit-btn:focus-visible,
-.connect-rsvp-submit:hover,
-.connect-rsvp-submit:focus-visible {
+.post-submit-btn:focus-visible {
   box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
   transform: translateY(-2px);
 }
@@ -95,6 +91,27 @@
 .msg-send-btn:hover,
 .connect-chat-send:hover {
   box-shadow: 0 6px 22px rgba(170,38,108,0.46) !important;
+}
+
+/* Normalize action button geometry to match the edit profile button */
+.btn-post,
+.post-submit-btn,
+.btn-auth,
+.feed-modal-rsvp,
+.connect-profile-follow,
+.post-preview-rsvp,
+.connect-rsvp-submit,
+.post-cat-btn,
+.msg-send-btn,
+.connect-chat-send,
+.square-card-btn,
+.wide-card-btn,
+.btn-edit-profile,
+.success-btn {
+  width: 120px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  font-weight: 500 !important;
 }
 
 /* Sent bubble */
@@ -115,7 +132,8 @@
 .connect-profile-follow,
 .post-preview-rsvp,
 .connect-action--follow.is-followed,
-.msg-view-profile-btn {
+.msg-view-profile-btn,
+.connect-rsvp-submit {
   background: var(--action-social) !important;
   color: var(--action-social-text) !important;
   box-shadow:
@@ -134,13 +152,14 @@
 .wide-card-btn:focus-visible,
 .connect-profile-follow:hover,
 .connect-profile-follow:focus-visible,
-.msg-view-profile-btn:hover {
+.msg-view-profile-btn:hover,
+.connect-rsvp-submit:hover,
+.connect-rsvp-submit:focus-visible {
   background: rgba(255,205,230,0.96) !important;
   box-shadow:
     0 10px 30px rgba(200,80,140,0.24),
     inset 0 1px 1px rgba(255,255,255,0.72) !important;
   transform: translateY(-2px);
-  color: var(--action-social-text) !important;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -175,16 +194,31 @@
   color: var(--action-social-text) !important;
 }
 
-/* Success page CTAs — glass tier 3 */
+/* Success page CTAs — same action button styling as the rest */
 .success-btn {
-  background: rgba(255,255,255,0.22) !important;
-  color: var(--text) !important;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.07), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 120px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  background: var(--action-social) !important;
+  color: var(--action-social-text) !important;
+  box-shadow:
+    0 4px 16px rgba(200,80,140,0.14),
+    inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  border: 1px solid rgba(255,200,230,0.4) !important;
+  border-radius: 999px !important;
+  font-weight: 500 !important;
 }
 
-.success-btn:hover {
-  background: rgba(255,255,255,0.34) !important;
-  box-shadow: 0 7px 22px rgba(0,0,0,0.10) !important;
+.success-btn:hover,
+.success-btn:focus-visible {
+  background: rgba(255,205,230,0.96) !important;
+  box-shadow:
+    0 10px 30px rgba(200,80,140,0.24),
+    inset 0 1px 1px rgba(255,255,255,0.72) !important;
+  transform: translateY(-2px);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -200,11 +234,11 @@
   border-radius: 0;
   padding: 0;
   box-shadow: none;
-  gap: 2px;
+  gap: 16px;
 }
 
 .nav-link {
-  padding: 8px 18px;
+  padding: var(--button-pad-y) var(--button-pad-x);
   border-radius: 999px;
   color: var(--muted);
   font-weight: 400;
@@ -449,6 +483,12 @@
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+}
+
+.feed-modal-heart.liked,
+.card-heart.liked,
+.post-preview-heart.liked {
+  color: rgba(170, 38, 108, 0.94) !important;
 }
 
 /* Media pane inside modal — L1 surface tint */
