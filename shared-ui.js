@@ -1325,6 +1325,8 @@
                 desc: 'An expanded mural prototype testing reactive line work, projector timing, and audience-triggered loops.',
                 stats: '218 views · 3d ago',
                 action: 'Details',
+                imageSrc: 'assets/signal-mural-prototype.jpg',
+                imageAlt: 'Colorful projection light installation on wall',
                 frontLabel: 'Prototype',
                 tags: ['work']
             },
@@ -1335,6 +1337,8 @@
                 desc: 'A hosted walkthrough of works in progress, research sketches, and the technical setup behind a current installation.',
                 stats: '41 going · Sun 2pm',
                 action: 'Details',
+                imageSrc: 'assets/open-studio-walkthrough.jpg',
+                imageAlt: 'Open artist studio with works in progress',
                 frontLabel: 'Open Studio',
                 tags: ['events']
             },
@@ -1345,6 +1349,8 @@
                 desc: 'Seeking a collaborator to help calibrate projectors and optimize playback for an upcoming site test.',
                 stats: '6 responses · 1d ago',
                 action: 'Details',
+                imageSrc: 'assets/looking-for-projection-technician.jpg',
+                imageAlt: 'Projection equipment setup in dark space',
                 frontLabel: 'Collab',
                 tags: ['collabs']
             },
@@ -1355,6 +1361,8 @@
                 desc: 'A saved resource listing for an audio session tied to a future installation score.',
                 stats: 'Saved yesterday',
                 action: 'Details',
+                imageSrc: 'assets/studio-a-booking-draft.jpg',
+                imageAlt: 'Recording studio with mixing equipment',
                 frontLabel: 'Saved',
                 tags: ['saved']
             },
@@ -1365,6 +1373,8 @@
                 desc: 'A process set focused on interface fragments, annotation systems, and public-facing interaction prompts.',
                 stats: '183 views · 4d ago',
                 action: 'Details',
+                imageSrc: 'assets/neighborhood-interface-sketches.jpg',
+                imageAlt: 'Design sketches and process drawings',
                 frontLabel: 'Sketches',
                 tags: ['work']
             },
@@ -1375,6 +1385,8 @@
                 desc: 'A low-stakes outdoor test of color, motion, and brightness across a temporary downtown facade setup.',
                 stats: '22 going · Thu 9pm',
                 action: 'Details',
+                imageSrc: 'assets/projection-test-night.jpg',
+                imageAlt: 'Outdoor projection on building facade at night',
                 frontLabel: 'Event',
                 tags: ['events']
             },
@@ -1385,6 +1397,8 @@
                 desc: 'Looking for a motion editor to help shape documentation clips, title cards, and portfolio reels.',
                 stats: '4 responses · 2d ago',
                 action: 'Details',
+                imageSrc: 'assets/seeking-motion-editor.jpg',
+                imageAlt: 'Video editing suite with monitor and timeline',
                 frontLabel: 'Collab',
                 tags: ['collabs']
             },
@@ -1395,6 +1409,8 @@
                 desc: 'A browser-ready archive of moving posters, identity loops, and short animation systems built over the past year.',
                 stats: '341 views · 5d ago',
                 action: 'Details',
+                imageSrc: 'assets/archive-of-poster-loops.jpg',
+                imageAlt: 'Display screen showing motion poster archive',
                 frontLabel: 'Archive',
                 tags: ['work']
             },
@@ -1405,6 +1421,8 @@
                 desc: 'A saved mentorship session focused on shaping sound cues for installation and performance contexts.',
                 stats: 'Booked for Saturday',
                 action: 'Details',
+                imageSrc: 'assets/sound-critique-elena-park.jpg',
+                imageAlt: 'Listening session with headphones and audio equipment',
                 frontLabel: 'Saved',
                 tags: ['saved']
             },
@@ -1415,6 +1433,8 @@
                 desc: 'Seeking a collaborator to help prototype modular ceramic forms for a mixed-media installation.',
                 stats: '3 responses · 3d ago',
                 action: 'Details',
+                imageSrc: 'assets/need-ceramic-fabricator.jpg',
+                imageAlt: 'Ceramics workshop with clay forms',
                 frontLabel: 'Collab',
                 tags: ['collabs']
             },
@@ -1425,6 +1445,8 @@
                 desc: 'A short artist talk on participation, public space interfaces, and translating research into exhibition form.',
                 stats: '36 RSVPs · Mon 6pm',
                 action: 'Details',
+                imageSrc: 'assets/artist-talk-public-systems.jpg',
+                imageAlt: 'Artist talk in lecture space with audience',
                 frontLabel: 'Talk',
                 tags: ['events']
             }

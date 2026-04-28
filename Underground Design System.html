@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Underground — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ─── TOKENS ─────────────────────────────────────────── */
+  :root {
+    /* Background / scene */
+    --bg-page: #f5eef4;
+    --bg-gradient: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255,210,232,0.55) 0%, transparent 55%),
+                   radial-gradient(ellipse 60% 50% at 80% 80%, rgba(220,210,245,0.40) 0%, transparent 50%),
+                   #f5eef4;
+
+    /* ── GLASS LEVELS ── */
+    --glass-0-bg:      rgba(255,255,255,0.06);
+    --glass-0-border:  rgba(255,255,255,0.14);
+    --glass-0-blur:    blur(8px) saturate(140%);
+    --glass-0-shadow:  none;
+
+    --glass-1-bg:      rgba(255,255,255,0.18);
+    --glass-1-border:  rgba(255,255,255,0.28);
+    --glass-1-blur:    blur(20px) saturate(180%);
+    --glass-1-shadow:  0 8px 32px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.62);
+
+    --glass-2-bg:      rgba(255,255,255,0.72);
+    --glass-2-border:  rgba(255,255,255,0.55);
+    --glass-2-blur:    blur(32px) saturate(200%);
+    --glass-2-shadow:  0 20px 56px rgba(48,24,72,0.14), inset 0 1px 1px rgba(255,255,255,0.80);
+
+    --sheen: linear-gradient(120deg, rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.14) 45%, rgba(255,255,255,0.04) 100%);
+
+    /* ── SEMANTIC COLORS ── */
+    /* Primary action — "do the main thing" (Post, Submit, Send) */
+    --action-primary:      rgba(186, 48, 120, 0.92);
+    --action-primary-text: #fff;
+    --action-primary-glow: 0 8px 28px rgba(186,48,120,0.32);
+
+    /* Social action — follow, like, RSVP, connect */
+    --action-social:       rgba(255, 195, 225, 0.88);
+    --action-social-text:  #3a1229;
+
+    /* Content type tints */
+    --type-event:      rgba(255, 210, 140, 0.70);   /* amber */
+    --type-collab:     rgba(195, 185, 250, 0.65);   /* violet */
+    --type-portfolio:  rgba(175, 230, 200, 0.65);   /* sage */
+    --type-resource:   rgba(185, 225, 255, 0.65);   /* sky */
+
+    --type-event-border:     rgba(200, 140, 40, 0.35);
+    --type-collab-border:    rgba(100, 80, 210, 0.30);
+    --type-portfolio-border: rgba(40, 160, 100, 0.28);
+    --type-resource-border:  rgba(50, 140, 220, 0.28);
+
+    --type-event-dot:      #c47d10;
+    --type-collab-dot:     #5c44cc;
+    --type-portfolio-dot:  #2a8c5c;
+    --type-resource-dot:   #2466b8;
+
+    /* Text */
+    --text:  #17151f;
+    --muted: #6f687c;
+
+    /* ── TYPOGRAPHY ── */
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-ui:      'DM Sans', 'BIZ UDPGothic', sans-serif;
+
+    --size-display:  72px;
+    --size-h1:       48px;
+    --size-h2:       32px;
+    --size-h3:       20px;
+    --size-body-lg:  16px;
+    --size-body:     13px;
+    --size-label:    11px;
+
+    /* ── RADIUS ── */
+    --r-card:   28px;
+    --r-chip:   999px;
+    --r-input:  16px;
+    --r-badge:  6px;
+
+    /* ── MOTION ── */
+    --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
+    --ease-out:    cubic-bezier(0.22,1,0.36,1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-ui);
+    font-size: var(--size-body);
+    color: var(--text);
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    padding: 0 0 120px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── DOC LAYOUT ─────────────────────────────────────── */
+  .ds-header {
+    padding: 72px 80px 56px;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    background: var(--glass-2-bg);
+    backdrop-filter: var(--glass-2-blur);
+    -webkit-backdrop-filter: var(--glass-2-blur);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .ds-header-title {
+    font-family: var(--font-display);
+    font-size: 42px;
+    line-height: 1;
+    font-weight: 400;
+    flex: 1;
+  }
+  .ds-header-title em { font-style: italic; opacity: 0.5; }
+
+  .ds-header-meta {
+    font-size: var(--size-label);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.8;
+    text-align: right;
+  }
+
+  .ds-toc {
+    display: flex;
+    gap: 32px;
+    padding: 0 80px;
+    margin: 0;
+    background: transparent;
+    position: sticky;
+    top: 120px;
+    z-index: 40;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .ds-toc a {
+    font-size: var(--size-label);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .ds-toc a:hover { color: var(--text); background: rgba(255,255,255,0.22); }
+
+  .ds-content {
+    padding: 0 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ds-section {
+    margin-top: 96px;
+  }
+
+  .ds-section-label {
+    font-size: var(--size-label);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .ds-section-title {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 40px;
+    line-height: 1.1;
+  }
+
+  .ds-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .ds-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ─── ANNOTATION ─────────────────────────────────────── */
+  .ds-token-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .ds-token-value {
+    font-size: 10px;
+    color: var(--muted);
+    opacity: 0.7;
+    font-family: monospace;
+  }
+  .ds-note {
+    font-size: var(--size-label);
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  .ds-rule-label {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.06);
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  /* ─── GLASS CLASSES (reusable) ───────────────────────── */
+  .glass-0, .glass-1, .glass-2 {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: var(--r-card);
+  }
+
+  .glass-0 {
+    background: var(--glass-0-bg);
+    backdrop-filter: var(--glass-0-blur);
+    -webkit-backdrop-filter: var(--glass-0-blur);
+    border: 1px solid var(--glass-0-border);
+    box-shadow: var(--glass-0-shadow);
+  }
+
+  .glass-1 {
+    background: var(--glass-1-bg);
+    backdrop-filter: var(--glass-1-blur);
+    -webkit-backdrop-filter: var(--glass-1-blur);
+    border: 1px solid var(--glass-1-border);
+    box-shadow: var(--glass-1-shadow);
+  }
+
+  .glass-2 {
+    background: var(--glass-2-bg);
+    backdrop-filter: var(--glass-2-blur);
+    -webkit-backdrop-filter: var(--glass-2-blur);
+    border: 1px solid var(--glass-2-border);
+    box-shadow: var(--glass-2-shadow);
+  }
+
+  .glass-1::before, .glass-2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--sheen);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .glass-1 > *, .glass-2 > * { position: relative; z-index: 1; }
+
+  /* ─── SECTION: GLASS LEVELS ──────────────────────────── */
+  .glass-demo-stack {
+    width: 100%;
+    position: relative;
+    height: 300px;
+    border-radius: var(--r-card);
+    overflow: hidden;
+    background: var(--bg-gradient);
+  }
+
+  .glass-demo-rect {
+    position: absolute;
+    border-radius: var(--r-card);
+  }
+
+  .glass-level-card {
+    padding: 28px 32px;
+    flex: 1;
+    min-width: 220px;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .glass-level-name {
+    font-size: var(--size-body-lg);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .glass-level-use {
+    font-size: var(--size-label);
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .glass-level-spec {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .glass-spec-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--muted);
+    border-top: 1px solid rgba(0,0,0,0.06);
+    padding: 4px 0;
+  }
+  .glass-spec-row span:last-child { font-family: monospace; opacity: 0.8; }
+
+  /* ─── SECTION: COLORS ────────────────────────────────── */
+  .swatch-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 160px;
+  }
+
+  .swatch {
+    height: 72px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .swatch::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--sheen);
+    opacity: 0.5;
+  }
+
+  .swatch-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text);
+    opacity: 0.8;
+  }
+
+  .swatch-role {
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  /* ─── SECTION: TYPOGRAPHY ────────────────────────────── */
+  .type-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    padding: 20px 0;
+  }
+
+  .type-sample-display {
+    font-family: var(--font-display);
+    font-size: 72px;
+    line-height: 0.95;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .type-sample-display-italic {
+    font-family: var(--font-display);
+    font-size: 72px;
+    line-height: 0.95;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 8px;
+    opacity: 0.6;
+  }
+
+  .type-sample-h1 { font-family: var(--font-display); font-size: var(--size-h1); font-weight: 400; line-height: 1.1; }
+  .type-sample-h2 { font-family: var(--font-display); font-size: var(--size-h2); font-weight: 400; line-height: 1.2; }
+  .type-sample-h3 { font-family: var(--font-ui); font-size: var(--size-h3); font-weight: 600; line-height: 1.3; }
+  .type-sample-body { font-family: var(--font-ui); font-size: var(--size-body-lg); font-weight: 400; line-height: 1.55; }
+  .type-sample-small { font-family: var(--font-ui); font-size: var(--size-body); font-weight: 400; line-height: 1.5; color: var(--muted); }
+  .type-sample-label { font-family: var(--font-ui); font-size: var(--size-label); text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); }
+
+  .type-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 6px;
+  }
+
+  .type-meta span {
+    font-size: 10px;
+    color: var(--muted);
+    opacity: 0.7;
+  }
+
+  .type-meta strong {
+    color: var(--muted);
+    font-weight: 500;
+    opacity: 1;
+    font-size: 10px;
+  }
+
+  /* ─── SECTION: BUTTONS ───────────────────────────────── */
+  .btn-demo-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* Primary */
+  .btn-primary {
+    height: 40px;
+    padding: 0 28px;
+    border-radius: 999px;
+    background: var(--action-primary);
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--action-primary-glow);
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+    letter-spacing: 0.01em;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(186,48,120,0.42); }
+
+  .btn-primary-sm {
+    height: 32px;
+    padding: 0 20px;
+    border-radius: 999px;
+    background: var(--action-primary);
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--action-primary-glow);
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+    position: relative; overflow: hidden; isolation: isolate;
+  }
+  .btn-primary-sm::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .btn-primary-sm:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(186,48,120,0.38); }
+
+  /* Secondary / Social */
+  .btn-social {
+    height: 40px;
+    padding: 0 28px;
+    border-radius: 999px;
+    background: var(--action-social);
+    color: var(--action-social-text);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.4);
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200,80,140,0.14), inset 0 1px 1px rgba(255,255,255,0.6);
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+    position: relative; overflow: hidden; isolation: isolate;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .btn-social::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: var(--sheen);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .btn-social:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(200,80,140,0.22), inset 0 1px 1px rgba(255,255,255,0.7); }
+
+  .btn-social-sm {
+    height: 32px;
+    padding: 0 20px;
+    border-radius: 999px;
+    background: var(--action-social);
+    color: var(--action-social-text);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.4);
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200,80,140,0.12), inset 0 1px 1px rgba(255,255,255,0.6);
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+    position: relative; overflow: hidden; isolation: isolate;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .btn-social-sm::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: var(--sheen);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  /* Glass secondary */
+  .btn-glass {
+    height: 40px;
+    padding: 0 28px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.18);
+    color: var(--text);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.30);
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07), inset 0 1px 1px rgba(255,255,255,0.6);
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease, background 0.2s;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    position: relative; overflow: hidden; isolation: isolate;
+  }
+  .btn-glass::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: var(--sheen);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .btn-glass:hover { transform: translateY(-2px); background: rgba(255,255,255,0.26); box-shadow: 0 10px 28px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.7); }
+
+  .btn-glass-sm {
+    height: 32px;
+    padding: 0 20px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.18);
+    color: var(--text);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.30);
+    cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.6);
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+    position: relative; overflow: hidden; isolation: isolate;
+  }
+  .btn-glass-sm::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: var(--sheen);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* Ghost */
+  .btn-ghost {
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .btn-ghost:hover { color: var(--text); background: rgba(255,255,255,0.12); }
+
+  .btn-ghost-sm {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    transition: color 0.15s;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .btn-ghost-sm:hover { color: var(--text); }
+
+  /* Icon button */
+  .btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.30);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.6);
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+  }
+  .btn-icon:hover { transform: translateY(-2px) scale(1.08); box-shadow: 0 8px 22px rgba(0,0,0,0.10); }
+
+  .btn-row-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    min-width: 80px;
+    padding-top: 12px;
+  }
+
+  .btn-tier-block {
+    padding: 28px 32px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .btn-tier-title {
+    font-size: var(--size-h3);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tier-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  .tier-badge--1 { background: var(--action-primary); color: #fff; }
+  .tier-badge--2 { background: var(--action-social); color: var(--action-social-text); }
+  .tier-badge--3 { background: rgba(0,0,0,0.08); color: var(--muted); }
+  .tier-badge--4 { background: rgba(255,255,255,0.3); color: var(--muted); border: 1px solid rgba(0,0,0,0.08); }
+
+  .btn-tier-desc {
+    font-size: var(--size-label);
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .btn-tier-examples {
+    font-size: var(--size-label);
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ─── SECTION: NAV & FILTERS ─────────────────────────── */
+  .nav-demo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.28);
+    box-shadow: var(--glass-1-shadow);
+    width: fit-content;
+  }
+
+  .nav-item {
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-family: var(--font-ui);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    border: none;
+    background: transparent;
+    font-weight: 400;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.22); color: var(--text); }
+  .nav-item.active {
+    background: rgba(255,255,255,0.42);
+    color: var(--text);
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08), inset 0 1px 1px rgba(255,255,255,0.7);
+  }
+
+  .filter-demo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-chip {
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-family: var(--font-ui);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    border: 1px solid rgba(255,255,255,0.26);
+    background: rgba(255,255,255,0.14);
+    color: var(--muted);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-weight: 400;
+  }
+  .filter-chip:hover { background: rgba(255,255,255,0.24); color: var(--text); }
+  .filter-chip.active {
+    background: rgba(255,255,255,0.52);
+    color: var(--text);
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border-color: rgba(255,255,255,0.42);
+  }
+
+  /* ─── SECTION: CONTENT TYPES ─────────────────────────── */
+  .type-option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .type-option-title {
+    font-size: var(--size-label);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+
+  /* Option A: Tinted glass cards */
+  .type-card-a {
+    padding: 18px 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.55);
+  }
+
+  .type-card-a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--sheen);
+    opacity: 0.45;
+  }
+
+  .type-card-a > * { position: relative; z-index: 1; }
+
+  .type-card-a-event     { background: var(--type-event); border-color: var(--type-event-border); }
+  .type-card-a-collab    { background: var(--type-collab); border-color: var(--type-collab-border); }
+  .type-card-a-portfolio { background: var(--type-portfolio); border-color: var(--type-portfolio-border); }
+  .type-card-a-resource  { background: var(--type-resource); border-color: var(--type-resource-border); }
+
+  /* Option B: Neutral glass + colored left edge + type badge */
+  .type-card-b {
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-left-width: 3px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.55);
+  }
+
+  .type-card-b::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--sheen);
+    opacity: 0.45;
+  }
+
+  .type-card-b > * { position: relative; z-index: 1; }
+
+  .type-card-b-event     { border-left-color: var(--type-event-dot); }
+  .type-card-b-collab    { border-left-color: var(--type-collab-dot); }
+  .type-card-b-portfolio { border-left-color: var(--type-portfolio-dot); }
+  .type-card-b-resource  { border-left-color: var(--type-resource-dot); }
+
+  /* Option C: Neutral glass + pill badge in corner */
+  .type-card-c {
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.30);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06), inset 0 1px 1px rgba(255,255,255,0.55);
+  }
+
+  .type-card-c::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--sheen);
+    opacity: 0.45;
+  }
+
+  .type-card-c > * { position: relative; z-index: 1; }
+
+  .type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  .type-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .type-badge-event     { background: var(--type-event);     color: #7a4800; }
+  .type-badge-collab    { background: var(--type-collab);    color: #2d1f8c; }
+  .type-badge-portfolio { background: var(--type-portfolio); color: #145c38; }
+  .type-badge-resource  { background: var(--type-resource);  color: #0e3d7a; }
+
+  .type-card-title { font-size: 13px; font-weight: 500; }
+  .type-card-sub   { font-size: 11px; color: var(--muted); }
+
+  .type-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.35);
+  }
+
+  /* ─── SECTION: CARD HIERARCHY ────────────────────────── */
+  .card-demo {
+    padding: 28px 28px;
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card-demo-img {
+    width: 100%;
+    height: 120px;
+    border-radius: 14px;
+    background: rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  .card-demo-category { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .card-demo-title { font-size: 15px; font-weight: 500; line-height: 1.3; }
+  .card-demo-meta { font-size: 11px; color: var(--muted); }
+
+  .card-demo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* ─── SECTION: SPACING ───────────────────────────────── */
+  .spacing-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .spacing-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .spacing-bar {
+    background: rgba(186,48,120,0.22);
+    border-radius: 4px;
+    width: 40px;
+  }
+
+  .spacing-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-align: center;
+    font-family: monospace;
+  }
+
+  /* ─── OPTION HEADER ──────────────────────────────────── */
+  .option-strip {
+    display: flex;
+    gap: 0;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.28);
+    padding: 3px;
+    width: fit-content;
+    margin-bottom: 24px;
+  }
+
+  .option-tab {
+    padding: 6px 20px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-family: var(--font-ui);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    transition: all 0.18s;
+  }
+  .option-tab:hover { color: var(--text); background: rgba(255,255,255,0.28); }
+  .option-tab.active {
+    background: var(--action-primary);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: var(--action-primary-glow);
+    letter-spacing: 0.01em;
+  }
+
+  /* ─── CONTENT TYPE CARD — SELECTED STATE ─────────────── */
+  .type-card-a,
+  .type-card-b,
+  .type-card-c {
+    cursor: pointer;
+    transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.18s var(--ease-spring);
+  }
+
+  .type-card-a.selected,
+  .type-card-b.selected,
+  .type-card-c.selected {
+    border-color: rgba(186,48,120,0.72) !important;
+    box-shadow: 0 0 0 2px rgba(186,48,120,0.55),
+                0 8px 24px rgba(186,48,120,0.18),
+                inset 0 1px 1px rgba(255,255,255,0.65);
+    transform: translateY(-2px);
+  }
+
+  /* Check indicator — empty circle when idle, filled ✓ when selected */
+  .type-select-check {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(186,48,120,0.30);
+    background: rgba(255,255,255,0.50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0;
+    transition: all 0.18s var(--ease-spring);
+    z-index: 2;
+    flex-shrink: 0;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .selected .type-select-check {
+    background: var(--action-primary);
+    border-color: var(--action-primary);
+    font-size: 10px;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(186,48,120,0.38);
+  }
+
+  /* ─── DIVIDER ─────────────────────────────────────────── */
+  .ds-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1) 20%, rgba(0,0,0,0.1) 80%, transparent);
+    margin: 0;
+  }
+
+  /* ─── HIGHLIGHT BOX ──────────────────────────────────── */
+  .ds-highlight {
+    padding: 20px 24px;
+    border-radius: 16px;
+    background: rgba(186,48,120,0.06);
+    border: 1px solid rgba(186,48,120,0.14);
+    font-size: var(--size-label);
+    color: var(--muted);
+    line-height: 1.7;
+    margin-top: 24px;
+  }
+  .ds-highlight strong { color: var(--text); font-weight: 600; }
+
+  /* ─── GRID HELPERS ───────────────────────────────────── */
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .three-col { grid-template-columns: 1fr 1fr; }
+    .ds-header { padding: 48px 32px 36px; }
+    .ds-toc { padding: 12px 32px; }
+    .ds-content { padding: 0 32px; }
+  }
+
+  @media (max-width: 600px) {
+    .three-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="ds-header">
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:8px;">Underground</div>
+      <h1 class="ds-header-title">Design System <em>v2</em></h1>
+    </div>
+    <div class="ds-header-meta">
+      April 2026<br>
+      Hi-fi Reference<br>
+      Frosted Glass Edition
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="ds-toc" aria-label="Sections">
+    <a href="#glass">Glass</a>
+    <a href="#colors">Colors</a>
+    <a href="#type">Typography</a>
+    <a href="#buttons">Buttons</a>
+    <a href="#nav">Nav & Filters</a>
+    <a href="#content-types">Content Types</a>
+    <a href="#cards">Cards</a>
+    <a href="#spacing">Spacing</a>
+  </nav>
+
+  <div class="ds-content">
+
+    <!-- ═══════════════════════════════════════
+         SECTION 1 · GLASS LEVELS
+         ═══════════════════════════════════════ -->
+    <section class="ds-section" id="glass">
+      <p class="ds-section-label">Foundation</p>
+      <h2 class="ds-section-title">Glass Levels</h2>
+
+      <p style="font-size:13px;color:var(--muted);max-width:640px;line-height:1.6;margin-bottom:32px;">
+        Three elevation levels create visual hierarchy. Higher levels are more opaque, more blurred, and carry stronger shadows — they feel closer to the user. Every surface in the app must declare one of these three levels.
+      </p>
+
+      <div class="ds-row" style="align-items:stretch;">
+
+        <div class="glass-level-card glass-0" style="background:var(--glass-0-bg);backdrop-filter:var(--glass-0-blur);-webkit-backdrop-filter:var(--glass-0-blur);border:1px solid var(--glass-0-border);">
+          <div class="glass-level-name">L0 · Ambient</div>
+          <div class="glass-level-use">Page atmosphere, decorative rects, hover zones, inactive filter regions</div>
+          <div class="glass-level-spec">
+            <div class="glass-spec-row"><span>Fill</span><span>rgba(255,255,255,0.06)</span></div>
+            <div class="glass-spec-row"><span>Blur</span><span>8px sat 140%</span></div>
+            <div class="glass-spec-row"><span>Border</span><span>rgba(255,255,255,0.14)</span></div>
+            <div class="glass-spec-row"><span>Shadow</span><span>none</span></div>
+          </div>
+        </div>
+
+        <div class="glass-level-card glass-1">
+          <div class="glass-level-name">L1 · Surface</div>
+          <div class="glass-level-use">Cards, panels, nav bar, side panels, filter chips, form inputs, buttons</div>
+          <div class="glass-level-spec">
+            <div class="glass-spec-row"><span>Fill</span><span>rgba(255,255,255,0.18)</span></div>
+            <div class="glass-spec-row"><span>Blur</span><span>20px sat 180%</span></div>
+            <div class="glass-spec-row"><span>Border</span><span>rgba(255,255,255,0.28)</span></div>
+            <div class="glass-spec-row"><span>Shadow</span><span>0 8px 32px + inner sheen</span></div>
+          </div>
+        </div>
+
+        <div class="glass-level-card glass-2">
+          <div class="glass-level-name">L2 · Elevated</div>
+          <div class="glass-level-use">Modals, drawers, focused overlays, tooltips, profile previews</div>
+          <div class="glass-level-spec">
+            <div class="glass-spec-row"><span>Fill</span><span>rgba(255,255,255,0.72)</span></div>
+            <div class="glass-spec-row"><span>Blur</span><span>32px sat 200%</span></div>
+            <div class="glass-spec-row"><span>Border</span><span>rgba(255,255,255,0.55)</span></div>
+            <div class="glass-spec-row"><span>Shadow</span><span>0 20px 56px rgba(48,24,72,.14)</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ds-highlight">
+        <strong>Rule:</strong> Never nest the same glass level inside itself. An L1 card inside an L1 panel reads as flat. Go L0 → L1 → L2 as you layer content inward. Modals (L2) on top of cards (L1) on top of page (L0).
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SECTION 2 · COLORS
+         ═══════════════════════════════════════ -->
+    <section class="ds-section" id="colors">
+      <p class="ds-section-label">Tokens</p>
+      <h2 class="ds-section-title">Color System</h2>
+
+      <p style="font-size:13px;color:var(--muted);max-width:640px;line-height:1.6;margin-bottom:32px;">
+        The palette adds two new functional colors to the original pink palette. Pink is now split into two distinct roles so primary CTA and social actions stop looking identical.
+      </p>
+
+      <!-- Action colors -->
+      <p class="ds-rule-label">Action Colors — NEW</p>
+      <div class="ds-row" style="margin-bottom:40px;">
+
+        <div class="swatch-group">
+          <div class="swatch" style="background:var(--action-primary);"></div>
+          <div class="swatch-label">--action-primary</div>
+          <div class="swatch-role">Post, Submit, Send — the one main CTA per screen</div>
+          <div class="ds-token-value">rgba(186, 48, 120, 0.92)</div>
+        </div>
+
+        <div class="swatch-group">
+          <div class="swatch" style="background:var(--action-social);border-color:rgba(255,180,210,0.4);"></div>
+          <div class="swatch-label">--action-social</div>
+          <div class="swatch-role">Follow, RSVP, Like, Connect — social-layer actions</div>
+          <div class="ds-token-value">rgba(255, 195, 225, 0.88)</div>
+        </div>
+
+      </div>
+
+      <!-- Content type colors -->
+      <p class="ds-rule-label">Content Type Tints</p>
+      <div class="ds-row" style="margin-bottom:40px;">
+
+        <div class="swatch-group">
+          <div class="swatch" style="background:var(--type-event);border-color:var(--type-event-border);"></div>
+          <div class="swatch-label">--type-event</div>
+          <div class="swatch-role">Events & shows — warm amber</div>
+          <div class="ds-token-value">rgba(255, 210, 140, 0.70)</div>
+        </div>
+
+        <div class="swatch-group">
+          <div class="swatch" style="background:var(--type-collab);border-color:var(--type-collab-border);"></div>
+          <div class="swatch-label">--type-collab</div>
+          <div class="swatch-role">Collaboration posts — soft violet</div>
+          <div class="ds-token-value">rgba(195, 185, 250, 0.65)</div>
+        </div>
+
+        <div class="swatch-group">
+          <div class="swatch" style="background:var(--type-portfolio);border-color:var(--type-portfolio-border);"></div>
+          <div class="swatch-label">--type-portfolio</div>
+          <div class="swatch-role">Portfolio work — sage green</div>
+          <div class="ds-token-value">rgba(175, 230, 200, 0.65)</div>
+        </div>
+
+        <div class="swatch-group">
+          <div class="swatch" style="background:var(--type-resource);border-color:var(--type-resource-border);"></div>
+          <div class="swatch-label">--type-resource</div>
+          <div class="swatch-role">Resources & links — sky blue</div>
+          <div class="ds-token-value">rgba(185, 225, 255, 0.65)</div>
+        </div>
+
+      </div>
+
+      <!-- Text & neutrals -->
+      <p class="ds-rule-label">Text & Neutrals — Unchanged</p>
+      <div class="ds-row">
+        <div class="swatch-group">
+          <div class="swatch" style="background:#17151f;"></div>
+          <div class="swatch-label">--text</div>
+          <div class="ds-token-value">#17151f</div>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#6f687c;"></div>
+          <div class="swatch-label">--muted</div>
+          <div class="ds-token-value">#6f687c</div>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#f5eef4;border:1px solid rgba(0,0,0,0.08);"></div>
+          <div class="swatch-label">--bg-page</div>
+          <div class="ds-token-value">#f5eef4</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SECTION 3 · TYPOGRAPHY
+         ═══════════════════════════════════════ -->
+    <section class="ds-section" id="type">
+      <p class="ds-section-label">Typography</p>
+      <h2 class="ds-section-title">Type Scale</h2>
+
+      <p style="font-size:13px;color:var(--muted);max-width:640px;line-height:1.6;margin-bottom:32px;">
+        Instrument Serif is added as a display / heading face. Its editorial contrast pairs with DM Sans's clean geometry to create a clear editorial-but-accessible voice. DM Sans replaces BIZ UDPGothic for Latin UI text to improve readability at small sizes.
+      </p>
+
+      <div class="type-row">
+        <div class="type-sample-display">Underground</div>
+        <div class="type-sample-display-italic">Your borough.</div>
+        <div class="type-meta">
+          <span><strong>Display</strong> · Instrument Serif · 72px / regular + italic</span>
+          <span>Hero headlines only</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-sample-h1">Events happening tonight</div>
+        <div class="type-meta">
+          <span><strong>H1</strong> · Instrument Serif · 48px / regular</span>
+          <span>Page titles</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-sample-h2">For You</div>
+        <div class="type-meta">
+          <span><strong>H2</strong> · Instrument Serif · 32px / regular</span>
+          <span>Section titles, modal headings</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-sample-h3">Filter by borough</div>
+        <div class="type-meta">
+          <span><strong>H3</strong> · DM Sans · 20px / 600</span>
+          <span>Card titles, panel headings</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-sample-body">DJ for underground warehouse party, BK · Paid collab</div>
+        <div class="type-meta">
+          <span><strong>Body Large</strong> · DM Sans · 16px / 400</span>
+          <span>Card body, descriptions</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-sample-small">@pioneerselect · 11 responses · 2h ago · Queens</div>
+        <div class="type-meta">
+          <span><strong>Body / Meta</strong> · DM Sans · 13px / 400</span>
+          <span>Metadata, secondary copy, captions</span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-sample-label">Music Festival · Collabs · Resources</div>
+        <div class="type-meta">
+          <span><strong>Label</strong> · DM Sans · 11px / 400 · uppercase · tracking 0.09em</span>
+          <span>Category labels, nav items, UI labels</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SECTION 4 · BUTTONS
+         ═══════════════════════════════════════ -->
+    <section class="ds-section" id="buttons">
+      <p class="ds-section-label">Interaction</p>
+      <h2 class="ds-section-title">Button Hierarchy</h2>
+
+      <p style="font-size:13px;color:var(--muted);max-width:640px;line-height:1.6;margin-bottom:36px;">
+        Four tiers, strictly enforced. Only one Tier 1 button should appear in any given view. Tier 2 and 3 can coexist. Tier 4 (ghost) is for dismissal, back navigation, and low-friction links.
+      </p>
+
+      <div class="three-col" style="margin-bottom:40px;">
+
+        <div class="btn-tier-block">
+          <div class="btn-tier-title">Tier 1 <span class="tier-badge tier-badge--1">Primary</span></div>
+          <div class="btn-tier-desc">The one unmissable action on the screen. Deep fuchsia fill, strong glow shadow, sheen overlay. One per view max.</div>
+          <div class="btn-tier-examples">Post · Submit · Publish · Send</div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+            <button class="btn-primary">Post</button>
+            <button class="btn-primary-sm">Submit</button>
+          </div>
+        </div>
+
+        <div class="btn-tier-block">
+          <div class="btn-tier-title">Tier 2 <span class="tier-badge tier-badge--2">Social</span></div>
+          <div class="btn-tier-desc">Social-layer actions. Soft pink glass — clearly interactive but subordinate to Tier 1. Can appear next to Tier 1.</div>
+          <div class="btn-tier-examples">Follow · RSVP · Save · Connect · Like</div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+            <button class="btn-social">Follow</button>
+            <button class="btn-social-sm">RSVP</button>
+          </div>
+        </div>
+
+        <div class="btn-tier-block">
+          <div class="btn-tier-title">Tier 3 <span class="tier-badge tier-badge--3">Glass</span></div>
+          <div class="btn-tier-desc">Secondary actions that need to exist but shouldn't pull focus. Neutral glass, white border, no color.</div>
+          <div class="btn-tier-examples">Details · View · Edit Profile · Filter · Share</div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+            <button class="btn-glass">Details</button>
+            <button class="btn-glass-sm">Edit Profile</button>
+          </div>
+        </div>
+
+        <div class="btn-tier-block">
+          <div class="btn-tier-title">Tier 4 <span class="tier-badge tier-badge--4">Ghost</span></div>
+          <div class="btn-tier-desc">Inline navigation, dismiss, back, and low-stakes text actions. Underline signals it's tappable without competing for attention.</div>
+          <div class="btn-tier-examples">← Back · Cancel · Skip · Learn more</div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+            <button class="btn-ghost">← Back</button>
+            <button class="btn-ghost-sm">Cancel</button>
+          </div>
+        </div>
+
+        <div class="btn-tier-block">
+          <div class="btn-tier-title">Icon Button</div>
+          <div class="btn-tier-desc">Circular glass button for heart/save, close, share. Use with a visible tooltip or clear context — no orphaned icons.</div>
+          <div class="btn-tier-examples">♡ · ✕ · ↗ · ···</div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+            <button class="btn-icon">♡</button>
+            <button class="btn-icon">✕</button>
+            <button class="btn-icon">↗</button>
+          </div>
+        </div>
+
+        <div class="btn-tier-block" style="justify-content:center;background:rgba(186,48,120,0.04);border-color:rgba(186,48,120,0.12);">
+          <div class="btn-tier-desc" style="font-style:italic;font-size:12px;">
+            <strong style="display:block;font-style:normal;margin-bottom:8px;color:var(--text);">Decision rule</strong>
+            Ask: <em>"What's the single most important action here?"</em> That one gets Tier 1. Everything else steps down. If you're unsure, default to Tier 3.
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SECTION 5 · NAV & FILTERS
+         ═══════════════════════════════════════ -->
+    <section class="ds-section" id="nav">
+      <p class="ds-section-label">Navigation</p>
+      <h2 class="ds-section-title">Nav & Filters</h2>
+
+      <p style="font-size:13px;color:var(--muted);max-width:640px;line-height:1.6;margin-bottom:36px;">
+        Navigation uses a pill container (L1 glass) that groups items visually. The active item gets a distinct inner pill (L2 glass) — a clear selected state without needing bold text or color.
+      </p>
+
+      <!-- Global nav -->
+      <div style="margin-bottom:12px;">
+        <p class="ds-rule-label">Global Nav — site header</p>
+      </div>
+      <div class="nav-demo" style="margin-bottom:8px;">
+        <button class="nav-item">Feed</button>
+        <button class="nav-item active">Events</button>
+        <button class="nav-item">Collabs</button>
+        <button class="nav-item">Resources</button>
+        <button class="nav-item">Profile</button>
+      </div>
+      <p class="ds-note" style="margin-bottom:36px;">Active: inner pill rgba(255,255,255,0.42) + weight 600 · Hover: rgba(255,255,255,0.22) · Default: transparent</p>
+
+      <!-- Filter chips -->
+      <div style="margin-bottom:12px;">
+        <p class="ds-rule-label">Filter Chips — content tabs / page filters</p>
+      </div>
+      <div class="filter-demo" style="margin-bottom:8px;">
+        <button class="filter-chip active">All</button>
+        <button class="filter-chip">Following</button>
+        <button class="filter-chip">Events</button>
+        <button class="filter-chip">Collabs</button>
+        <button class="filter-chip">Portfolios</button>
+        <button class="filter-chip">Resources</button>
+      </div>
+      <p class="ds-note" style="margin-bottom:36px;">Active: rgba(255,255,255,0.52) + weight 600 · Default: rgba(255,255,255,0.14) · These should sit on the page background, not inside a container</p>
+
+      <div class="ds-highlight">
+        <strong>Key fix:</strong> Previously nav links, filter chips, and buttons all used the same look. Now: nav sits in a pill container (structural), filters are loose chips (contextual), buttons use the tier system (action). Three clearly different roles, three clearly different shapes.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SECTION 6 · CONTENT TYPES
+         ═══════════════════════════════════════ -->
+    <section class="ds-section" id="content-types">
+      <p class="ds-section-label">Content Taxonomy</p>
+      <h2 class="ds-section-title">Content Type Treatments</h2>
+
+      <p style="font-size:13px;color:var(--muted);max-width:640px;line-height:1.6;margin-bottom:36px;">
+        Three visual options for differentiating Events, Collabs, Portfolios, and Resources. Pick one and apply it consistently. Option B (edge accent) is the most subtle and works well with image-heavy cards; Option A (tinted glass) is loudest and best for list views; Option C (badge) is the most flexible.
+      </p>
+
+      <div class="ds-row" style="align-items:flex-start;gap:40px;">
+
+        <!-- Option A: Tinted glass -->
+        <div class="type-option-group">
+          <div class="type-option-title">A — Tinted Glass</div>
+
+          <div class="type-card-a type-card-a-event selected" data-group="a">
+            <span class="type-select-check">✓</span>
+            <div class="type-icon">🎵</div>
+            <div>
+              <div class="type-card-title">Summer Sonic '24</div>
+              <div class="type-card-sub">Flushing Meadows · May 20–22</div>
+            </div>
+          </div>
+
+          <div class="type-card-a type-card-a-collab" data-group="a">
+            <span class="type-select-check">✓</span>
+            <div class="type-icon">🤝</div>
+            <div>
+              <div class="type-card-title">DJ for warehouse party</div>
+              <div class="type-card-sub">@pioneerselect · BK · Paid</div>
+            </div>
+          </div>
+
+          <div class="type-card-a type-card-a-portfolio" data-group="a">
+            <span class="type-select-check">✓</span>
+            <div class="type-icon">🎨</div>
+            <div>
+              <div class="type-card-title">Album artwork series</div>
+              <div class="type-card-sub">@inklab · 2024</div>
+            </div>
+          </div>
+
+          <div class="type-card-a type-card-a-resource" data-group="a">
+            <span class="type-select-check">✓</span>
+            <div class="type-icon">📎</div>
+            <div>
+              <div class="type-card-title">Affordable rehearsal spaces</div>
+              <div class="type-card-sub">Google Sheet · Updated weekly</div>
+            </div>
+          </div>
+
+          <p class="ds-note">Full card tint — best for list / feed views without imagery. Unmissable type signal.</p>
+        </div>
+
+        <!-- Option B: Edge accent -->
+        <div class="type-option-group">
+          <div class="type-option-title">B — Edge Accent</div>
+
+          <div class="type-card-b type-card-b-event selected" data-group="b">
+            <span class="type-select-check">✓</span>
+            <div class="type-icon">🎵</div>
+            <div>
+              <div class="type-card-title">Summer Sonic '24</div>
+              <div class="type-card-sub">Flushing Meadows · May 20–22</div>
+            </div>
+          </div>
+
+          <div class="type-card-b type-card-b-collab" data-group="b">
+            <span class="type-select-check">✓</span>
+            <div class="type-icon">🤝</div>
+            <div>
+              <div class="type-card-title">DJ for warehouse party</div>
+              <div class="type-card-sub">@pioneerselect · BK · Paid</div>
+            </div>
+          </div>
+
+          <div class="type-card-b type-card-b-portfolio" data-group="b">
+            <span class="type-select-check">✓</span>
+            <div class="type-icon">🎨</div>
+            <div>
+              <div class="type-card-title">Album artwork series</div>
+              <div class="type-card-sub">@inklab · 2024</div>
+            </div>
+          </div>
+
+          <div class="type-card-b type-card-b-resource" data-group="b">
+            <span class="type-select-check">✓</span>
+            <div class="type-icon">📎</div>
+            <div>
+              <div class="type-card-title">Affordable rehearsal spaces</div>
+              <div class="type-card-sub">Google Sheet · Updated weekly</div>
+            </div>
+          </div>
+
+          <p class="ds-note">3px left border — minimal signal, works with images. Clean on mixed feeds.</p>
+        </div>
+
+        <!-- Option C: Badge -->
+        <div class="type-option-group">
+          <div class="type-option-title">C — Type Badge</div>
+
+          <div class="type-card-c selected" data-group="c">
+            <span class="type-select-check">✓</span>
+            <div class="type-badge type-badge-event"><span class="type-dot" style="background:var(--type-event-dot);"></span>Event</div>
+            <div class="type-card-title">Summer Sonic '24</div>
+            <div class="type-card-sub">Flushing Meadows · May 20–22</div>
+          </div>
+
+          <div class="type-card-c" data-group="c">
+            <span class="type-select-check">✓</span>
+            <div class="type-badge type-badge-collab"><span class="type-dot" style="background:var(--type-collab-dot);"></span>Collab</div>
+            <div class="type-card-title">DJ for warehouse party</div>
+            <div class="type-card-sub">@pioneerselect · BK · Paid</div>
+          </div>
+
+          <div class="type-card-c" data-group="c">
+            <span class="type-select-check">✓</span>
+            <div class="type-badge type-badge-portfolio"><span class="type-dot" style="background:var(--type-portfolio-dot);"></span>Portfolio</div>
+            <div class="type-card-title">Album artwork series</div>
+            <div class="type-card-sub">@inklab · 2024</div>
+          </div>
+
+          <div class="type-card-c" data-group="c">
+            <span class="type-select-check">✓</span>
+            <div class="type-badge type-badge-resource"><span class="type-dot" style="background:var(--type-resource-dot);"></span>Resource</div>
+            <div class="type-card-title">Affordable rehearsal spaces</div>
+            <div class="type-card-sub">Google Sheet · Updated weekly</div>
+          </div>
+
+          <p class="ds-note">Badge + dot — works everywhere including on images. Most flexible. Easiest to implement.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SECTION 7 · CARDS
+         ═══════════════════════════════════════ -->
+    <section class="ds-section" id="cards">
+      <p class="ds-section-label">Components</p>
+      <h2 class="ds-section-title">Card Anatomy</h2>
+
+      <p style="font-size:13px;color:var(--muted);max-width:640px;line-height:1.6;margin-bottom:36px;">
+        Cards demonstrate how the full system composes: glass level, content type badge, button tiers, and typography all in one unit. The card <em>back</em> (hover state) elevates from L1 to L2 to feel like it's surfacing toward the user.
+      </p>
+
+      <div class="ds-row" style="flex-wrap:nowrap;overflow-x:auto;padding-bottom:12px;">
+
+        <!-- Event card -->
+        <div class="card-demo glass-1">
+          <div class="card-demo-img">
+            <span style="font-size:10px;color:var(--muted);">Image</span>
+          </div>
+          <div>
+            <div class="type-badge type-badge-event" style="margin-bottom:8px;"><span class="type-dot" style="background:var(--type-event-dot);"></span>Event</div>
+            <div class="card-demo-title">Summer Sonic '24</div>
+            <div class="card-demo-meta" style="margin-top:4px;">Flushing Meadows · May 20–22 · $125</div>
+          </div>
+          <div class="card-demo-footer">
+            <span style="font-size:11px;color:var(--muted);">142 going</span>
+            <button class="btn-social-sm">RSVP</button>
+          </div>
+        </div>
+
+        <!-- Collab card -->
+        <div class="card-demo glass-1">
+          <div class="card-demo-img">
+            <span style="font-size:10px;color:var(--muted);">Image</span>
+          </div>
+          <div>
+            <div class="type-badge type-badge-collab" style="margin-bottom:8px;"><span class="type-dot" style="background:var(--type-collab-dot);"></span>Collab</div>
+            <div class="card-demo-title">DJ for warehouse party</div>
+            <div class="card-demo-meta" style="margin-top:4px;">@pioneerselect · BK · Paid</div>
+          </div>
+          <div class="card-demo-footer">
+            <span style="font-size:11px;color:var(--muted);">11 responses</span>
+            <button class="btn-social-sm">Connect</button>
+          </div>
+        </div>
+
+        <!-- Portfolio card -->
+        <div class="card-demo glass-1">
+          <div class="card-demo-img">
+            <span style="font-size:10px;color:var(--muted);">Image</span>
+          </div>
+          <div>
+            <div class="type-badge type-badge-portfolio" style="margin-bottom:8px;"><span class="type-dot" style="background:var(--type-portfolio-dot);"></span>Portfolio</div>
+            <div class="card-demo-title">Album artwork series</div>
+            <div class="card-demo-meta" style="margin-top:4px;">@inklab · 2024</div>
+          </div>
+          <div class="card-demo-footer">
+            <span style="font-size:11px;color:var(--muted);">48 saves</span>
+            <button class="btn-social-sm">Save</button>
+          </div>
+        </div>
+
+        <!-- Resource card -->
+        <div class="card-demo glass-1">
+          <div class="card-demo-img">
+            <span style="font-size:10px;color:var(--muted);">Image</span>
+          </div>
+          <div>
+            <div class="type-badge type-badge-resource" style="margin-bottom:8px;"><span class="type-dot" style="background:var(--type-resource-dot);"></span>Resource</div>
+            <div class="card-demo-title">Affordable rehearsal spaces</div>
+            <div class="card-demo-meta" style="margin-top:4px;">Google Sheet · Updated weekly</div>
+          </div>
+          <div class="card-demo-footer">
+            <span style="font-size:11px;color:var(--muted);">Brooklyn, Queens</span>
+            <button class="btn-glass-sm">Open</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ds-highlight" style="margin-top:24px;">
+        <strong>Button placement rule:</strong> Cards get Tier 2 (social) or Tier 3 (glass) buttons. The Tier 1 primary button lives outside the grid — in the header or as a floating action. This ensures the "Post" action is always dominant, not buried in a card.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SECTION 8 · SPACING
+         ═══════════════════════════════════════ -->
+    <section class="ds-section" id="spacing">
+      <p class="ds-section-label">Layout</p>
+      <h2 class="ds-section-title">Spacing Scale</h2>
+
+      <div class="spacing-row" style="margin-bottom:32px;">
+        <div class="spacing-item"><div class="spacing-bar" style="height:4px;"></div><div class="spacing-label">4<br>xs</div></div>
+        <div class="spacing-item"><div class="spacing-bar" style="height:8px;"></div><div class="spacing-label">8<br>sm</div></div>
+        <div class="spacing-item"><div class="spacing-bar" style="height:12px;"></div><div class="spacing-label">12<br>—</div></div>
+        <div class="spacing-item"><div class="spacing-bar" style="height:16px;"></div><div class="spacing-label">16<br>md</div></div>
+        <div class="spacing-item"><div class="spacing-bar" style="height:24px;"></div><div class="spacing-label">24<br>—</div></div>
+        <div class="spacing-item"><div class="spacing-bar" style="height:32px;"></div><div class="spacing-label">32<br>lg</div></div>
+        <div class="spacing-item"><div class="spacing-bar" style="height:48px;"></div><div class="spacing-label">48<br>xl</div></div>
+        <div class="spacing-item"><div class="spacing-bar" style="height:64px;"></div><div class="spacing-label">64<br>2xl</div></div>
+        <div class="spacing-item"><div class="spacing-bar" style="height:80px;"></div><div class="spacing-label">80<br>3xl</div></div>
+        <div class="spacing-item"><div class="spacing-bar" style="height:96px;"></div><div class="spacing-label">96<br>4xl</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        <div class="glass-1" style="padding:20px 24px;border-radius:16px;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:8px;">Border Radius</div>
+          <div style="font-size:13px;line-height:2;">
+            Card: 28px<br>
+            Input / chip: 16px<br>
+            Button: 999px (pill)<br>
+            Badge: 6px<br>
+            Icon btn: 50%
+          </div>
+        </div>
+        <div class="glass-1" style="padding:20px 24px;border-radius:16px;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:8px;">Page Layout</div>
+          <div style="font-size:13px;line-height:2;">
+            Page X pad: 80px<br>
+            Grid gap: 8px<br>
+            Section gap: 96px<br>
+            Header H: 80px<br>
+            Content max-W: 1136px
+          </div>
+        </div>
+        <div class="glass-1" style="padding:20px 24px;border-radius:16px;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:8px;">Motion</div>
+          <div style="font-size:13px;line-height:2;">
+            Hover lift: translateY(-2px)<br>
+            Hover timing: 200ms<br>
+            Ease: ease-out or spring<br>
+            Flip duration: 550ms<br>
+            Overlay fade: 350ms
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <div style="height:80px;"></div>
+
+  </div>
+
+<script>
+  /* Content type card — click to select within each option group */
+  document.querySelectorAll('[data-group]').forEach(card => {
+    card.addEventListener('click', () => {
+      const group = card.dataset.group;
+      document.querySelectorAll(`[data-group="${group}"]`).forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+    });
+  });
+</script>
+</body>
+</html>

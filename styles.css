@@ -117,7 +117,6 @@ textarea {
     .wide-card-front,
     .wide-card-back,
     .side-panel,
-    .feed-modal,
     .connect-action,
     .post-form-panel,
     .post-preview-panel,
@@ -146,11 +145,13 @@ textarea {
     .connect-rsvp-submit,
     .connect-profile-follow,
     .connect-profile-tab,
-    .post-preview-heart,
     .landing-drawer-close,
     .menu-toggle,
     .post-field input,
-    .post-field textarea
+    .post-field textarea,
+    .feed-modal,
+    .edit-profile-modal,
+    .profile-posts-modal
 ) {
     position: relative;
     overflow: hidden;
@@ -167,7 +168,6 @@ textarea {
     .wide-card-front,
     .wide-card-back,
     .side-panel,
-    .feed-modal,
     .connect-action,
     .post-form-panel,
     .post-preview-panel,
@@ -196,11 +196,14 @@ textarea {
     .connect-rsvp-submit,
     .connect-profile-follow,
     .connect-profile-tab,
-    .post-preview-heart,
     .landing-drawer-close,
     .menu-toggle,
     .post-field input,
-    .post-field textarea
+    .post-field textarea,
+    .feed-modal,
+    .connect-profile-preview,
+    .edit-profile-modal,
+    .profile-posts-modal
 ) {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(180%);
@@ -219,7 +222,6 @@ textarea {
     .wide-card-front,
     .wide-card-back,
     .side-panel,
-    .feed-modal,
     .connect-action,
     .connect-profile-preview,
     .post-form-panel,
@@ -249,11 +251,13 @@ textarea {
     .connect-rsvp-submit,
     .connect-profile-follow,
     .connect-profile-tab,
-    .post-preview-heart,
     .landing-drawer-close,
     .menu-toggle,
     .post-field input,
-    .post-field textarea
+    .post-field textarea,
+    .feed-modal,
+    .edit-profile-modal,
+    .profile-posts-modal
 )::before {
     content: "";
     position: absolute;
@@ -263,6 +267,8 @@ textarea {
     pointer-events: none;
     z-index: 0;
 }
+
+/* Modals use liquid glass — sheen pseudo-element is active */
 
 .liquid-glass::after,
 :where(
@@ -274,7 +280,6 @@ textarea {
     .wide-card-front,
     .wide-card-back,
     .side-panel,
-    .feed-modal,
     .connect-action,
     .connect-profile-preview,
     .post-form-panel,
@@ -299,11 +304,13 @@ textarea {
     .connect-chat-send,
     .msg-input,
     .msg-send-btn,
-    .post-preview-heart,
     .landing-drawer-close,
     .menu-toggle,
     .post-field input,
-    .post-field textarea
+    .post-field textarea,
+    .feed-modal,
+    .edit-profile-modal,
+    .profile-posts-modal
 )::after {
     content: "";
     position: absolute;
@@ -323,7 +330,6 @@ textarea {
     .wide-card-front,
     .wide-card-back,
     .side-panel,
-    .feed-modal,
     .feed-modal-connect,
     .connect-poster-card,
     .connect-action,
@@ -350,9 +356,11 @@ textarea {
     .connect-rsvp-submit,
     .connect-profile-follow,
     .connect-profile-tab,
-    .post-preview-heart,
     .landing-drawer-close,
-    .menu-toggle
+    .menu-toggle,
+    .feed-modal,
+    .edit-profile-modal,
+    .profile-posts-modal
 ) > * {
     position: relative;
     z-index: 1;
@@ -663,6 +671,12 @@ textarea {
     box-shadow: var(--glass-shadow-strong);
 }
 
+.btn-follow-profile.is-followed {
+    background: rgba(255, 255, 255, 0.22);
+    color: var(--text);
+    box-shadow: var(--glass-shadow-strong);
+}
+
 .filter-row--profile {
     gap: 64px;
     justify-content: flex-start;
@@ -707,8 +721,9 @@ textarea {
 }
 
 .filter-chip.active {
-    font-weight: 700;
-    background: transparent;
+    font-weight: 500;
+    background: #b5607a;
+    color: #ffffff;
     box-shadow: none;
 }
 
@@ -928,9 +943,9 @@ textarea {
     width: clamp(24px, calc(32px * var(--hover-copy-scale)), 32px);
     height: clamp(24px, calc(32px * var(--hover-copy-scale)), 32px);
     border: 0;
-    background: rgba(255, 255, 255, 0.14);
+    background: transparent;
     border-radius: 999px;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.58);
+    box-shadow: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1391,7 +1406,7 @@ textarea {
     inset: 0;
     z-index: 1200;
     padding: 24px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.45);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1409,7 +1424,6 @@ textarea {
     position: relative;
     width: 960px;
     height: 660px;
-    background: rgba(255, 255, 255, 0.8);
     box-shadow: var(--glass-shadow-strong);
     border-radius: 32px;
     flex-shrink: 0;
@@ -1464,9 +1478,9 @@ textarea {
     width: 32px;
     height: 32px;
     border: 0;
-    background: rgba(255, 255, 255, 0.14);
+    background: transparent;
     border-radius: 999px;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.58);
+    box-shadow: none;
     font-size: 24px;
     line-height: 1;
     cursor: pointer;
@@ -1924,10 +1938,6 @@ textarea {
     flex-direction: column;
     gap: 20px;
     padding: 60px 36px 36px;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.35);
     box-shadow: var(--glass-shadow-strong);
     isolation: isolate;
     z-index: 2;
@@ -2615,9 +2625,9 @@ textarea {
 }
 
 .post-cat-btn.selected {
-    background: var(--surface-pink);
-    color: var(--text);
-    box-shadow: var(--glass-shadow);
+    background: #b5607a;
+    color: #ffffff;
+    box-shadow: none;
 }
 
 /* Submit button */
@@ -2758,7 +2768,7 @@ textarea {
     width: 56px;
     height: 56px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
+    background: transparent;
 }
 
 .post-preview-heart:hover,
@@ -2970,10 +2980,10 @@ textarea {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.14);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-right: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.38);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
     overflow: hidden;
 }
 
@@ -3089,9 +3099,9 @@ textarea {
     flex-direction: column;
     min-width: 0;
     position: relative;
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    background: rgba(255, 255, 255, 0.52);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
     overflow: hidden;
 }
 
@@ -3129,10 +3139,10 @@ textarea {
     display: flex;
     align-items: center;
     padding: 14px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.38);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     flex-shrink: 0;
     z-index: 2;
 }
@@ -3193,21 +3203,20 @@ textarea {
 
 .msg-bubble--received {
     align-self: flex-start;
-    background: rgba(255, 255, 255, 0.24);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-bottom-left-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--glass-shadow);
+    color: var(--text);
 }
 
 .msg-bubble--sent {
     align-self: flex-end;
-    background: var(--accent-grad);
+    background: var(--surface-blue);
     color: #ffffff;
     border-radius: 12px 12px 2px 12px;
     padding: 8px 12px;
-    box-shadow: 0 2px 14px rgba(217, 74, 155, 0.28);
+    box-shadow: 0 2px 14px rgba(255, 82, 166, 0.35);
 }
 
 .msg-input-row {
@@ -3215,7 +3224,8 @@ textarea {
     align-items: center;
     gap: 8px;
     padding: 14px 24px 18px;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-top: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.22);
     flex-shrink: 0;
 }
 
@@ -3412,7 +3422,7 @@ textarea {
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: rgba(0, 0, 0, 0.28);
+    background: rgba(0, 0, 0, 0.45);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -3428,10 +3438,6 @@ textarea {
     width: min(100%, 560px);
     max-height: 90vh;
     overflow-y: auto;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 32px;
     box-shadow: var(--glass-shadow-strong);
     padding: 48px 40px 40px;
@@ -3596,7 +3602,7 @@ textarea {
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: rgba(0, 0, 0, 0.28);
+    background: rgba(0, 0, 0, 0.45);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -3612,10 +3618,6 @@ textarea {
     width: min(100%, 1120px);
     max-height: 90vh;
     overflow-y: auto;
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 32px;
     box-shadow: var(--glass-shadow-strong);
     padding: 52px 40px 40px;

@@ -13,9 +13,9 @@
             inset: 0;
             display: flex;
             flex-direction: column;
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(28px) saturate(200%);
-            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.35);
             overflow: hidden;
             z-index: 10;
@@ -29,8 +29,8 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(120deg, rgba(255,255,255,0.52) 0%, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0.04) 100%);
-            opacity: 0.7;
+            background: linear-gradient(120deg, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.10) 40%, rgba(255,255,255,0.02) 100%);
+            opacity: 0.5;
             pointer-events: none;
             z-index: 0;
         }
@@ -208,6 +208,12 @@
         .msg-profile-follow-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 18px rgba(217, 74, 155, 0.44);
+        }
+
+        .msg-profile-follow-btn.is-followed {
+            background: rgba(255, 255, 255, 0.22);
+            color: var(--text);
+            box-shadow: var(--glass-shadow-strong);
         }
 
         /* Work grid inside drawer */
@@ -418,10 +424,6 @@
                     <div class="msg-profile-drawer" id="profile-rosaline">
                         <div class="msg-profile-drawer-header">
                             <button class="msg-profile-drawer-back" data-chat="rosaline">← Back to chat</button>
-                            <div>
-                                <div class="msg-profile-drawer-title">Rosaline Mercer</div>
-                                <div class="msg-profile-drawer-sub">@rosaline.m</div>
-                            </div>
                         </div>
                         <div class="msg-profile-drawer-body">
                             <div class="msg-profile-hero">
@@ -491,10 +493,6 @@
                     <div class="msg-profile-drawer" id="profile-kai">
                         <div class="msg-profile-drawer-header">
                             <button class="msg-profile-drawer-back" data-chat="kai">← Back to chat</button>
-                            <div>
-                                <div class="msg-profile-drawer-title">Kai Wu</div>
-                                <div class="msg-profile-drawer-sub">@kai.wu</div>
-                            </div>
                         </div>
                         <div class="msg-profile-drawer-body">
                             <div class="msg-profile-hero">
@@ -563,10 +561,6 @@
                     <div class="msg-profile-drawer" id="profile-amina">
                         <div class="msg-profile-drawer-header">
                             <button class="msg-profile-drawer-back" data-chat="amina">← Back to chat</button>
-                            <div>
-                                <div class="msg-profile-drawer-title">Amina Stone</div>
-                                <div class="msg-profile-drawer-sub">@amina.stone</div>
-                            </div>
                         </div>
                         <div class="msg-profile-drawer-body">
                             <div class="msg-profile-hero">
@@ -636,10 +630,6 @@
                     <div class="msg-profile-drawer" id="profile-jiro">
                         <div class="msg-profile-drawer-header">
                             <button class="msg-profile-drawer-back" data-chat="jiro">← Back to chat</button>
-                            <div>
-                                <div class="msg-profile-drawer-title">Jiro Nakamura</div>
-                                <div class="msg-profile-drawer-sub">@jiro.n</div>
-                            </div>
                         </div>
                         <div class="msg-profile-drawer-body">
                             <div class="msg-profile-hero">
@@ -780,6 +770,16 @@
 
             // Open first chat by default
             openChat('rosaline');
+
+            // Follow buttons inside profile drawers
+            document.querySelectorAll('.msg-profile-follow-btn').forEach(btn => {
+                let followed = false;
+                btn.addEventListener('click', () => {
+                    followed = !followed;
+                    btn.classList.toggle('is-followed', followed);
+                    btn.textContent = followed ? 'Following' : 'Follow';
+                });
+            });
         })();
     </script>
     <script src="ds-init.js" defer></script>
