@@ -1463,71 +1463,11 @@
         map: { containerId: 'resourceLiveMap' }
     };
 
-    const SVG_MAP_W = 590;
-    const SVG_MAP_H = 460;
-    const SVG_MAP_BOUNDS = { minLng: -74.27, maxLng: -73.68, minLat: 40.47, maxLat: 40.93 };
-
-    const BOROUGH_SHAPES = [
-        {
-            id: 'bronx',
-            coords: [
-                [40.808, -73.917], [40.808, -73.830], [40.813, -73.765],
-                [40.893, -73.749], [40.917, -73.848], [40.900, -73.934],
-                [40.877, -73.931]
-            ]
-        },
-        {
-            id: 'manhattan',
-            coords: [
-                [40.878, -73.908], [40.863, -73.929], [40.848, -73.941],
-                [40.820, -73.953], [40.795, -73.944], [40.770, -73.952],
-                [40.748, -73.971], [40.720, -73.982], [40.701, -74.017],
-                [40.698, -74.021], [40.705, -74.016], [40.725, -74.004],
-                [40.745, -73.997], [40.769, -73.983], [40.798, -73.964],
-                [40.820, -73.950], [40.845, -73.935], [40.870, -73.920]
-            ]
-        },
-        {
-            id: 'brooklyn',
-            coords: [
-                [40.703, -73.995], [40.680, -74.005], [40.645, -74.033],
-                [40.617, -74.038], [40.598, -74.002], [40.552, -73.960],
-                [40.590, -73.913], [40.650, -73.900], [40.698, -73.863],
-                [40.730, -73.948]
-            ]
-        },
-        {
-            id: 'queens',
-            coords: [
-                [40.776, -73.918], [40.743, -73.941], [40.698, -73.863],
-                [40.605, -73.757], [40.587, -73.770], [40.752, -73.700],
-                [40.808, -73.700], [40.808, -73.830]
-            ]
-        },
-        {
-            id: 'staten-island',
-            coords: [
-                [40.643, -74.073], [40.644, -74.190], [40.570, -74.253],
-                [40.500, -74.246], [40.505, -74.215], [40.558, -74.103],
-                [40.595, -74.060], [40.636, -74.061]
-            ]
-        }
-    ];
+    const LIVE_MAP_CENTER = [40.693, -73.985];
+    const LIVE_MAP_ZOOM = 11;
 
     const liveMapRegistry = new Map();
-
-    function latlngToSvgPt(lat, lng) {
-        const x = (lng - SVG_MAP_BOUNDS.minLng) / (SVG_MAP_BOUNDS.maxLng - SVG_MAP_BOUNDS.minLng) * SVG_MAP_W;
-        const y = (SVG_MAP_BOUNDS.maxLat - lat) / (SVG_MAP_BOUNDS.maxLat - SVG_MAP_BOUNDS.minLat) * SVG_MAP_H;
-        return [x, y];
-    }
-
-    function coordsToPath(coords) {
-        return coords.map(([lat, lng], i) => {
-            const [x, y] = latlngToSvgPt(lat, lng);
-            return (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
-        }).join(' ') + ' Z';
-    }
+    let leafletPinIcon = null;
 
     function ensureLiveMap(pageKey) {
         const config = LIVE_MAP_CONFIG[pageKey];
@@ -1537,66 +1477,35 @@
         if (existing) return existing;
 
         const container = document.getElementById(config.containerId);
-        if (!container) return null;
+        if (!container || !window.L) return null;
 
-        const NS = 'http://www.w3.org/2000/svg';
-        const svg = document.createElementNS(NS, 'svg');
-        svg.setAttribute('viewBox', `0 0 ${SVG_MAP_W} ${SVG_MAP_H}`);
-        svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-        svg.style.cssText = 'width:100%;height:100%;display:block;';
+        if (!leafletPinIcon) {
+            leafletPinIcon = L.divIcon({
+                className: '',
+                html: '<span class="map-pin-leaflet"></span>',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+        }
 
-        const defs = document.createElementNS(NS, 'defs');
-        const filter = document.createElementNS(NS, 'filter');
-        filter.setAttribute('id', `grain-${pageKey}`);
-        filter.setAttribute('x', '0%');
-        filter.setAttribute('y', '0%');
-        filter.setAttribute('width', '100%');
-        filter.setAttribute('height', '100%');
-        const feTurbulence = document.createElementNS(NS, 'feTurbulence');
-        feTurbulence.setAttribute('type', 'fractalNoise');
-        feTurbulence.setAttribute('baseFrequency', '0.65');
-        feTurbulence.setAttribute('numOctaves', '3');
-        feTurbulence.setAttribute('stitchTiles', 'stitch');
-        const feColorMatrix = document.createElementNS(NS, 'feColorMatrix');
-        feColorMatrix.setAttribute('type', 'saturate');
-        feColorMatrix.setAttribute('values', '0');
-        const feBlend = document.createElementNS(NS, 'feBlend');
-        feBlend.setAttribute('in', 'SourceGraphic');
-        feBlend.setAttribute('in2', 'noise');
-        feBlend.setAttribute('mode', 'multiply');
-        filter.appendChild(feTurbulence);
-        filter.appendChild(feColorMatrix);
-        defs.appendChild(filter);
-        svg.appendChild(defs);
-
-        const bg = document.createElementNS(NS, 'rect');
-        bg.setAttribute('width', SVG_MAP_W);
-        bg.setAttribute('height', SVG_MAP_H);
-        bg.setAttribute('fill', '#bfcdd9');
-        svg.appendChild(bg);
-
-        BOROUGH_SHAPES.forEach(({ id, coords }) => {
-            const path = document.createElementNS(NS, 'path');
-            path.setAttribute('d', coordsToPath(coords));
-            path.setAttribute('class', `map-borough map-borough--${id}`);
-            svg.appendChild(path);
+        const leafletMap = L.map(container, {
+            center: LIVE_MAP_CENTER,
+            zoom: LIVE_MAP_ZOOM,
+            zoomControl: false,
+            attributionControl: false,
+            scrollWheelZoom: false,
+            dragging: false,
+            doubleClickZoom: false,
+            touchZoom: false
         });
 
-        const grain = document.createElementNS(NS, 'rect');
-        grain.setAttribute('width', SVG_MAP_W);
-        grain.setAttribute('height', SVG_MAP_H);
-        grain.setAttribute('fill', 'transparent');
-        grain.setAttribute('filter', `url(#grain-${pageKey})`);
-        grain.setAttribute('opacity', '0.04');
-        svg.appendChild(grain);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(leafletMap);
 
-        const markersGroup = document.createElementNS(NS, 'g');
-        markersGroup.setAttribute('class', 'map-markers');
-        svg.appendChild(markersGroup);
-
-        container.appendChild(svg);
-
-        const state = { svg, markersGroup };
+        const markersLayer = L.layerGroup().addTo(leafletMap);
+        const state = { leafletMap, markersLayer };
         liveMapRegistry.set(pageKey, state);
         return state;
     }
@@ -1605,39 +1514,28 @@
         const state = ensureLiveMap(pageKey);
         if (!state) return;
 
-        while (state.markersGroup.firstChild) {
-            state.markersGroup.removeChild(state.markersGroup.firstChild);
-        }
+        state.markersLayer.clearLayers();
 
-        const NS = 'http://www.w3.org/2000/svg';
-
-        items.filter((item) => {
+        const visible = items.filter((item) => {
             const lat = Number(item.dataset.lat);
             const lng = Number(item.dataset.lng);
             return !item.hidden && Number.isFinite(lat) && Number.isFinite(lng);
-        }).forEach((card) => {
-            const [x, y] = latlngToSvgPt(Number(card.dataset.lat), Number(card.dataset.lng));
-
-            const g = document.createElementNS(NS, 'g');
-            g.setAttribute('class', 'map-pin');
-
-            const ring = document.createElementNS(NS, 'circle');
-            ring.setAttribute('cx', x);
-            ring.setAttribute('cy', y);
-            ring.setAttribute('r', '10');
-            ring.setAttribute('class', 'map-pin-ring');
-
-            const dot = document.createElementNS(NS, 'circle');
-            dot.setAttribute('cx', x);
-            dot.setAttribute('cy', y);
-            dot.setAttribute('r', '4');
-            dot.setAttribute('class', 'map-pin-dot');
-
-            g.appendChild(ring);
-            g.appendChild(dot);
-            g.addEventListener('click', () => card.click());
-            state.markersGroup.appendChild(g);
         });
+
+        visible.forEach((card) => {
+            const lat = Number(card.dataset.lat);
+            const lng = Number(card.dataset.lng);
+            const marker = L.marker([lat, lng], { icon: leafletPinIcon });
+            marker.on('click', () => card.click());
+            state.markersLayer.addLayer(marker);
+        });
+
+        if (visible.length > 0) {
+            const latlngs = visible.map((c) => [Number(c.dataset.lat), Number(c.dataset.lng)]);
+            state.leafletMap.fitBounds(L.latLngBounds(latlngs).pad(0.3), { animate: false });
+        } else {
+            state.leafletMap.setView(LIVE_MAP_CENTER, LIVE_MAP_ZOOM, { animate: false });
+        }
     }
 
     function getCardTitle(card) {

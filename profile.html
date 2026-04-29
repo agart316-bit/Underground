@@ -9,7 +9,7 @@
 </head>
 <body class="app-page" data-page="profile">
     <header class="site-header">
-        <a class="brand-link" href="underground-landing.html">Underground</a>
+        <a class="brand-link" href="index.html">Underground</a>
         <nav class="site-nav">
             <a href="feed.html" class="nav-link">Feed</a>
             <a href="events.html" class="nav-link">Events</a>
@@ -281,9 +281,160 @@
         </div>
     </div>
 
+    <style>
+        /* Edit form overlays the right column — same position as .feed-modal-connect */
+        .post-edit-form {
+            position: absolute;
+            top: 80px;
+            left: 452px;
+            right: 36px;
+            bottom: 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 2;
+        }
+        .post-edit-form[hidden] { display: none; }
+        .post-edit-fields {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+        }
+        .post-edit-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            padding-top: 4px;
+        }
+        /* When editing, hide the view-mode text and the Edit button */
+        .feed-modal.is-editing :is(
+            .feed-modal-category,
+            .feed-modal-title,
+            .feed-modal-meta,
+            .feed-modal-desc,
+            .feed-modal-stats,
+            .feed-modal-rsvp
+        ) {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+    </style>
     <script src="shared-ui.js"></script>
     <script>
     (() => {
+        // --- Post Edit (modal action button) ---
+        const feedOverlay = document.getElementById('feedOverlay');
+        if (feedOverlay) {
+            const oldRsvpBtn = feedOverlay.querySelector('.feed-modal-rsvp');
+            if (oldRsvpBtn) {
+                // Clone to strip shared-ui.js listeners, set label to Edit
+                const editPostBtn = oldRsvpBtn.cloneNode(true);
+                editPostBtn.textContent = 'Edit';
+                oldRsvpBtn.replaceWith(editPostBtn);
+
+                const feedModal       = document.getElementById('feedModal');
+                const connectPanel    = feedOverlay.querySelector('.feed-modal-connect');
+                const modalTitleEl    = document.getElementById('modalTitle');
+                const modalDescEl     = document.getElementById('modalDesc');
+                const modalCategoryEl = document.getElementById('modalCategory');
+                const modalMetaEl     = document.getElementById('modalMeta');
+
+                // Build edit form — appended inside feedModal so it can be absolutely positioned
+                const postEditForm = document.createElement('form');
+                postEditForm.className = 'post-edit-form';
+                postEditForm.hidden = true;
+                postEditForm.innerHTML = `
+                    <div class="post-edit-fields">
+                        <label class="connect-rsvp-field">
+                            <span>Title</span>
+                            <input class="connect-rsvp-input" name="title" type="text" required>
+                        </label>
+                        <label class="connect-rsvp-field">
+                            <span>Category</span>
+                            <input class="connect-rsvp-input" name="category" type="text">
+                        </label>
+                        <label class="connect-rsvp-field">
+                            <span>Location</span>
+                            <input class="connect-rsvp-input" name="meta" type="text">
+                        </label>
+                        <label class="connect-rsvp-field">
+                            <span>Description</span>
+                            <textarea class="connect-rsvp-textarea" name="desc" rows="4"></textarea>
+                        </label>
+                    </div>
+                    <div class="post-edit-footer">
+                        <button class="edit-profile-cancel post-edit-cancel" type="button">Cancel</button>
+                        <button class="connect-rsvp-submit" type="submit">Save Changes</button>
+                    </div>
+                `;
+                feedModal.appendChild(postEditForm);
+
+                let currentCard = null;
+
+                // When overlay opens reset edit state and track the source card
+                const mo = new MutationObserver(() => {
+                    if (!feedOverlay.classList.contains('is-open')) return;
+                    const t = modalTitleEl ? modalTitleEl.textContent : '';
+                    currentCard = t
+                        ? [...document.querySelectorAll('.three-grid .square-card')].find(
+                            c => c.querySelector('.square-card-title')?.textContent === t
+                          ) || null
+                        : null;
+                    feedModal.classList.remove('is-editing');
+                    postEditForm.hidden = true;
+                });
+                mo.observe(feedOverlay, { attributes: true, attributeFilter: ['class'] });
+
+                function openPostEdit() {
+                    if (modalTitleEl)    postEditForm.elements.title.value    = modalTitleEl.textContent;
+                    if (modalCategoryEl) postEditForm.elements.category.value = modalCategoryEl.textContent;
+                    if (modalMetaEl)     postEditForm.elements.meta.value     = modalMetaEl.textContent;
+                    if (modalDescEl)     postEditForm.elements.desc.value     = modalDescEl.textContent;
+                    if (connectPanel)    connectPanel.hidden = true;
+                    feedModal.classList.add('is-editing');
+                    postEditForm.hidden = false;
+                }
+
+                function closePostEdit() {
+                    feedModal.classList.remove('is-editing');
+                    postEditForm.hidden = true;
+                }
+
+                editPostBtn.addEventListener('click', openPostEdit);
+                postEditForm.querySelector('.post-edit-cancel').addEventListener('click', closePostEdit);
+
+                postEditForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const newTitle    = postEditForm.elements.title.value.trim();
+                    const newCategory = postEditForm.elements.category.value.trim();
+                    const newMeta     = postEditForm.elements.meta.value.trim();
+                    const newDesc     = postEditForm.elements.desc.value.trim();
+
+                    if (modalTitleEl    && newTitle)    modalTitleEl.textContent    = newTitle;
+                    if (modalCategoryEl && newCategory) modalCategoryEl.textContent = newCategory;
+                    if (modalMetaEl     && newMeta)     modalMetaEl.textContent     = newMeta;
+                    if (modalDescEl)                    modalDescEl.textContent     = newDesc;
+
+                    if (currentCard) {
+                        const ct = currentCard.querySelector('.square-card-title');
+                        const cc = currentCard.querySelector('.square-card-category');
+                        const cm = currentCard.querySelector('.square-card-meta');
+                        const cd = currentCard.querySelector('.square-card-desc');
+                        if (ct && newTitle)    ct.textContent = newTitle;
+                        if (cc && newCategory) cc.textContent = newCategory;
+                        if (cm && newMeta)     cm.textContent = newMeta;
+                        if (cd)                cd.textContent = newDesc;
+                    }
+
+                    closePostEdit();
+                });
+            }
+        }
+
         // --- Edit Profile Modal ---
         const editBtn    = document.getElementById('editProfileBtn');
         const editOverlay = document.getElementById('editProfileOverlay');

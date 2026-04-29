@@ -90,7 +90,8 @@
 
 .msg-send-btn:hover,
 .connect-chat-send:hover {
-  box-shadow: 0 6px 22px rgba(170,38,108,0.46) !important;
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
+  transform: translateY(-2px);
 }
 
 /* Normalize action button geometry to match the edit profile button */
@@ -114,10 +115,14 @@
   font-weight: 500 !important;
 }
 
-/* Sent bubble */
+/* Sent bubble — social tier: soft pink glass, not primary fuchsia */
 .msg-bubble--sent {
-  background: var(--action-primary) !important;
-  box-shadow: 0 2px 14px rgba(170,38,108,0.28) !important;
+  background: var(--accent-grad-soft) !important;
+  color: var(--action-social-text) !important;
+  border: 1px solid rgba(255, 200, 230, 0.42) !important;
+  box-shadow:
+    0 4px 16px rgba(200, 80, 140, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.64) !important;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -146,19 +151,22 @@
 .btn-auth:focus-visible,
 .feed-modal-rsvp:hover,
 .feed-modal-rsvp:focus-visible,
-.square-card-btn:hover,
-.square-card-btn:focus-visible,
-.wide-card-btn:hover,
-.wide-card-btn:focus-visible,
 .connect-profile-follow:hover,
 .connect-profile-follow:focus-visible,
 .msg-view-profile-btn:hover,
 .connect-rsvp-submit:hover,
 .connect-rsvp-submit:focus-visible {
   background: rgba(255,205,230,0.96) !important;
-  box-shadow:
-    0 10px 30px rgba(200,80,140,0.24),
-    inset 0 1px 1px rgba(255,255,255,0.72) !important;
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
+  transform: translateY(-2px);
+}
+
+.square-card-btn:hover,
+.square-card-btn:focus-visible,
+.wide-card-btn:hover,
+.wide-card-btn:focus-visible {
+  background: var(--action-social) !important;
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
   transform: translateY(-2px);
 }
 
@@ -176,15 +184,9 @@
 }
 
 .btn-edit-profile:hover,
-.btn-edit-profile:focus-visible,
-.square-card-btn:hover,
-.square-card-btn:focus-visible,
-.wide-card-btn:hover,
-.wide-card-btn:focus-visible {
+.btn-edit-profile:focus-visible {
   background: rgba(255,255,255,0.34) !important;
-  box-shadow:
-    0 7px 22px rgba(0,0,0,0.10),
-    inset 0 1px 1px rgba(255,255,255,0.72) !important;
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
   transform: translateY(-2px);
 }
 
@@ -192,6 +194,7 @@
 .post-cat-btn.selected {
   background: var(--action-social) !important;
   color: var(--action-social-text) !important;
+  box-shadow: var(--glass-shadow) !important;
 }
 
 /* Success page CTAs — same action button styling as the rest */
@@ -215,9 +218,7 @@
 .success-btn:hover,
 .success-btn:focus-visible {
   background: rgba(255,205,230,0.96) !important;
-  box-shadow:
-    0 10px 30px rgba(200,80,140,0.24),
-    inset 0 1px 1px rgba(255,255,255,0.72) !important;
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
   transform: translateY(-2px);
 }
 
@@ -497,25 +498,27 @@
   border: 1px solid rgba(255,255,255,0.28) !important;
 }
 
-/* ── MESSAGES PAGE — align all panels to ds-v2 glass ─── */
+/* ── MESSAGES PAGE — soft glass to match rest of site ─── */
 
-/* Overall layout shell — uses strong glass shadow like the modal */
+/* Overall layout shell — no unified wrapper; each panel carries its own glass */
 .msg-layout {
-  box-shadow: 0 20px 56px rgba(48,24,72,0.14), inset 0 1px 1px rgba(255,255,255,0.80) !important;
-  border: 1px solid rgba(255,255,255,0.55) !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
-/* Sidebar — L2 Elevated glass (matches modal) */
+/* Sidebar — pink-tinted glass, rounded, matches .post-form-panel */
 .msg-sidebar {
-  background: rgba(255,255,255,0.62) !important;
+  background: rgba(255, 214, 233, 0.3) !important;
   backdrop-filter: blur(32px) saturate(200%) !important;
   -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
-  border-right: 1px solid rgba(255,255,255,0.45) !important;
+  border-radius: 32px !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  border-right: none !important;
 }
 
 /* Sidebar header strip */
 .msg-sidebar-header {
-  background: rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.08);
   border-bottom: 1px solid rgba(255,255,255,0.28) !important;
 }
 
@@ -524,64 +527,62 @@
   background: rgba(255,255,255,0.14) !important;
 }
 
-/* Active contact — pink tint using action-primary at low opacity */
+/* Active contact — soft warm pink, no harsh fuchsia */
 .msg-contact-item--active {
-  background: rgba(186,48,120,0.09) !important;
+  background: rgba(240,136,193,0.12) !important;
 }
 .msg-contact-item--active:hover {
-  background: rgba(186,48,120,0.13) !important;
+  background: rgba(240,136,193,0.18) !important;
 }
 
-/* Main chat area — L2 Elevated glass (same as modal card) */
+/* Main chat area — lighter pink-tinted glass, rounded, matches .post-preview-panel */
 .msg-chat {
-  background: rgba(255,255,255,0.72) !important;
+  background: rgba(255, 238, 245, 0.24) !important;
   backdrop-filter: blur(32px) saturate(200%) !important;
   -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+  border-radius: 32px !important;
 }
 
-/* Chat header — slightly more opaque strip */
+/* Chat header — lightweight frosted strip */
 .msg-chat-header {
-  background: rgba(255,255,255,0.55) !important;
-  backdrop-filter: blur(24px) saturate(200%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.45) !important;
+  background: rgba(255,255,255,0.22) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.34) !important;
 }
 
-/* Received bubble — clean white glass (matches modal connect panel) */
+/* Received bubble — soft frosted glass */
 .msg-bubble--received {
-  background: rgba(255,255,255,0.82) !important;
-  border: 1px solid rgba(255,255,255,0.60) !important;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07), inset 0 1px 1px rgba(255,255,255,0.80) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  background: rgba(255,255,255,0.52) !important;
+  border: 1px solid rgba(255,255,255,0.54) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07), inset 0 1px 1px rgba(255,255,255,0.72) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
 }
 
-/* Sent bubble — solid pink (matches modal quick-reply chips) */
+/* Sent bubble — soft pastel pink glass, matches social tier */
 .msg-bubble--sent {
-  background: var(--action-primary) !important;
-  box-shadow: 0 2px 14px rgba(170,38,108,0.28) !important;
+  background: var(--accent-grad-soft) !important;
+  color: var(--action-social-text) !important;
+  border: 1px solid rgba(255,200,230,0.42) !important;
+  box-shadow: 0 4px 16px rgba(200,80,140,0.12), inset 0 1px 1px rgba(255,255,255,0.64) !important;
 }
 
 /* Message input field — L1 Surface glass */
 .msg-input {
-  background: rgba(255,255,255,0.18) !important;
-  border: 1px solid rgba(255,255,255,0.28) !important;
+  background: rgba(255,255,255,0.22) !important;
+  border: 1px solid rgba(255,255,255,0.34) !important;
   box-shadow: inset 0 1px 1px rgba(255,255,255,0.62) !important;
 }
 .msg-input:focus {
-  border-color: rgba(186,48,120,0.35) !important;
-  box-shadow: 0 0 0 2px rgba(186,48,120,0.18), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  border-color: rgba(186,48,120,0.28) !important;
+  box-shadow: 0 0 0 2px rgba(186,48,120,0.14), inset 0 1px 1px rgba(255,255,255,0.62) !important;
 }
 
-/* Input row border */
+/* Input row — lighter strip so chat area feels open */
 .msg-input-row {
-  border-top: 1px solid rgba(255,255,255,0.45) !important;
-  background: rgba(255,255,255,0.55) !important;
-}
-
-.msg-input {
-  background: rgba(255,255,255,0.72) !important;
-  border: 1px solid rgba(255,255,255,0.55) !important;
+  border-top: 1px solid rgba(255,255,255,0.34) !important;
+  background: rgba(255,255,255,0.16) !important;
 }
 
 /* Send button — already Tier 1 primary via ds-v2 above */
@@ -595,12 +596,12 @@
   box-shadow: 0 20px 56px rgba(48,24,72,0.14), inset 0 1px 1px rgba(255,255,255,0.80) !important;
 }
 
-/* Drawer header strip — L1 Surface */
+/* Drawer header strip — soft glass strip */
 .msg-profile-drawer-header {
-  background: rgba(255,255,255,0.55) !important;
+  background: rgba(255,255,255,0.30) !important;
   backdrop-filter: blur(20px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.45) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.38) !important;
 }
 
 /* Drawer back button — Tier 3 glass */
