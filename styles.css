@@ -198,7 +198,8 @@ textarea {
     .post-field textarea,
     .feed-modal,
     .edit-profile-modal,
-    .profile-posts-modal
+    .profile-posts-modal,
+    .landing-cta-btn
 ) {
     position: relative;
     overflow: hidden;
@@ -252,7 +253,8 @@ textarea {
     .feed-modal,
     .connect-profile-preview,
     .edit-profile-modal,
-    .profile-posts-modal
+    .profile-posts-modal,
+    .landing-cta-btn
 ) {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(180%);
@@ -307,7 +309,8 @@ textarea {
     .post-field textarea,
     .feed-modal,
     .edit-profile-modal,
-    .profile-posts-modal
+    .profile-posts-modal,
+    .landing-cta-btn
 )::before {
     content: "";
     position: absolute;
@@ -360,7 +363,8 @@ textarea {
     .post-field textarea,
     .feed-modal,
     .edit-profile-modal,
-    .profile-posts-modal
+    .profile-posts-modal,
+    .landing-cta-btn
 )::after {
     content: "";
     position: absolute;
@@ -412,7 +416,8 @@ textarea {
     .menu-toggle,
     .feed-modal,
     .edit-profile-modal,
-    .profile-posts-modal
+    .profile-posts-modal,
+    .landing-cta-btn
 ) > * {
     position: relative;
     z-index: 1;
@@ -1470,19 +1475,18 @@ textarea {
     border-radius: 999px;
     background: var(--action-social);
     color: var(--action-social-text);
-    font-size: var(--body-size);
-    font-weight: 600;
-    letter-spacing: 0.01em;
+    font-size: var(--button-font-size);
+    line-height: var(--button-line-height);
+    font-weight: 500;
     text-decoration: none;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-    box-shadow: 0 4px 20px rgba(255, 195, 225, 0.22);
+    cursor: pointer;
+    box-shadow: none;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, opacity 0.18s ease;
 }
 
 .landing-cta-btn:hover,
 .landing-cta-btn:focus-visible {
-    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
-    opacity: 0.88;
 }
 
 .landing-links {
