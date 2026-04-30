@@ -23,21 +23,35 @@
         </nav>
         <div class="site-actions">
             <button class="btn-post" type="button">Post</button>
-            <a href="messages.html"><img class="avatar" src="assets/profile-icon.png" alt="Messages" /></a>
+            <a href="messages.html" class="nav-avatar" aria-label="Messages">T</a>
         </div>
     </header>
 
     <main class="page-main">
         <h1 class="page-title">Event Board</h1>
 
-        <div class="filter-row filter-row--feed" data-tab-group>
-            <button class="filter-chip active" type="button">All</button>
-            <button class="filter-chip" type="button">Tonight</button>
-            <button class="filter-chip" type="button">This Week</button>
-            <button class="filter-chip" type="button">Free</button>
+        <div class="filter-row filter-row--feed" id="eventsFilterRow">
+            <button class="filter-chip active" type="button" data-filter="all">All</button>
+            <button class="filter-chip" type="button" data-filter="tonight">Tonight</button>
+            <button class="filter-chip" type="button" data-filter="week">This Week</button>
+            <button class="filter-chip" type="button" data-filter="free">Free</button>
         </div>
 
-        <section class="split-layout" aria-label="Events and map layout">
+        <!-- Portfolio empty state (shown only on Tonight filter) -->
+        <div class="portfolio-empty" id="portfolioEmpty" hidden>
+            <div class="portfolio-empty-icon" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="10" width="36" height="28" rx="6" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <circle cx="17" cy="20" r="3" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M6 32l9-8 7 6 5-4 9 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </div>
+            <p class="portfolio-empty-heading">Nothing on tonight</p>
+            <p class="portfolio-empty-body">No events are happening in your borough this evening. Check back later or browse everything.</p>
+            <a href="#" class="portfolio-empty-cta" onclick="document.querySelector('[data-filter=all]').click(); return false;">See all events →</a>
+        </div>
+
+        <section class="split-layout" id="eventsLayout" aria-label="Events and map layout">
             <div class="wide-card-list">
 
                 <article class="wide-card" data-img="assets/bravo-design-good-design.jpg" data-lat="40.7158" data-lng="-73.9970">
@@ -163,5 +177,27 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="shared-ui.js"></script>
     <script src="ds-init.js" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var filterRow = document.getElementById('eventsFilterRow');
+        var eventsLayout = document.getElementById('eventsLayout');
+        var portfolioEmpty = document.getElementById('portfolioEmpty');
+        if (!filterRow) return;
+        filterRow.addEventListener('click', function (e) {
+          var chip = e.target.closest('.filter-chip');
+          if (!chip) return;
+          filterRow.querySelectorAll('.filter-chip').forEach(function (c) { c.classList.remove('active'); });
+          chip.classList.add('active');
+          var filter = chip.dataset.filter;
+          if (filter === 'tonight') {
+            eventsLayout.hidden = true;
+            portfolioEmpty.hidden = false;
+          } else {
+            eventsLayout.hidden = false;
+            portfolioEmpty.hidden = true;
+          }
+        });
+      });
+    </script>
 </body>
 </html>

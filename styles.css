@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+
 :root {
     --bg: #ffffff;
     --text: #17151f;
@@ -5,10 +7,50 @@
     --line: rgba(255, 255, 255, 0.28);
     --surface: rgba(255, 255, 255, 0.16);
     --surface-strong: rgba(255, 255, 255, 0.22);
-    --surface-blue: rgba(255, 82, 166, 0.94);
+    /* --surface-blue / --surface-pink kept as aliases for legacy selectors;
+       prefer --action-primary / --action-social going forward */
+    --surface-blue: var(--action-primary);
     --surface-green: rgba(255, 211, 232, 0.78);
     --surface-orange: rgba(255, 196, 224, 0.8);
-    --surface-pink: rgba(255, 210, 232, 0.78);
+    --surface-pink: var(--action-social);
+
+    /* ── Design System v2 canonical tokens ─────────────────
+       Single source of truth — do not redefine in ds-v2.css */
+
+    /* Button tiers */
+    --action-primary:      rgba(170, 38, 108, 0.94);
+    --action-primary-glow: 0 8px 28px rgba(170, 38, 108, 0.34);
+    --action-social:       rgba(255, 195, 225, 0.88);
+    --action-social-text:  #3a1229;
+
+    /* Glass levels */
+    --glass-0-bg:     rgba(255, 255, 255, 0.06);
+    --glass-0-border: rgba(255, 255, 255, 0.14);
+    --glass-0-blur:   blur(8px) saturate(140%);
+
+    --glass-1-bg:     rgba(255, 255, 255, 0.18);
+    --glass-1-border: rgba(255, 255, 255, 0.28);
+    --glass-1-blur:   blur(20px) saturate(180%);
+    --glass-1-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), inset 0 1px 1px rgba(255, 255, 255, 0.62);
+
+    --glass-2-bg:     rgba(255, 255, 255, 0.72);
+    --glass-2-border: rgba(255, 255, 255, 0.55);
+    --glass-2-blur:   blur(32px) saturate(200%);
+    --glass-2-shadow: 0 20px 56px rgba(48, 24, 72, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.80);
+
+    /* Content-type tints */
+    --type-event:          rgba(255, 210, 140, 0.78);
+    --type-collab:         rgba(195, 185, 250, 0.72);
+    --type-portfolio:      rgba(175, 230, 200, 0.72);
+    --type-resource:       rgba(185, 225, 255, 0.72);
+    --type-event-dot:      #c47d10;
+    --type-collab-dot:     #5c44cc;
+    --type-portfolio-dot:  #2a8c5c;
+    --type-resource-dot:   #2466b8;
+    --type-event-text:     #7a4800;
+    --type-collab-text:    #2d1f8c;
+    --type-portfolio-text: #145c38;
+    --type-resource-text:  #0e3d7a;
     --glass-shadow:
         0 8px 32px rgba(0, 0, 0, 0.12),
         inset 0 1px 1px rgba(255, 255, 255, 0.6),
@@ -70,6 +112,9 @@
     --flip-ease: cubic-bezier(0.4, 0.2, 0.2, 1);
     --shadow-hover: 8px 12px 47px 3px rgba(0, 0, 0, 0.12);
 
+    --subhead-size: 26px;
+    --subhead-line: 1.2;
+
     font-synthesis: none;
     text-rendering: optimizeLegibility;
 }
@@ -87,12 +132,12 @@ body {
 
 body {
     min-height: 100vh;
-    background: var(--bg);
+    background: #ffffff;
+    background-attachment: fixed;
     color: var(--text);
-    font-family: "BIZ UDPGothic", "Noto Sans JP", "Segoe UI", sans-serif;
+    font-family: 'DM Sans', 'Segoe UI', sans-serif;
     overflow-x: hidden;
     position: relative;
-    background-image: none;
 }
 
 a {
@@ -442,10 +487,10 @@ textarea {
     box-shadow: 0 8px 22px rgba(46, 34, 70, 0.08);
 }
 
+/* Active nav pill — ds-v2.css owns the full visual treatment;
+   only structural properties live here */
 .nav-link.active {
-    font-weight: 700;
-    background: transparent;
-    box-shadow: none;
+    font-weight: 400;
 }
 
 .site-actions {
@@ -515,10 +560,12 @@ textarea {
 }
 
 .btn-post {
-    width: 120px;
+    width: auto;
     height: 32px;
-    padding: 0;
-    background: var(--surface-blue);
+    padding: 0 24px;
+    white-space: nowrap;
+    background: var(--action-primary);
+    box-shadow: var(--action-primary-glow);
     font-size: var(--button-font-size);
     line-height: var(--button-line-height);
     cursor: pointer;
@@ -532,14 +579,15 @@ textarea {
 }
 
 .btn-auth {
-    width: 120px;
+    width: auto;
     height: 32px;
-    padding: 0;
-    background: var(--surface-pink);
+    padding: 0 24px;
+    white-space: nowrap;
+    background: var(--action-social);
     font-size: var(--button-font-size);
     line-height: var(--button-line-height);
     cursor: pointer;
-    color: var(--text);
+    color: var(--action-social-text);
 }
 
 .btn-auth:hover,
@@ -560,6 +608,27 @@ textarea {
     box-shadow: var(--glass-shadow);
     transition: transform 0.18s ease, box-shadow 0.18s ease;
     cursor: pointer;
+}
+
+/* Gradient initial-letter avatar used in the nav */
+.nav-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(250, 206, 224, 0.95) 0%, rgba(211, 68, 149, 0.9) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+    text-decoration: none;
 }
 
 .site-actions a {
@@ -587,7 +656,8 @@ textarea {
     text-align: center;
 }
 
-.site-actions a:hover .avatar {
+.site-actions a:hover .avatar,
+.site-actions .nav-avatar:hover {
     transform: translateY(-1px);
     box-shadow: var(--glass-shadow-strong);
 }
@@ -681,13 +751,15 @@ textarea {
 }
 
 .btn-edit-profile {
-    width: 120px;
+    width: auto;
     height: 32px;
-    padding: 0;
-    background: var(--surface-pink);
+    padding: 0 24px;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.22);
     font-size: var(--button-font-size);
     line-height: var(--button-line-height);
     cursor: pointer;
+    color: var(--text);
 }
 
 .btn-edit-profile:hover,
@@ -747,8 +819,8 @@ textarea {
 
 .filter-chip.active {
     font-weight: 500;
-    background: #b5607a;
-    color: #ffffff;
+    background: rgba(255, 255, 255, 0.54);
+    color: var(--text);
     box-shadow: none;
 }
 
@@ -782,8 +854,8 @@ textarea {
 }
 
 .pagination-btn.active {
-    background: var(--surface-pink);
-    color: var(--text);
+    background: var(--action-social);
+    color: var(--action-social-text);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -806,14 +878,14 @@ textarea {
 }
 
 .pagination-btn--next {
-    background: var(--surface-pink);
+    background: rgba(255, 255, 255, 0.22);
     color: var(--text);
     box-shadow: var(--glass-shadow-strong);
 }
 
 .pagination-btn--next:hover,
 .pagination-btn--next:focus-visible {
-    background: var(--surface-pink);
+    background: rgba(255, 255, 255, 0.32);
     color: var(--text);
     box-shadow: var(--glass-shadow-strong);
 }
@@ -954,11 +1026,12 @@ textarea {
     box-shadow: var(--glass-shadow-strong);
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: clamp(4px, calc(6px * var(--hover-copy-scale)), 6px);
     padding:
         clamp(18px, calc(32px * var(--hover-copy-scale)), 32px)
-        clamp(18px, calc(48px * var(--hover-copy-scale)), 48px)
-        clamp(56px, calc(88px * var(--hover-copy-scale)), 88px);
+        clamp(18px, calc(32px * var(--hover-copy-scale)), 32px)
+        clamp(18px, calc(32px * var(--hover-copy-scale)), 32px);
 }
 
 .card-heart {
@@ -996,8 +1069,8 @@ textarea {
 
 .square-card-title {
     display: -webkit-box;
-    font-size: clamp(13px, calc(var(--body-large-size) * var(--hover-copy-scale)), var(--body-large-size));
-    line-height: clamp(18px, calc(var(--body-large-line) * var(--hover-copy-scale)), var(--body-large-line));
+    font-size: clamp(18px, calc(var(--subhead-size) * var(--hover-copy-scale)), var(--subhead-size));
+    line-height: clamp(22px, calc(var(--subhead-size) * var(--subhead-line) * var(--hover-copy-scale)), calc(var(--subhead-size) * var(--subhead-line)));
     font-weight: 400;
     overflow: hidden;
     -webkit-box-orient: vertical;
@@ -1023,22 +1096,24 @@ textarea {
 
 .square-card-stats {
     margin-top: auto;
+    flex: 1 1 0;
+    min-width: 0;
     font-size: clamp(10px, calc(var(--body-size) * var(--hover-copy-scale)), var(--body-size));
     line-height: clamp(13px, calc(var(--body-line) * var(--hover-copy-scale)), var(--body-line));
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    padding-right: clamp(104px, calc(132px * var(--hover-copy-scale)), 132px);
+    align-self: center;
 }
 
 .square-card-btn {
-    position: absolute;
-    bottom: clamp(18px, calc(32px * var(--hover-copy-scale)), 32px);
-    right: clamp(18px, calc(32px * var(--hover-copy-scale)), 32px);
+    margin-top: auto;
+    flex-shrink: 0;
     width: clamp(92px, calc(120px * var(--hover-copy-scale)), 120px);
     height: clamp(28px, calc(32px * var(--hover-copy-scale)), 32px);
     border-radius: 999px;
-    background: var(--surface-pink);
+    background: var(--action-social);
+    color: var(--action-social-text);
     font-size: var(--button-font-size);
     line-height: var(--button-line-height);
     cursor: pointer;
@@ -1057,6 +1132,10 @@ textarea {
     width: min(100%, var(--content-width));
     margin: 0 auto;
     justify-content: center;
+}
+
+.split-layout[hidden] {
+    display: none;
 }
 
 .wide-card-list {
@@ -1142,8 +1221,8 @@ textarea {
 
 .wide-card-title {
     display: -webkit-box;
-    font-size: clamp(13px, calc(var(--body-large-size) * var(--hover-copy-scale)), var(--body-large-size));
-    line-height: clamp(18px, calc(var(--body-large-line) * var(--hover-copy-scale)), var(--body-large-line));
+    font-size: clamp(18px, calc(var(--subhead-size) * var(--hover-copy-scale)), var(--subhead-size));
+    line-height: clamp(22px, calc(var(--subhead-size) * var(--subhead-line) * var(--hover-copy-scale)), calc(var(--subhead-size) * var(--subhead-line)));
     font-weight: 400;
     overflow: hidden;
     -webkit-box-orient: vertical;
@@ -1184,7 +1263,8 @@ textarea {
     width: clamp(92px, calc(120px * var(--hover-copy-scale)), 120px);
     height: clamp(28px, calc(32px * var(--hover-copy-scale)), 32px);
     border-radius: 999px;
-    background: var(--surface-pink);
+    background: var(--action-social);
+    color: var(--action-social-text);
     font-size: var(--button-font-size);
     line-height: var(--button-line-height);
     cursor: pointer;
@@ -1374,11 +1454,87 @@ textarea {
     line-height: var(--body-large-line);
 }
 
+.landing-cta-btn {
+    display: inline-block;
+    margin-top: 36px;
+    padding: 14px 32px;
+    border-radius: 999px;
+    background: var(--text);
+    color: #ffffff;
+    font-size: var(--body-size);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    box-shadow: 0 4px 20px rgba(10, 8, 15, 0.14);
+}
+
+.landing-cta-btn:hover,
+.landing-cta-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(10, 8, 15, 0.22);
+    opacity: 0.88;
+}
+
 .landing-links {
     padding: 0 0 var(--page-pad-bottom);
     display: flex;
     flex-direction: column;
     gap: var(--grid-gap);
+}
+
+/* Portfolio empty state on Events page */
+.portfolio-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px;
+    gap: 12px;
+    color: var(--text);
+}
+
+.portfolio-empty[hidden] {
+    display: none;
+}
+
+.portfolio-empty-icon {
+    opacity: 0.3;
+    margin-bottom: 8px;
+}
+
+.portfolio-empty-heading {
+    font-size: var(--body-large-size);
+    font-weight: 600;
+    margin: 0;
+}
+
+.portfolio-empty-body {
+    font-size: var(--body-size);
+    line-height: var(--body-line);
+    opacity: 0.6;
+    max-width: 320px;
+    margin: 0;
+}
+
+.portfolio-empty-cta {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 11px 26px;
+    border-radius: 999px;
+    background: var(--text);
+    color: #ffffff;
+    font-size: var(--body-size);
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.portfolio-empty-cta:hover,
+.portfolio-empty-cta:focus-visible {
+    transform: translateY(-2px);
+    opacity: 0.85;
 }
 
 .landing-link-card {
@@ -1551,8 +1707,8 @@ textarea {
 
 .feed-modal-title {
     position: relative;
-    font-size: var(--body-large-size);
-    line-height: var(--body-large-line);
+    font-size: var(--subhead-size);
+    line-height: var(--subhead-line);
     font-weight: 400;
     grid-column: 2;
     grid-row: 3;
@@ -1596,7 +1752,8 @@ textarea {
     width: 120px;
     height: 32px;
     padding: 0;
-    background: var(--surface-pink);
+    background: var(--action-social);
+    color: var(--action-social-text);
     box-shadow: var(--glass-shadow);
     font-size: var(--button-font-size);
     line-height: var(--button-line-height);
@@ -1766,8 +1923,8 @@ textarea {
 }
 
 .connect-action--follow.is-followed {
-    background: var(--surface-pink);
-    color: var(--text);
+    background: var(--action-social);
+    color: var(--action-social-text);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -1837,9 +1994,9 @@ textarea {
     width: 120px;
     height: 32px;
     padding: 0;
-    background: var(--surface-blue);
+    background: var(--action-primary);
     border: none;
-    box-shadow: var(--glass-shadow);
+    box-shadow: var(--action-primary-glow);
     color: #ffffff;
     font-weight: 500;
     font-size: var(--button-font-size);
@@ -1924,11 +2081,13 @@ textarea {
 
 .connect-rsvp-submit {
     align-self: flex-start;
-    width: 120px;
+    width: auto;
     height: 32px;
-    padding: 0;
+    padding: 0 24px;
+    white-space: nowrap;
     border-radius: 999px;
-    background: var(--surface-pink);
+    background: var(--action-social);
+    color: var(--action-social-text);
     box-shadow: var(--glass-shadow);
     font-size: var(--button-font-size);
     line-height: var(--button-line-height);
@@ -2026,18 +2185,20 @@ textarea {
 }
 
 .connect-profile-follow {
-    width: 120px;
+    width: auto;
     height: 32px;
-    padding: 0;
-    background: rgba(255, 255, 255, 0.18);
-    color: var(--text);
+    padding: 0 24px;
+    white-space: nowrap;
+    background: var(--action-social);
+    color: var(--action-social-text);
     font-size: var(--button-font-size);
     line-height: var(--button-line-height);
     cursor: pointer;
 }
 
 .connect-profile-follow.is-followed {
-    background: var(--surface-pink);
+    background: var(--action-social);
+    color: var(--action-social-text);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -2058,8 +2219,8 @@ textarea {
 }
 
 .connect-profile-tab.is-active {
-    background: var(--surface-pink);
-    color: var(--text);
+    background: var(--action-social);
+    color: var(--action-social-text);
     box-shadow: var(--glass-shadow);
 }
 
@@ -2646,18 +2807,20 @@ textarea {
 }
 
 .post-cat-btn.selected {
-    background: #b5607a;
-    color: #ffffff;
+    background: var(--action-social);
+    color: var(--action-social-text);
     box-shadow: none;
 }
 
-/* Submit button */
+/* Submit button — Tier 1 primary action */
 .post-submit-btn {
-    width: 120px;
+    width: auto;
     height: 32px;
-    padding: 0;
-    background: var(--surface-pink);
-    box-shadow: var(--glass-shadow);
+    padding: 0 24px;
+    white-space: nowrap;
+    background: var(--action-primary);
+    color: #fff;
+    box-shadow: var(--action-primary-glow);
     font-size: var(--button-font-size);
     line-height: var(--button-line-height);
     font-weight: 500;
@@ -2798,12 +2961,14 @@ textarea {
 }
 
 .post-preview-rsvp {
-    padding: 12px 32px;
+    width: auto;
+    height: 32px;
+    padding: 0 24px;
     border-radius: 999px;
-    background: var(--surface-orange);
+    background: var(--action-social);
+    color: var(--action-social-text);
     font-size: 14px;
     line-height: 16px;
-    color: var(--text);
     cursor: pointer;
     transition: box-shadow 0.2s ease;
     white-space: nowrap;
@@ -2943,11 +3108,11 @@ textarea {
 }
 
 .success-btn {
-    background: var(--surface-blue);
+    background: var(--action-social);
+    color: var(--action-social-text);
     border-radius: 999px;
     padding: 12px 32px;
     font-size: 14px;
-    color: #000;
     text-decoration: none;
     line-height: 16px;
     white-space: nowrap;
@@ -3270,7 +3435,7 @@ textarea {
     height: 32px;
     padding: 0;
     border-radius: 999px;
-    background: var(--surface-blue);
+    background: var(--action-primary);
     border: none;
     color: #ffffff;
     font-weight: 500;
@@ -3279,7 +3444,7 @@ textarea {
     cursor: pointer;
     flex-shrink: 0;
     transition: transform 0.22s ease, box-shadow 0.22s ease;
-    box-shadow: var(--glass-shadow);
+    box-shadow: var(--action-primary-glow);
 }
 
 .msg-send-btn:hover {
@@ -3383,14 +3548,14 @@ textarea {
     align-self: flex-start;
     display: inline-block;
     padding: 12px 30px;
-    background: var(--surface-blue);
-    color: #ffffff;
+    background: var(--action-social);
+    color: var(--action-social-text);
     border-radius: 999px;
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
     transition: transform 0.18s ease, box-shadow 0.18s ease;
-    box-shadow: 0 2px 12px rgba(217, 74, 155, 0.3);
+    box-shadow: 0 4px 16px rgba(200, 80, 140, 0.14);
 }
 
 .msg-view-profile-btn:hover {
@@ -3593,11 +3758,11 @@ textarea {
     height: 36px;
     padding: 0 28px;
     border-radius: 999px;
-    background: var(--surface-pink);
+    background: var(--action-social);
+    color: var(--action-social-text);
     box-shadow: var(--glass-shadow);
     font-size: var(--button-font-size);
     line-height: var(--button-line-height);
-    color: var(--text);
     cursor: pointer;
     font-family: inherit;
     border: none;
@@ -3792,9 +3957,5 @@ select.connect-rsvp-input {
     background: rgba(255, 255, 255, 0.24);
 }
 
-[data-page="feed"] .filter-chip.active {
-    background: var(--surface-pink);
-    border-color: rgba(255, 210, 232, 0.6);
-    font-weight: 700;
-    box-shadow: var(--glass-shadow);
-}
+/* Feed filter chips use the same white-glass active state as all other pages —
+   no override needed here; .filter-chip.active in ds-v2.css handles it. */

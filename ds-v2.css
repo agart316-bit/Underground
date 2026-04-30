@@ -1,51 +1,12 @@
 /* ═══════════════════════════════════════════════════════
-   Underground Design System v2 — Override Layer
-   Load after styles.css. Keeps glass aesthetic intact
-   while adding hierarchy: button tiers, nav pill,
-   filter chip states, and content-type C badges.
+   Underground Design System v2 — Component Layer
+   Load after styles.css.
+
+   Tokens (--action-primary, --glass-*, --type-*, etc.) are
+   defined in styles.css :root — do NOT redefine them here.
+   This file contains only component rules that build on
+   those tokens.
    ═══════════════════════════════════════════════════════ */
-
-/* ─── NEW TOKENS ──────────────────────────────────────── */
-:root {
-  /* Tier 1: primary action — Post, Submit, Send (one per screen) */
-  --action-primary:      rgba(170, 38, 108, 0.94);
-  --action-primary-glow: 0 8px 28px rgba(170,38,108,0.34);
-
-  /* Tier 2: social action — Follow, RSVP, Like, Connect */
-  --action-social:      rgba(255, 195, 225, 0.88);
-  --action-social-text: #3a1229;
-
-  /* ── GLASS LEVEL TOKENS (mirrors Design System v2) ── */
-  --glass-0-bg:     rgba(255,255,255,0.06);
-  --glass-0-border: rgba(255,255,255,0.14);
-  --glass-0-blur:   blur(8px) saturate(140%);
-
-  --glass-1-bg:     rgba(255,255,255,0.18);
-  --glass-1-border: rgba(255,255,255,0.28);
-  --glass-1-blur:   blur(20px) saturate(180%);
-  --glass-1-shadow: 0 8px 32px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.62);
-
-  --glass-2-bg:     rgba(255,255,255,0.72);
-  --glass-2-border: rgba(255,255,255,0.55);
-  --glass-2-blur:   blur(32px) saturate(200%);
-  --glass-2-shadow: 0 20px 56px rgba(48,24,72,0.14), inset 0 1px 1px rgba(255,255,255,0.80);
-
-  /* Content type tints */
-  --type-event:     rgba(255, 210, 140, 0.78);
-  --type-collab:    rgba(195, 185, 250, 0.72);
-  --type-portfolio: rgba(175, 230, 200, 0.72);
-  --type-resource:  rgba(185, 225, 255, 0.72);
-
-  --type-event-dot:     #c47d10;
-  --type-collab-dot:    #5c44cc;
-  --type-portfolio-dot: #2a8c5c;
-  --type-resource-dot:  #2466b8;
-
-  --type-event-text:     #7a4800;
-  --type-collab-text:    #2d1f8c;
-  --type-portfolio-text: #145c38;
-  --type-resource-text:  #0e3d7a;
-}
 
 /* ═══════════════════════════════════════════════════════
    TIER 1 — PRIMARY BUTTONS
@@ -54,10 +15,10 @@
    ═══════════════════════════════════════════════════════ */
 .btn-post,
 .post-submit-btn {
-  background: var(--action-primary) !important;
-  color: #fff !important;
-  box-shadow: var(--action-primary-glow) !important;
-  font-weight: 500 !important;
+  background: var(--action-primary);
+  color: #fff;
+  box-shadow: var(--action-primary-glow);
+  font-weight: 500;
   border: none;
 }
 
@@ -76,21 +37,21 @@
 .btn-post:focus-visible,
 .post-submit-btn:hover,
 .post-submit-btn:focus-visible {
-  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46);
   transform: translateY(-2px);
 }
 
 /* Messages send + modal chat send — both use primary */
 .msg-send-btn,
 .connect-chat-send {
-  background: var(--action-primary) !important;
-  color: #fff !important;
-  box-shadow: var(--action-primary-glow) !important;
+  background: var(--action-primary);
+  color: #fff;
+  box-shadow: var(--action-primary-glow);
 }
 
 .msg-send-btn:hover,
 .connect-chat-send:hover {
-  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46);
   transform: translateY(-2px);
 }
 
@@ -109,20 +70,20 @@
 .wide-card-btn,
 .btn-edit-profile,
 .success-btn {
-  width: 120px !important;
-  height: 32px !important;
-  padding: 0 !important;
-  font-weight: 500 !important;
+  min-width: 100px;
+  height: 32px;
+  padding: 0 20px;
+  font-weight: 500;
 }
 
 /* Sent bubble — social tier: soft pink glass, not primary fuchsia */
 .msg-bubble--sent {
-  background: var(--accent-grad-soft) !important;
-  color: var(--action-social-text) !important;
-  border: 1px solid rgba(255, 200, 230, 0.42) !important;
+  background: var(--accent-grad-soft);
+  color: var(--action-social-text);
+  border: 1px solid rgba(255, 200, 230, 0.42);
   box-shadow:
     0 4px 16px rgba(200, 80, 140, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.64) !important;
+    inset 0 1px 1px rgba(255, 255, 255, 0.64);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -139,11 +100,11 @@
 .connect-action--follow.is-followed,
 .msg-view-profile-btn,
 .connect-rsvp-submit {
-  background: var(--action-social) !important;
-  color: var(--action-social-text) !important;
+  background: var(--action-social);
+  color: var(--action-social-text);
   box-shadow:
     0 4px 16px rgba(200,80,140,0.14),
-    inset 0 1px 1px rgba(255,255,255,0.62) !important;
+    inset 0 1px 1px rgba(255,255,255,0.62);
   border: 1px solid rgba(255,200,230,0.4);
 }
 
@@ -156,8 +117,8 @@
 .msg-view-profile-btn:hover,
 .connect-rsvp-submit:hover,
 .connect-rsvp-submit:focus-visible {
-  background: rgba(255,205,230,0.96) !important;
-  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
+  background: rgba(255,205,230,0.96);
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46);
   transform: translateY(-2px);
 }
 
@@ -165,8 +126,8 @@
 .square-card-btn:focus-visible,
 .wide-card-btn:hover,
 .wide-card-btn:focus-visible {
-  background: var(--action-social) !important;
-  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
+  background: var(--action-social);
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46);
   transform: translateY(-2px);
 }
 
@@ -176,49 +137,49 @@
    Present but not competing.
    ═══════════════════════════════════════════════════════ */
 .btn-edit-profile {
-  background: rgba(255,255,255,0.22) !important;
-  color: var(--text) !important;
+  background: rgba(255,255,255,0.22);
+  color: var(--text);
   box-shadow:
     0 3px 12px rgba(0,0,0,0.07),
-    inset 0 1px 1px rgba(255,255,255,0.62) !important;
+    inset 0 1px 1px rgba(255,255,255,0.62);
 }
 
 .btn-edit-profile:hover,
 .btn-edit-profile:focus-visible {
-  background: rgba(255,255,255,0.34) !important;
-  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
+  background: rgba(255,255,255,0.34);
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46);
   transform: translateY(-2px);
 }
 
 /* Post category selector — selected = social */
 .post-cat-btn.selected {
-  background: var(--action-social) !important;
-  color: var(--action-social-text) !important;
-  box-shadow: var(--glass-shadow) !important;
+  background: var(--action-social);
+  color: var(--action-social-text);
+  box-shadow: var(--glass-shadow);
 }
 
 /* Success page CTAs — same action button styling as the rest */
 .success-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 120px !important;
-  height: 32px !important;
-  padding: 0 !important;
-  background: var(--action-social) !important;
-  color: var(--action-social-text) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  height: 32px;
+  padding: 0 20px;
+  background: var(--action-social);
+  color: var(--action-social-text);
   box-shadow:
     0 4px 16px rgba(200,80,140,0.14),
-    inset 0 1px 1px rgba(255,255,255,0.62) !important;
-  border: 1px solid rgba(255,200,230,0.4) !important;
-  border-radius: 999px !important;
-  font-weight: 500 !important;
+    inset 0 1px 1px rgba(255,255,255,0.62);
+  border: 1px solid rgba(255,200,230,0.4);
+  border-radius: 999px;
+  font-weight: 500;
 }
 
 .success-btn:hover,
 .success-btn:focus-visible {
-  background: rgba(255,205,230,0.96) !important;
-  box-shadow: 0 14px 40px rgba(170,38,108,0.46) !important;
+  background: rgba(255,205,230,0.96);
+  box-shadow: 0 14px 40px rgba(170,38,108,0.46);
   transform: translateY(-2px);
 }
 
@@ -249,28 +210,28 @@
 
 .nav-link:hover,
 .nav-link:focus-visible {
-  background: rgba(255,255,255,0.22) !important;
+  background: rgba(255,255,255,0.22);
   backdrop-filter: blur(12px) saturate(160%);
   -webkit-backdrop-filter: blur(12px) saturate(160%);
   color: var(--text);
   transform: translateY(-1px);
   box-shadow:
     0 4px 14px rgba(0,0,0,0.07),
-    inset 0 1px 0 rgba(255,255,255,0.60) !important;
+    inset 0 1px 0 rgba(255,255,255,0.60);
 }
 
 .nav-link.active {
-  background: rgba(255, 195, 225, 0.55) !important;
+  background: rgba(255, 195, 225, 0.55);
   backdrop-filter: blur(28px) saturate(220%) brightness(1.08);
   -webkit-backdrop-filter: blur(28px) saturate(220%) brightness(1.08);
-  color: var(--action-social-text) !important;
+  color: var(--action-social-text);
   font-weight: 400;
   border: 1px solid rgba(255, 220, 238, 0.70);
   box-shadow:
     0 4px 20px rgba(200, 80, 130, 0.18),
     0 1px 6px rgba(200, 80, 130, 0.10),
     inset 0 1.5px 0 rgba(255,255,255,0.80),
-    inset 0 -1px 0 rgba(200, 100, 150, 0.14) !important;
+    inset 0 -1px 0 rgba(200, 100, 150, 0.14);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -280,27 +241,27 @@
    not action — so they stay out of the button hierarchy.
    ═══════════════════════════════════════════════════════ */
 .filter-chip {
-  background: rgba(255,255,255,0.10) !important;
-  color: var(--muted) !important;
+  background: rgba(255,255,255,0.10);
+  color: var(--muted);
   font-weight: 400;
-  border: 1px solid rgba(255,255,255,0.18) !important;
-  box-shadow: none !important;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: none;
 }
 
 .filter-chip:hover,
 .filter-chip:focus-visible {
-  background: rgba(255,255,255,0.24) !important;
-  color: var(--text) !important;
+  background: rgba(255,255,255,0.24);
+  color: var(--text);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 
 .filter-chip.active {
-  background: rgba(255,255,255,0.54) !important;
-  color: var(--text) !important;
+  background: rgba(255,255,255,0.54);
+  color: var(--text);
   font-weight: 600;
-  border-color: rgba(255,255,255,0.44) !important;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08) !important;
+  border-color: rgba(255,255,255,0.44);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -315,13 +276,13 @@
 .square-card-category,
 .wide-card-category,
 .feed-modal-category {
-  display: inline-flex !important;
+  display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 3px 10px 3px 7px !important;
-  border-radius: 999px !important;
-  font-size: 10px !important;
-  font-weight: 600 !important;
+  padding: 3px 10px 3px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   width: fit-content;
@@ -337,10 +298,10 @@
 .square-card-category::before,
 .wide-card-category::before,
 .feed-modal-category::before {
-  content: "" !important;
-  width: 5px !important;
-  height: 5px !important;
-  border-radius: 50% !important;
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
   flex-shrink: 0;
   background: var(--muted);
   opacity: 0.45;
@@ -352,15 +313,15 @@
 [data-type="event"] .wide-card-category,
 [data-type="event"] .feed-modal-category,
 .feed-modal[data-type="event"] .feed-modal-category {
-  background: var(--type-event) !important;
-  color: var(--type-event-text) !important;
-  border-color: rgba(200,140,40,0.28) !important;
+  background: var(--type-event);
+  color: var(--type-event-text);
+  border-color: rgba(200,140,40,0.28);
 }
 [data-type="event"] .square-card-category::before,
 [data-type="event"] .wide-card-category::before,
 [data-type="event"] .feed-modal-category::before,
 .feed-modal[data-type="event"] .feed-modal-category::before {
-  background: var(--type-event-dot) !important;
+  background: var(--type-event-dot);
   opacity: 1;
 }
 
@@ -369,15 +330,15 @@
 [data-type="collab"] .wide-card-category,
 [data-type="collab"] .feed-modal-category,
 .feed-modal[data-type="collab"] .feed-modal-category {
-  background: var(--type-collab) !important;
-  color: var(--type-collab-text) !important;
-  border-color: rgba(100,80,210,0.25) !important;
+  background: var(--type-collab);
+  color: var(--type-collab-text);
+  border-color: rgba(100,80,210,0.25);
 }
 [data-type="collab"] .square-card-category::before,
 [data-type="collab"] .wide-card-category::before,
 [data-type="collab"] .feed-modal-category::before,
 .feed-modal[data-type="collab"] .feed-modal-category::before {
-  background: var(--type-collab-dot) !important;
+  background: var(--type-collab-dot);
   opacity: 1;
 }
 
@@ -386,15 +347,15 @@
 [data-type="portfolio"] .wide-card-category,
 [data-type="portfolio"] .feed-modal-category,
 .feed-modal[data-type="portfolio"] .feed-modal-category {
-  background: var(--type-portfolio) !important;
-  color: var(--type-portfolio-text) !important;
-  border-color: rgba(40,160,100,0.25) !important;
+  background: var(--type-portfolio);
+  color: var(--type-portfolio-text);
+  border-color: rgba(40,160,100,0.25);
 }
 [data-type="portfolio"] .square-card-category::before,
 [data-type="portfolio"] .wide-card-category::before,
 [data-type="portfolio"] .feed-modal-category::before,
 .feed-modal[data-type="portfolio"] .feed-modal-category::before {
-  background: var(--type-portfolio-dot) !important;
+  background: var(--type-portfolio-dot);
   opacity: 1;
 }
 
@@ -403,15 +364,15 @@
 [data-type="resource"] .wide-card-category,
 [data-type="resource"] .feed-modal-category,
 .feed-modal[data-type="resource"] .feed-modal-category {
-  background: var(--type-resource) !important;
-  color: var(--type-resource-text) !important;
-  border-color: rgba(50,140,220,0.25) !important;
+  background: var(--type-resource);
+  color: var(--type-resource-text);
+  border-color: rgba(50,140,220,0.25);
 }
 [data-type="resource"] .square-card-category::before,
 [data-type="resource"] .wide-card-category::before,
 [data-type="resource"] .feed-modal-category::before,
 .feed-modal[data-type="resource"] .feed-modal-category::before {
-  background: var(--type-resource-dot) !important;
+  background: var(--type-resource-dot);
   opacity: 1;
 }
 
@@ -420,49 +381,49 @@
 .feed-modal,
 .edit-profile-modal,
 .profile-posts-modal {
-  background: var(--glass-2-bg) !important;
-  backdrop-filter: var(--glass-2-blur) !important;
-  -webkit-backdrop-filter: var(--glass-2-blur) !important;
-  border: 1px solid var(--glass-2-border) !important;
-  box-shadow: var(--glass-2-shadow) !important;
+  background: var(--glass-2-bg);
+  backdrop-filter: var(--glass-2-blur);
+  -webkit-backdrop-filter: var(--glass-2-blur);
+  border: 1px solid var(--glass-2-border);
+  box-shadow: var(--glass-2-shadow);
 }
 
 /* connect-profile-preview is position:absolute inside .feed-modal,
    so backdrop-filter can't blur through the parent — use a low-alpha
    tint so it reads as glass over the already-blurred modal surface */
 .connect-profile-preview {
-  background: rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
 }
 
 /* ─── PROFILE STAT CARDS ──────────────────────────────── */
 /* Tier distinction: stat cards read as ambient data, not interactive */
 .profile-stat-card {
-  background: rgba(255,255,255,0.14) !important;
-  box-shadow: none !important;
+  background: rgba(255,255,255,0.14);
+  box-shadow: none;
 }
 
 /* ─── PAGINATION ──────────────────────────────────────── */
 .pagination-btn.active {
-  background: var(--action-social) !important;
-  color: var(--action-social-text) !important;
+  background: var(--action-social);
+  color: var(--action-social-text);
 }
 
 .pagination-btn--next {
-  background: rgba(255,255,255,0.22) !important;
-  color: var(--text) !important;
+  background: rgba(255,255,255,0.22);
+  color: var(--text);
 }
 
 /* ─── CONNECT ACTIONS (glass tier 3) ─────────────────── */
 .connect-action {
-  background: rgba(255,255,255,0.18) !important;
+  background: rgba(255,255,255,0.18);
 }
 
 .connect-action:hover {
-  background: rgba(255,255,255,0.28) !important;
+  background: rgba(255,255,255,0.28);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -471,178 +432,161 @@
    Typography is left untouched throughout.
    ═══════════════════════════════════════════════════════ */
 
-/* ── FEED MODAL — align to ds-v2 glass tokens ────────── */
-
-/* L2 Elevated: the modal card itself — glass-2 token (see block above) */
-
-/* Sheen overlay on modal — active */
-
 /* Heart button — no background */
 .feed-modal-heart {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .feed-modal-heart.liked,
 .card-heart.liked,
 .post-preview-heart.liked {
-  color: rgba(170, 38, 108, 0.94) !important;
+  color: var(--action-primary);
 }
 
 /* Media pane inside modal — L1 surface tint */
 .feed-modal-media {
-  background: rgba(255,255,255,0.18) !important;
-  border: 1px solid rgba(255,255,255,0.28) !important;
+  background: var(--glass-1-bg);
+  border: 1px solid var(--glass-1-border);
 }
 
 /* ── MESSAGES PAGE — soft glass to match rest of site ─── */
 
-/* Overall layout shell — no unified wrapper; each panel carries its own glass */
 .msg-layout {
-  box-shadow: none !important;
-  border: none !important;
+  box-shadow: none;
+  border: none;
 }
 
 /* Sidebar — pink-tinted glass, rounded, matches .post-form-panel */
 .msg-sidebar {
-  background: rgba(255, 214, 233, 0.3) !important;
-  backdrop-filter: blur(32px) saturate(200%) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
-  border-radius: 32px !important;
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
-  border-right: none !important;
+  background: rgba(255, 214, 233, 0.3);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-right: none;
 }
 
 /* Sidebar header strip */
 .msg-sidebar-header {
   background: rgba(255,255,255,0.08);
-  border-bottom: 1px solid rgba(255,255,255,0.28) !important;
+  border-bottom: 1px solid var(--glass-1-border);
 }
 
 /* Contact hover — subtle L0 ambient */
 .msg-contact-item:hover {
-  background: rgba(255,255,255,0.14) !important;
+  background: var(--glass-0-bg);
 }
 
 /* Active contact — soft warm pink, no harsh fuchsia */
 .msg-contact-item--active {
-  background: rgba(240,136,193,0.12) !important;
+  background: rgba(240,136,193,0.12);
 }
 .msg-contact-item--active:hover {
-  background: rgba(240,136,193,0.18) !important;
+  background: rgba(240,136,193,0.18);
 }
 
 /* Main chat area — lighter pink-tinted glass, rounded, matches .post-preview-panel */
 .msg-chat {
-  background: rgba(255, 238, 245, 0.24) !important;
-  backdrop-filter: blur(32px) saturate(200%) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
-  border-radius: 32px !important;
+  background: rgba(255, 238, 245, 0.24);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border-radius: 32px;
 }
 
 /* Chat header — lightweight frosted strip */
 .msg-chat-header {
-  background: rgba(255,255,255,0.22) !important;
-  backdrop-filter: blur(28px) saturate(200%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.34) !important;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border-bottom: 1px solid rgba(255,255,255,0.34);
 }
 
 /* Received bubble — soft frosted glass */
 .msg-bubble--received {
-  background: rgba(255,255,255,0.52) !important;
-  border: 1px solid rgba(255,255,255,0.54) !important;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.07), inset 0 1px 1px rgba(255,255,255,0.72) !important;
-  backdrop-filter: blur(12px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
-}
-
-/* Sent bubble — soft pastel pink glass, matches social tier */
-.msg-bubble--sent {
-  background: var(--accent-grad-soft) !important;
-  color: var(--action-social-text) !important;
-  border: 1px solid rgba(255,200,230,0.42) !important;
-  box-shadow: 0 4px 16px rgba(200,80,140,0.12), inset 0 1px 1px rgba(255,255,255,0.64) !important;
+  background: rgba(255,255,255,0.52);
+  border: 1px solid rgba(255,255,255,0.54);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07), inset 0 1px 1px rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
 }
 
 /* Message input field — L1 Surface glass */
 .msg-input {
-  background: rgba(255,255,255,0.22) !important;
-  border: 1px solid rgba(255,255,255,0.34) !important;
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  background: var(--glass-1-bg);
+  border: 1px solid var(--glass-1-border);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.62);
 }
 .msg-input:focus {
-  border-color: rgba(186,48,120,0.28) !important;
-  box-shadow: 0 0 0 2px rgba(186,48,120,0.14), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  border-color: rgba(186,48,120,0.28);
+  box-shadow: 0 0 0 2px rgba(186,48,120,0.14), inset 0 1px 1px rgba(255,255,255,0.62);
 }
 
 /* Input row — lighter strip so chat area feels open */
 .msg-input-row {
-  border-top: 1px solid rgba(255,255,255,0.34) !important;
-  background: rgba(255,255,255,0.16) !important;
+  border-top: 1px solid rgba(255,255,255,0.34);
+  background: rgba(255,255,255,0.16);
 }
-
-/* Send button — already Tier 1 primary via ds-v2 above */
 
 /* Profile drawer — L2 Elevated (same level as feed-modal) */
 .msg-profile-drawer {
-  background: rgba(255,255,255,0.96) !important;
-  backdrop-filter: blur(32px) saturate(200%) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
-  border: 1px solid rgba(255,255,255,0.55) !important;
-  box-shadow: 0 20px 56px rgba(48,24,72,0.14), inset 0 1px 1px rgba(255,255,255,0.80) !important;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: var(--glass-2-blur);
+  -webkit-backdrop-filter: var(--glass-2-blur);
+  border: 1px solid var(--glass-2-border);
+  box-shadow: var(--glass-2-shadow);
 }
 
 /* Drawer header strip — soft glass strip */
 .msg-profile-drawer-header {
-  background: rgba(255,255,255,0.30) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.38) !important;
+  background: rgba(255,255,255,0.30);
+  backdrop-filter: var(--glass-1-blur);
+  -webkit-backdrop-filter: var(--glass-1-blur);
+  border-bottom: 1px solid rgba(255,255,255,0.38);
 }
 
 /* Drawer back button — Tier 3 glass */
 .msg-profile-drawer-back {
-  background: rgba(255,255,255,0.18) !important;
-  border: 1px solid rgba(255,255,255,0.28) !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.62) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  background: var(--glass-1-bg);
+  border: 1px solid var(--glass-1-border);
+  box-shadow: var(--glass-1-shadow);
+  backdrop-filter: var(--glass-1-blur);
+  -webkit-backdrop-filter: var(--glass-1-blur);
 }
 .msg-profile-drawer-back:hover {
-  background: rgba(255,255,255,0.28) !important;
+  background: rgba(255,255,255,0.28);
   transform: translateY(-1px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.72) !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.72);
 }
 
 /* Profile stat cards — L1 Surface glass (ambient data, not interactive) */
 .msg-profile-stat-card {
-  background: rgba(255,255,255,0.18) !important;
-  border: 1px solid rgba(255,255,255,0.28) !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.62) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  background: var(--glass-1-bg);
+  border: 1px solid var(--glass-1-border);
+  box-shadow: var(--glass-1-shadow);
+  backdrop-filter: var(--glass-1-blur);
+  -webkit-backdrop-filter: var(--glass-1-blur);
 }
 
 /* Profile work grid cards — L0 Ambient */
 .msg-profile-card {
-  background: rgba(255,255,255,0.06) !important;
-  border: 1px solid rgba(255,255,255,0.14) !important;
+  background: var(--glass-0-bg);
+  border: 1px solid var(--glass-0-border);
 }
 
 /* Follow button — Tier 2 Social (same as feed modal RSVP) */
 .msg-profile-follow-btn {
-  background: var(--action-social) !important;
-  color: var(--action-social-text) !important;
-  border: 1px solid rgba(255,200,230,0.4) !important;
-  box-shadow: 0 4px 16px rgba(200,80,140,0.14), inset 0 1px 1px rgba(255,255,255,0.62) !important;
+  background: var(--action-social);
+  color: var(--action-social-text);
+  border: 1px solid rgba(255,200,230,0.4);
+  box-shadow: 0 4px 16px rgba(200,80,140,0.14), inset 0 1px 1px rgba(255,255,255,0.62);
 }
 .msg-profile-follow-btn:hover {
-  background: rgba(255,205,230,0.96) !important;
-  color: var(--action-social-text) !important;
-  box-shadow: 0 10px 30px rgba(200,80,140,0.24), inset 0 1px 1px rgba(255,255,255,0.72) !important;
+  background: rgba(255,205,230,0.96);
+  color: var(--action-social-text);
+  box-shadow: 0 10px 30px rgba(200,80,140,0.24), inset 0 1px 1px rgba(255,255,255,0.72);
   transform: translateY(-2px);
 }
