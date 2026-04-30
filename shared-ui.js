@@ -413,10 +413,12 @@
         appendTextElement(back, 'p', 'square-card-title', card.title);
         appendTextElement(back, 'p', 'square-card-meta', card.meta);
         appendTextElement(back, 'p', 'square-card-desc', card.desc);
-        appendTextElement(back, 'p', 'square-card-stats', card.stats);
-
+        const footer = document.createElement('div');
+        footer.className = 'square-card-footer';
+        appendTextElement(footer, 'p', 'square-card-stats', card.stats);
         const action = createButton('square-card-btn', card.action || 'Details');
-        back.appendChild(action);
+        footer.appendChild(action);
+        back.appendChild(footer);
 
         inner.appendChild(back);
         return article;

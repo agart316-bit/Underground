@@ -155,15 +155,6 @@
         });
     });
 
-    // Heart toggle in preview
-    const previewHeart = document.querySelector('.post-preview-heart');
-    if (previewHeart) {
-        previewHeart.addEventListener('click', () => {
-            const liked = previewHeart.classList.toggle('liked');
-            previewHeart.setAttribute('aria-pressed', liked ? 'true' : 'false');
-            previewHeart.textContent = liked ? '♥' : '♡';
-        });
-    }
 
     updatePreview();
 })();
