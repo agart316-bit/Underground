@@ -579,7 +579,7 @@ textarea {
 
 .btn-post:hover,
 .btn-post:focus-visible {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -597,7 +597,7 @@ textarea {
 
 .btn-auth:hover,
 .btn-auth:focus-visible {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -679,10 +679,20 @@ textarea {
     font-size: var(--header-size);
     line-height: var(--header-line);
     font-weight: 700;
-    margin-bottom: 48px;
+    margin-bottom: 8px;
     margin-right: auto;
     margin-left: auto;
     text-shadow: 0 8px 22px rgba(255, 255, 255, 0.42);
+}
+
+.page-subtitle {
+    width: min(100%, var(--content-width));
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--text);
+    margin-bottom: 32px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .page-title-outline {
@@ -769,7 +779,7 @@ textarea {
 
 .btn-edit-profile:hover,
 .btn-edit-profile:focus-visible {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -855,6 +865,7 @@ textarea {
 .pagination-btn:hover,
 .pagination-btn:focus-visible {
     background: rgba(255, 255, 255, 0.24);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow);
 }
 
@@ -879,6 +890,7 @@ textarea {
 .pagination-btn--edge:hover,
 .pagination-btn--edge:focus-visible {
     background: rgba(255, 255, 255, 0.24);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -892,6 +904,7 @@ textarea {
 .pagination-btn--next:focus-visible {
     background: rgba(255, 255, 255, 0.32);
     color: var(--text);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -1135,6 +1148,7 @@ textarea {
 
 .square-card-btn:hover,
 .square-card-btn:focus-visible {
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -1286,6 +1300,7 @@ textarea {
 
 .wide-card-btn:hover,
 .wide-card-btn:focus-visible {
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -1486,6 +1501,7 @@ textarea {
 
 .landing-cta-btn:hover,
 .landing-cta-btn:focus-visible {
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -1785,6 +1801,7 @@ textarea {
 
 .feed-modal-rsvp:hover,
 .feed-modal-rsvp:focus-visible {
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -1928,7 +1945,7 @@ textarea {
 .connect-action:hover {
     background: rgba(255, 255, 255, 0.24);
     box-shadow: var(--glass-shadow-strong);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
 
 .connect-action--follow {
@@ -1937,6 +1954,8 @@ textarea {
 
 .connect-action--follow:hover {
     background: rgba(255, 255, 255, 0.24);
+    transform: translateY(-2px);
+    box-shadow: var(--glass-shadow-strong);
 }
 
 .connect-action--follow.is-followed {
@@ -2023,7 +2042,7 @@ textarea {
 
 .connect-chat-send:hover {
     opacity: 1;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -2113,7 +2132,7 @@ textarea {
 
 .connect-rsvp-submit:hover {
     opacity: 1;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -2221,7 +2240,7 @@ textarea {
 
 .connect-profile-follow:hover,
 .connect-profile-follow:focus-visible {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -2769,6 +2788,7 @@ textarea {
 
 .post-upload-label:hover {
     color: var(--text);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -2848,7 +2868,7 @@ textarea {
 .post-submit-btn:hover,
 .post-submit-btn:focus-visible {
     box-shadow: var(--glass-shadow-strong);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
 
 /* Preview panel */
@@ -2982,6 +3002,7 @@ textarea {
 
 .post-preview-rsvp:hover,
 .post-preview-rsvp:focus-visible {
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -3126,6 +3147,7 @@ textarea {
 }
 
 .success-btn:hover {
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -3455,7 +3477,7 @@ textarea {
 
 .msg-send-btn:hover {
     opacity: 1;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
@@ -3565,8 +3587,8 @@ textarea {
 }
 
 .msg-view-profile-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(217, 74, 155, 0.46);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(170, 38, 108, 0.46);
 }
 
 /* ===========================
@@ -3776,7 +3798,7 @@ textarea {
 }
 
 .edit-profile-save:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--glass-shadow-strong);
 }
 
